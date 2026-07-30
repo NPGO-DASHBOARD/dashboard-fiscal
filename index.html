@@ -1,0 +1,833 @@
+
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Relatório Fiscal NF-e</title>
+
+
+
+
+<style>
+
+body{
+
+    font-family: Arial, Helvetica, sans-serif;
+    background:#f4f6f8;
+    margin:40px;
+
+}
+
+.header{
+
+    background:#1F4E79;
+    color:white;
+    padding:25px;
+    border-radius:8px;
+
+}
+
+.header h1{
+
+    margin:0;
+
+}
+
+.section{
+
+    background:white;
+    margin-top:25px;
+    padding:25px;
+    border-radius:8px;
+    box-shadow:0 2px 5px #ccc;
+
+}
+
+.section-title{
+
+    color:#1F4E79;
+    font-size:22px;
+    font-weight:bold;
+    margin-bottom:20px;
+
+}
+
+.cards{
+
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+
+}
+
+.card{
+
+    background:white;
+    border-left:6px solid #1F4E79;
+    padding:20px;
+    width:220px;
+    border-radius:8px;
+    box-shadow:0 2px 5px #ccc;
+
+}
+
+.card-title{
+
+    color:#666;
+    font-size:14px;
+
+}
+
+.card-value{
+
+    color:#1F4E79;
+    font-size:25px;
+    font-weight:bold;
+    margin-top:10px;
+
+}
+
+select{
+
+    margin-top:15px;
+    padding:10px;
+    font-size:16px;
+    border-radius:5px;
+
+}
+
+table{
+
+    width:100%;
+    border-collapse:collapse;
+
+}
+
+th{
+
+    background:#1F4E79;
+    color:white;
+    padding:12px;
+
+}
+
+td{
+
+    padding:12px;
+    border-bottom:1px solid #ddd;
+    text-align:center;
+
+}
+
+.future{
+
+    background:#fafafa;
+    padding:30px;
+    text-align:center;
+    color:#777;
+    border:2px dashed #ccc;
+
+}
+
+</style>
+
+
+
+
+</head>
+
+
+<body>
+
+
+
+
+<div class="header">
+
+<h1>📊 ANALISADOR FISCAL NF-e</h1>
+
+<h2>N&P IMPORTAÇÃO E COMÉRCIO LTDA</h2>
+
+<p>Relatório Fiscal Empresarial</p>
+
+
+<select id="selectMes">
+
+<option value="GERAL">Todos</option><option value="2025-09">Setembro/2025</option><option value="2026-06">Junho/2026</option><option value="2026-07">Julho/2026</option>
+
+</select>
+
+
+</div>
+
+
+
+
+
+
+<div class="section">
+
+    <div class="section-title">
+
+        📌 Indicadores Gerais
+
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="card-title">Notas</div>
+            <div class="card-value" id="total_notas">
+                1298
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Faturamento Bruto</div>
+            <div class="card-value" id="faturamento_bruto">
+                R$ 855.735,87
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Impostos</div>
+            <div class="card-value" id="total_impostos">
+                R$ 61.075,13
+            </div>
+        </div>
+
+        <div class="card">
+    <div class="card-title"> Carga Tributária</div>
+    <div class="card-value" id="carga_tributaria">
+        7.14%
+    </div>
+
+</div>
+
+        <div class="card">
+            <div class="card-title">Cancelamentos</div>
+            <div class="card-value" id="total_canceladas">
+                6
+            </div>
+        </div>
+
+<div class="card">
+    <div class="card-title">Compras</div>
+    <div class="card-value" id="total_compras">
+        0
+    </div>
+</div>
+
+
+<div class="card">
+    <div class="card-title">Valor Compras</div>
+    <div class="card-value" id="valor_compras">
+        R$ 0,00
+    </div>
+</div>
+
+
+
+
+    </div>
+
+</div>
+
+
+
+
+
+
+<div class="section">
+
+    <div class="section-title">
+
+        💰 Resumo Financeiro: <span id="mesResumoFinanceiro">Todos</span>
+
+    </div>
+
+    <table id="tabelaResumoFinanceiro">
+
+        <tr>
+            <th>Indicador</th>
+            <th>Quantidade</th>
+            <th>Valor</th>
+            <th>ICMS</th>
+            <th>IPI</th>
+            <th>PIS</th>
+            <th>COFINS</th>
+            <th>Total Impostos</th>
+        </tr>
+
+        <tbody id="corpoResumoFinanceiro">
+
+
+    <tr>
+        <td>Notas de Compra</td>
+        <td>0</td>
+        <td>R$ 0,00</td>
+        <td>R$ 0,00</td>
+        <td>R$ 0,00</td>
+        <td>R$ 0,00</td>
+        <td>R$ 0,00</td>
+        <td>R$ 0,00</td>
+    </tr>
+    
+    <tr>
+        <td>Notas de Venda</td>
+        <td>791</td>
+        <td>R$ 578.242,72</td>
+        <td>R$ 0,00</td>
+        <td>R$ 0,00</td>
+        <td>R$ 0,00</td>
+        <td>R$ 0,00</td>
+        <td>R$ 0,00</td>
+    </tr>
+    
+    <tr>
+        <td>Notas de Transferência</td>
+        <td>501</td>
+        <td>R$ 277.493,15</td>
+        <td>R$ 0,00</td>
+        <td>R$ 0,00</td>
+        <td>R$ 0,00</td>
+        <td>R$ 0,00</td>
+        <td>R$ 0,00</td>
+    </tr>
+    
+    <tr>
+        <td>Notas Canceladas</td>
+        <td>6</td>
+        <td>R$ 2.790,09</td>
+        <td>R$ 0,00</td>
+        <td>R$ 0,00</td>
+        <td>R$ 0,00</td>
+        <td>R$ 0,00</td>
+        <td>R$ 0,00</td>
+    </tr>
+    
+
+</tbody>
+
+    </table>
+
+</div>
+
+
+
+
+
+<div class="card-dashboard">
+
+<h2>📅 Evolução Mensal</h2>
+
+
+<table class="tabela-dashboard">
+
+<thead>
+
+<tr>
+<th>Mês</th>
+<th>Notas Venda</th>
+<th>Transferências</th>
+<th>Canceladas</th>
+<th>Devoluções</th>
+<th>Faturamento Bruto</th>
+<th>Faturamento Líquido</th>
+<th>Impostos</th>
+<th>Carga Tributária</th>
+</tr>
+
+</thead>
+
+
+<tbody id="corpoEvolucaoMensal">
+
+</tbody>
+
+
+</table>
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+const dadosDashboard = {"empresa": "N&P IMPORTAÇÃO E COMÉRCIO LTDA", "indicadores": {"total_xml": 1306, "total_compras": 3, "valor_compras": 240007.08, "icms_compras": 25519.76, "ipi_compras": 0, "pis_compras": 3156.17, "cofins_compras": 14537.500000000002, "total_notas": 1303.0, "total_transferencias": 501.0, "valor_transferencias": 277493.15000000026, "icms_transferencias": 0.0, "ipi_transferencias": 0.0, "pis_transferencias": 0.0, "cofins_transferencias": 0.0, "total_vendas": 791.0, "valor_vendas": 578242.7199999987, "icms_vendas": 56497.51000000005, "ipi_vendas": 0.0, "pis_vendas": 8600.260000000017, "cofins_vendas": 39614.02000000006, "total_canceladas": 3.0, "valor_canceladas": 1654.42, "icms_canceladas": 262.68, "ipi_canceladas": 0.0, "pis_canceladas": 22.96, "cofins_canceladas": 105.78, "total_devolucoes": 3.0, "valor_devolucoes": 1135.67, "icms_devolucoes": 9.88, "ipi_devolucoes": 0.0, "pis_devolucoes": 3.91, "cofins_devolucoes": 18.02, "total_impostos": 61075.13000000013, "faturamento_bruto": 855735.869999999}, "financeiro": [{"Movimento": "Vendas", "Valor": 578242.7199999987}, {"Movimento": "Canceladas", "Valor": 2790.09}, {"Movimento": "Transferências", "Valor": 277493.15000000026}], "impostos": [{"Imposto": "ICMS", "Valor": 0}, {"Imposto": "IPI", "Valor": 0}, {"Imposto": "PIS", "Valor": 0}, {"Imposto": "COFINS", "Valor": 0}, {"Imposto": "Total", "Valor": 0}], "resumo": [{"Indicador": "Arquivos XML encontrados", "Quantidade": 1306.0}, {"Indicador": "NF-e processadas", "Quantidade": 1298.0}, {"Indicador": "Total de vendas", "Quantidade": 791.0}, {"Indicador": "Total canceladas", "Quantidade": 6.0}, {"Indicador": "Total devoluções", "Quantidade": 3.0}, {"Indicador": "Total transferências", "Quantidade": 501.0}], "mensal": [{"Mês": "Setembro/2025", "Notas Venda": 0.0, "Transferências": 0.0, "Canceladas": 0.0, "Devoluções": 0.0, "Faturamento Bruto": 0.0, "Faturamento Líquido": 0.0, "Impostos": 0.0, "Carga Tributária %": 0.0}, {"Mês": "Junho/2026", "Notas Venda": 737.0, "Transferências": 79.0, "Canceladas": 3.0, "Devoluções": 0.0, "Faturamento Bruto": 537161.3899999988, "Faturamento Líquido": 535506.9699999988, "Impostos": 90551.67000000011, "Carga Tributária %": 16.86}, {"Mês": "Julho/2026", "Notas Venda": 54.0, "Transferências": 422.0, "Canceladas": 0.0, "Devoluções": 3.0, "Faturamento Bruto": 318574.48, "Faturamento Líquido": 317438.81, "Impostos": 13736.890000000003, "Carga Tributária %": 4.31}], "meses": {"2026-06": {"total_transferencias": 79.0, "valor_transferencias": 38838.44, "icms_transferencias": 0.0, "ipi_transferencias": 0.0, "pis_transferencias": 0.0, "cofins_transferencias": 0.0, "total_vendas": 737.0, "valor_vendas": 498322.94999999885, "icms_vendas": 49449.36000000004, "ipi_vendas": 0.0, "pis_vendas": 7401.490000000016, "cofins_vendas": 34092.240000000056, "total_canceladas": 3.0, "valor_canceladas": 1654.42, "icms_canceladas": 262.68, "ipi_canceladas": 0.0, "pis_canceladas": 22.96, "cofins_canceladas": 105.78, "total_impostos": 90551.67000000011}, "2026-07": {"total_devolucoes": 3.0, "valor_devolucoes": 1135.67, "icms_devolucoes": 9.88, "ipi_devolucoes": 0.0, "pis_devolucoes": 3.91, "cofins_devolucoes": 18.02, "total_transferencias": 422.0, "valor_transferencias": 238654.70999999996, "icms_transferencias": 0.0, "ipi_transferencias": 0.0, "pis_transferencias": 0.0, "cofins_transferencias": 0.0, "total_vendas": 54.0, "valor_vendas": 79919.77, "icms_vendas": 7048.1500000000015, "ipi_vendas": 0.0, "pis_vendas": 1198.77, "cofins_vendas": 5521.780000000001, "total_impostos": 13736.890000000003}, "2025-09": {"total_compras": 3.0, "valor_compras": 240007.08, "icms_compras": 25519.76, "ipi_compras": 0.0, "pis_compras": 3156.17, "cofins_compras": 14537.500000000002, "total_impostos": -43213.43}}};
+
+
+// =========================
+// OBTER INDICADORES
+// =========================
+
+function obterIndicadores(mes){
+
+    if(mes === "GERAL"){
+
+        return dadosDashboard.indicadores;
+
+    }
+
+    else{
+
+        return dadosDashboard.meses[mes];
+
+    }
+
+}
+
+
+// =========================
+// FORMATAR MOEDA
+// =========================
+
+function formatarMoeda(valor){
+
+    return Number(valor).toLocaleString(
+
+        'pt-BR',
+
+        {
+
+            style:'currency',
+            currency:'BRL'
+
+        }
+
+    );
+
+}
+
+
+// =========================
+// ATUALIZAR CARDS
+// =========================
+
+function atualizarCards(mes){
+
+
+    let indicadores = obterIndicadores(mes);
+
+
+    document.getElementById("total_compras").innerHTML =
+        (indicadores.total_compras || 0);
+
+
+    document.getElementById("valor_compras").innerHTML =
+        formatarMoeda(
+            indicadores.valor_compras || 0
+        );
+
+
+    document.getElementById("total_notas").innerHTML =
+
+    (
+        (indicadores.total_vendas || 0)
+        +
+        (indicadores.total_transferencias || 0)
+        +
+        (indicadores.total_canceladas || 0)
+        +
+        (indicadores.total_devolucoes || 0)
+    );
+
+
+    document.getElementById("faturamento_bruto").innerHTML =
+
+    formatarMoeda(
+
+        (
+            (indicadores.valor_vendas || 0)
+            +
+            (indicadores.valor_transferencias || 0)
+        )
+
+    );
+
+
+
+   document.getElementById("total_impostos").innerHTML =
+    formatarMoeda(indicadores.total_impostos || 0);
+
+document.getElementById("carga_tributaria").innerHTML =
+
+(
+    (
+
+        (
+            (indicadores.icms_vendas || 0)
+            +
+            (indicadores.ipi_vendas || 0)
+            +
+            (indicadores.pis_vendas || 0)
+            +
+            (indicadores.cofins_vendas || 0)
+        )
+
+        +
+
+        (
+            (indicadores.icms_transferencias || 0)
+            +
+            (indicadores.ipi_transferencias || 0)
+            +
+            (indicadores.pis_transferencias || 0)
+            +
+            (indicadores.cofins_transferencias || 0)
+        )
+
+        -
+
+        (
+            (indicadores.icms_canceladas || 0)
+            +
+            (indicadores.ipi_canceladas || 0)
+            +
+            (indicadores.pis_canceladas || 0)
+            +
+            (indicadores.cofins_canceladas || 0)
+        )
+
+        -
+
+        (
+            (indicadores.icms_devolucoes || 0)
+            +
+            (indicadores.ipi_devolucoes || 0)
+            +
+            (indicadores.pis_devolucoes || 0)
+            +
+            (indicadores.cofins_devolucoes || 0)
+        )
+
+    )
+
+    /
+
+    (
+        (indicadores.valor_vendas || 0)
+        +
+        (indicadores.valor_transferencias || 0)
+    )
+
+    * 100
+
+).toFixed(2) + "%";
+
+
+    document.getElementById("total_canceladas").innerHTML =
+
+        (
+            (indicadores.total_canceladas || 0)
+            +
+            (indicadores.total_devolucoes || 0)
+        );
+
+
+}
+
+
+// =========================
+// ATUALIZAR RESUMO FINANCEIRO
+// =========================
+function formatarMes(mes){
+
+    if(mes === "GERAL"){
+        return "Todos";
+    }
+
+    let partes = mes.split("-");
+
+    let ano = partes[0];
+    let numeroMes = partes[1];
+
+    let nomesMeses = [
+        "Janeiro",
+        "Fevereiro",
+        "Março",
+        "Abril",
+        "Maio",
+        "Junho",
+        "Julho",
+        "Agosto",
+        "Setembro",
+        "Outubro",
+        "Novembro",
+        "Dezembro"
+    ];
+
+    return nomesMeses[Number(numeroMes)-1] + "/" + ano;
+
+}
+
+function atualizarResumoFinanceiro(mes){
+
+
+    let indicadores = obterIndicadores(mes);
+
+    document.getElementById("mesResumoFinanceiro").innerHTML =
+    formatarMes(mes);
+
+
+    let corpo = document.getElementById("corpoResumoFinanceiro");
+
+
+    let totalVendaImpostos =
+
+        (indicadores.icms_vendas || 0)
+        +
+        (indicadores.ipi_vendas || 0)
+        +
+        (indicadores.pis_vendas || 0)
+        +
+        (indicadores.cofins_vendas || 0);
+
+
+
+    let totalTransfImpostos =
+
+        (indicadores.icms_transferencias || 0)
+        +
+        (indicadores.ipi_transferencias || 0)
+        +
+        (indicadores.pis_transferencias || 0)
+        +
+        (indicadores.cofins_transferencias || 0);
+
+
+
+    let totalCancelImpostos =
+
+    (
+        (indicadores.icms_canceladas || 0)
+        +
+        (indicadores.ipi_canceladas || 0)
+        +
+        (indicadores.pis_canceladas || 0)
+        +
+        (indicadores.cofins_canceladas || 0)
+    )
+
+    +
+
+    (
+        (indicadores.icms_devolucoes || 0)
+        +
+        (indicadores.ipi_devolucoes || 0)
+        +
+        (indicadores.pis_devolucoes || 0)
+        +
+        (indicadores.cofins_devolucoes || 0)
+    );
+
+
+
+    corpo.innerHTML = `
+
+
+    <tr>
+    <td>Notas de Compra</td>
+
+    <td>${indicadores.total_compras || 0}</td>
+
+    <td>${formatarMoeda(indicadores.valor_compras || 0)}</td>
+
+    <td>${formatarMoeda(indicadores.icms_compras || 0)}</td>
+
+    <td>${formatarMoeda(indicadores.ipi_compras || 0)}</td>
+
+    <td>${formatarMoeda(indicadores.pis_compras || 0)}</td>
+
+    <td>${formatarMoeda(indicadores.cofins_compras || 0)}</td>
+
+    <td>${formatarMoeda(
+        (indicadores.icms_compras || 0)
+        +
+        (indicadores.ipi_compras || 0)
+        +
+        (indicadores.pis_compras || 0)
+        +
+        (indicadores.cofins_compras || 0)
+    )}</td>
+
+</tr>
+
+    <tr>
+        <td>Notas de Venda</td>
+        <td>${(indicadores.total_vendas || 0)}</td>
+        <td>${
+formatarMoeda(indicadores.valor_vendas || 0)
+}</td>
+        <td>${
+formatarMoeda(indicadores.icms_vendas || 0)
+}</td>
+        <td>${
+formatarMoeda(indicadores.ipi_vendas || 0)
+}</td>
+        <td>${
+formatarMoeda(indicadores.pis_vendas || 0)
+}</td>
+        <td>${
+formatarMoeda(indicadores.cofins_vendas || 0)
+}</td>
+        <td>${
+formatarMoeda(totalVendaImpostos)
+}</td>
+    </tr>
+
+
+    <tr>
+        <td>Notas de Transferência</td>
+        <td>${(indicadores.total_transferencias || 0)}</td>
+        <td>${
+formatarMoeda(indicadores.valor_transferencias || 0)
+}</td>
+        <td>${
+formatarMoeda(indicadores.icms_transferencias || 0)
+}</td>
+        <td>${
+formatarMoeda(indicadores.ipi_transferencias || 0)
+}</td>
+        <td>${
+formatarMoeda(indicadores.pis_transferencias || 0)
+}</td>
+        <td>${
+formatarMoeda(indicadores.cofins_transferencias || 0)
+}</td>
+        <td>${
+formatarMoeda(totalTransfImpostos)
+}</td>
+    </tr>
+
+
+<tr>
+    <td>Notas Canceladas / Devoluções</td>
+
+    <td>${
+        (indicadores.total_canceladas || 0)
+        +
+        (indicadores.total_devolucoes || 0)
+    }</td>
+
+    <td>${
+        formatarMoeda(
+            (
+                (indicadores.valor_canceladas || 0)
+                +
+                (indicadores.valor_devolucoes || 0)
+            )
+        )
+    }</td>
+
+    <td>${
+        formatarMoeda(
+            (
+                (indicadores.icms_canceladas || 0)
+                +
+                (indicadores.icms_devolucoes || 0)
+            )
+        )
+    }</td>
+
+    <td>${
+        formatarMoeda(
+            (
+                (indicadores.ipi_canceladas || 0)
+                +
+                (indicadores.ipi_devolucoes || 0)
+            )
+        )
+    }</td>
+
+    <td>${
+        formatarMoeda(
+            (
+                (indicadores.pis_canceladas || 0)
+                +
+                (indicadores.pis_devolucoes || 0)
+            )
+        )
+    }</td>
+
+    <td>${
+        formatarMoeda(
+            (
+                (indicadores.cofins_canceladas || 0)
+                +
+                (indicadores.cofins_devolucoes || 0)
+            )
+        )
+    }</td>
+
+    <td>${
+formatarMoeda(totalCancelImpostos)
+}</td>
+
+</tr>
+
+    `;
+
+
+}
+
+
+
+// =========================
+// EVENTO DO SELECT
+// =========================
+
+window.onload = function(){
+
+
+    document
+    .getElementById("selectMes")
+    .addEventListener(
+
+        "change",
+
+        function(){
+
+            let mes = this.value;
+
+            atualizarCards(mes);
+
+            atualizarResumoFinanceiro(mes);
+
+            // Recarregar a evolução mensal se necessário ou manter estática
+            // carregarEvolucaoMensal(); // Descomente se quiser que ela mude também
+
+        }
+
+    );
+
+    // Initial load
+    atualizarCards("GERAL");
+    atualizarResumoFinanceiro("GERAL");
+    carregarEvolucaoMensal();
+
+
+};
+
+
+
+
+</script>
+
+
+
+
+</body>
+
+
+</html>
+
