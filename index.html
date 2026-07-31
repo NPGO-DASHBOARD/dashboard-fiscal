@@ -517,9 +517,9 @@ function renderFinancialSummaryTable(currentIndicators, mes) {
                 'IPI': getValue('ipi_compra') || getValue('ipi_compras'),
                 'PIS': getValue('pis_compra') || getValue('pis_compras'),
                 'COFINS': getValue('cofins_compra') || getValue('cofins_compras'),
-                'Total Impostos': (getValue('icms_compra') || getValue('icms_compras')) + 
-                                  (getValue('ipi_compra') || getValue('ipi_compras')) + 
-                                  (getValue('pis_compra') || getValue('pis_compras')) + 
+                'Total Impostos': (getValue('icms_compra') || getValue('icms_compras')) +
+                                  (getValue('ipi_compra') || getValue('ipi_compras')) +
+                                  (getValue('pis_compra') || getValue('pis_compras')) +
                                   (getValue('cofins_compra') || getValue('cofins_compras'))
             };
         } else if (rowDef.Indicador === 'Serviços') {
