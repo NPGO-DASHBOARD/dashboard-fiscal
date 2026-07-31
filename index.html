@@ -184,6 +184,8 @@ const dashboardData = {
     "valor_vendas": 578242.7199999987,
     "total_servicos": 5.0,
     "valor_servicos": 79094.9,
+    "pis_servicos": 1305.06585,
+    "cofins_servicos": 6011.212399999999,
     "total_canceladas_devolucoes": 6.0,
     "valor_canceladas_devolucoes": 2790.09,
     "total_transferencias": 501.0,
@@ -224,6 +226,8 @@ const dashboardData = {
       "valor_vendas": 498322.94999999885,
       "total_servicos": 5.0,
       "valor_servicos": 79094.9,
+      "pis_servicos": 1305.06585,
+      "cofins_servicos": 6011.212399999999,
       "total_canceladas": 3.0,
       "total_devolucoes": 0.0,
       "total_canceladas_devolucoes": 3.0,
@@ -265,6 +269,8 @@ const dashboardData = {
       "valor_vendas": 79919.77,
       "total_servicos": 0.0,
       "valor_servicos": 0.0,
+      "pis_servicos": 0.0,
+      "cofins_servicos": 0.0,
       "total_canceladas": 0.0,
       "total_devolucoes": 3.0,
       "total_canceladas_devolucoes": 3.0,
@@ -511,9 +517,9 @@ function renderFinancialSummaryTable(currentIndicators, mes) {
                 'Valor': getValue('valor_servicos'),
                 'ICMS': 0.0,
                 'IPI': 0.0,
-                'PIS': 0.0,
-                'COFINS': 0.0,
-                'Total Impostos': 0.0
+                'PIS': rowDef.PIS,
+                'COFINS': rowDef.COFINS,
+                'Total Impostos': rowDef['Total Impostos']
             };
         } else if (rowDef.Indicador === 'Notas de Venda') {
             rowData = {
