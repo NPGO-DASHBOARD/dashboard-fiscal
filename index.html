@@ -160,6 +160,7 @@ td{
                 <th>Mês</th>
                 <th>Notas Venda</th>
                 <th>Transferências</th>
+                <th>Transporte</th>
                 <th>Canceladas</th>
                 <th>Devoluções</th>
                 <th>Faturamento Bruto</th>
@@ -192,6 +193,8 @@ const dashboardData = {
     "valor_transferencias": 277493.15000000026,
     "total_compras": 0.0,
     "valor_compras": 0.0,
+    "total_transporte": 0.0,
+    "valor_transporte": 0.0,
     "icms_vendas": 56497.51000000005,
     "ipi_vendas": 0.0,
     "pis_vendas": 8600.260000000017,
@@ -200,6 +203,10 @@ const dashboardData = {
     "ipi_transferencias": 0.0,
     "pis_transferencias": 0.0,
     "cofins_transferencias": 0.0,
+    "icms_transporte": 0.0,
+    "ipi_transporte": 0.0,
+    "pis_transporte": 0.0,
+    "cofins_transporte": 0.0,
     "icms_canceladas": 262.68,
     "ipi_canceladas": 0.0,
     "pis_canceladas": 22.96,
@@ -236,6 +243,8 @@ const dashboardData = {
       "valor_transferencias": 38838.44,
       "total_compra": 0.0,
       "valor_compra": 0.0,
+      "total_transporte": 0.0,
+      "valor_transporte": 0.0,
       "icms_vendas": 49449.36000000004,
       "ipi_vendas": 0.0,
       "pis_vendas": 7401.490000000016,
@@ -244,6 +253,10 @@ const dashboardData = {
       "ipi_transferencias": 0.0,
       "pis_transferencias": 0.0,
       "cofins_transferencias": 0.0,
+      "icms_transporte": 0.0,
+      "ipi_transporte": 0.0,
+      "pis_transporte": 0.0,
+      "cofins_transporte": 0.0,
       "icms_canceladas": 262.68,
       "ipi_canceladas": 0.0,
       "pis_canceladas": 22.96,
@@ -279,6 +292,8 @@ const dashboardData = {
       "valor_transferencias": 238654.70999999996,
       "total_compra": 0.0,
       "valor_compra": 0.0,
+      "total_transporte": 0.0,
+      "valor_transporte": 0.0,
       "icms_vendas": 7048.1500000000015,
       "ipi_vendas": 0.0,
       "pis_vendas": 1198.77,
@@ -287,6 +302,10 @@ const dashboardData = {
       "ipi_transferencias": 0.0,
       "pis_transferencias": 0.0,
       "cofins_transferencias": 0.0,
+      "icms_transporte": 0.0,
+      "ipi_transporte": 0.0,
+      "pis_transporte": 0.0,
+      "cofins_transporte": 0.0,
       "icms_canceladas": 0.0,
       "ipi_canceladas": 0.0,
       "pis_canceladas": 0.0,
@@ -364,6 +383,16 @@ const dashboardData = {
       "Total Impostos": 0.0
     },
     {
+      "Indicador": "Notas de Transporte",
+      "Quantidade": 0.0,
+      "Valor": 0.0,
+      "ICMS": 0.0,
+      "IPI": 0.0,
+      "PIS": 0.0,
+      "COFINS": 0.0,
+      "Total Impostos": 0.0
+    },
+    {
       "Indicador": "Serviços",
       "Quantidade": 5.0,
       "Valor": 79094.9,
@@ -415,6 +444,7 @@ const dashboardData = {
       "Mês": "Junho/2026",
       "Notas Venda": 737.0,
       "Transferências": 79.0,
+      "Transporte": 0.0,
       "Canceladas": 3.0,
       "Devoluções": 0.0,
       "Faturamento Bruto": 537161.3899999988,
@@ -426,6 +456,7 @@ const dashboardData = {
       "Mês": "Julho/2026",
       "Notas Venda": 54.0,
       "Transferências": 422.0,
+      "Transporte": 0.0,
       "Canceladas": 0.0,
       "Devoluções": 3.0,
       "Faturamento Bruto": 318574.48,
@@ -543,6 +574,17 @@ function renderFinancialSummaryTable(currentIndicators, mes) {
                 'COFINS': getValue('cofins_transferencias'),
                 'Total Impostos': getValue('icms_transferencias') + getValue('ipi_transferencias') + getValue('pis_transferencias') + getValue('cofins_transferencias')
             };
+        } else if (rowDef.Indicador === 'Notas de Transporte') { // Handle new 'Notas de Transporte'
+            rowData = {
+                'Indicador': rowDef.Indicador,
+                'Quantidade': getValue('total_transporte'),
+                'Valor': getValue('valor_transporte'),
+                'ICMS': getValue('icms_transporte'),
+                'IPI': getValue('ipi_transporte'),
+                'PIS': getValue('pis_transporte'),
+                'COFINS': getValue('cofins_transporte'),
+                'Total Impostos': getValue('icms_transporte') + getValue('ipi_transporte') + getValue('pis_transporte') + getValue('cofins_transporte')
+            };
         } else if (rowDef.Indicador === 'Notas Canceladas/Devoluções') {
              rowData = {
                 'Indicador': rowDef.Indicador,
@@ -580,10 +622,10 @@ function renderTaxSummaryTable(currentIndicators) {
     tableBody.innerHTML = '';
 
     const taxDataForDisplay = [
-        { 'Imposto': 'ICMS a Recolher', 'Valor': (currentIndicators['icms_vendas'] || 0) + (currentIndicators['icms_transferencias'] || 0) },
-        { 'Imposto': 'IPI a Recolher', 'Valor': (currentIndicators['ipi_vendas'] || 0) + (currentIndicators['ipi_transferencias'] || 0) },
-        { 'Imposto': 'PIS a Recolher', 'Valor': (currentIndicators['pis_vendas'] || 0) + (currentIndicators['pis_transferencias'] || 0) },
-        { 'Imposto': 'COFINS a Recolher', 'Valor': (currentIndicators['cofins_vendas'] || 0) + (currentIndicators['cofins_transferencias'] || 0) },
+        { 'Imposto': 'ICMS a Recolher', 'Valor': (currentIndicators['icms_vendas'] || 0) + (currentIndicators['icms_transferencias'] || 0) + (currentIndicators['icms_transporte'] || 0) },
+        { 'Imposto': 'IPI a Recolher', 'Valor': (currentIndicators['ipi_vendas'] || 0) + (currentIndicators['ipi_transferencias'] || 0) + (currentIndicators['ipi_transporte'] || 0) },
+        { 'Imposto': 'PIS a Recolher', 'Valor': (currentIndicators['pis_vendas'] || 0) + (currentIndicators['pis_transferencias'] || 0) + (currentIndicators['pis_transporte'] || 0) },
+        { 'Imposto': 'COFINS a Recolher', 'Valor': (currentIndicators['cofins_vendas'] || 0) + (currentIndicators['cofins_transferencias'] || 0) + (currentIndicators['cofins_transporte'] || 0) },
         { 'Imposto': 'Créditos Tributários', 'Valor': currentIndicators['creditos_tributarios'] || 0.0 },
         { 'Imposto': 'Saldo Tributário', 'Valor': currentIndicators['total_impostos'] || 0.0 }
     ];
@@ -609,6 +651,7 @@ function renderMonthlyEvolutionTable() {
                 <td>${rowData['Mês']}</td>
                 <td>${formatValue(rowData['Notas Venda'], 'integer')}</td>
                 <td>${formatValue(rowData['Transferências'], 'integer')}</td>
+                <td>${formatValue(rowData['Transporte'], 'integer')}</td>
                 <td>${formatValue(rowData['Canceladas'], 'integer')}</td>
                 <td>${formatValue(rowData['Devoluções'], 'integer')}</td>
                 <td>${formatValue(rowData['Faturamento Bruto'], 'currency')}</td>
