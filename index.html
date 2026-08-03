@@ -334,14 +334,24 @@ const dashboardData = {
       "Total Impostos": 0.0
     },
     {
-      "Indicador": "CTe (Transporte)",
+      "Indicador": "CTe Estadual",
       "Quantidade": 0,
-      "Valor": 0,
-      "ICMS": 3143.3000000000034,
+      "Valor": 0.0,
+      "ICMS": 0.0,
       "IPI": 0.0,
-      "PIS": 462.7794599999998,
-      "COFINS": 2131.590240000002,
-      "Total Impostos": 5737.669700000005
+      "PIS": 0.0,
+      "COFINS": 0.0,
+      "Total Impostos": 0.0
+    },
+    {
+      "Indicador": "CTe Interestadual",
+      "Quantidade": 0,
+      "Valor": 0.0,
+      "ICMS": 0.0,
+      "IPI": 0.0,
+      "PIS": 0.0,
+      "COFINS": 0.0,
+      "Total Impostos": 0.0
     },
     {
       "Indicador": "Serviços",
@@ -464,93 +474,16 @@ function renderFinancialSummaryTable(currentIndicators, mes) {
     document.getElementById('mesResumoFinanceiro').textContent = formatMonthName(mes);
 
     dashboardData.financial_summary.forEach(rowDef => {
-        let rowData = {};
-        const getValue = (key) => currentIndicators[key] || 0.0;
-
-        if (rowDef.Indicador === 'Notas de Compra') {
-            rowData = {
-                'Indicador': rowDef.Indicador,
-                'Quantidade': getValue('total_compra') || getValue('total_compras'),
-                'Valor': getValue('valor_compra') || getValue('valor_compras'),
-                'ICMS': getValue('icms_compra') || getValue('icms_compras'),
-                'IPI': getValue('ipi_compra') || getValue('ipi_compras'),
-                'PIS': getValue('pis_compra') || getValue('pis_compras'),
-                'COFINS': getValue('cofins_compra') || getValue('cofins_compras'),
-                'Total Impostos': (getValue('icms_compra') || getValue('icms_compras')) +
-                                  (getValue('ipi_compra') || getValue('ipi_compras')) +
-                                  (getValue('pis_compra') || getValue('pis_compras')) +
-                                  (getValue('cofins_compra') || getValue('cofins_compras'))
-            };
-        } else if (rowDef.Indicador === 'Serviços') {
-            rowData = {
-                'Indicador': rowDef.Indicador,
-                'Quantidade': getValue('total_servicos'),
-                'Valor': getValue('valor_servicos'),
-                'ICMS': 0.0,
-                'IPI': 0.0,
-                'PIS': rowDef.PIS,
-                'COFINS': rowDef.COFINS,
-                'Total Impostos': rowDef['Total Impostos']
-            };
-        } else if (rowDef.Indicador === 'Notas de Venda') {
-            rowData = {
-                'Indicador': rowDef.Indicador,
-                'Quantidade': getValue('total_vendas'),
-                'Valor': getValue('valor_vendas'),
-                'ICMS': getValue('icms_vendas'),
-                'IPI': getValue('ipi_vendas'),
-                'PIS': getValue('pis_vendas'),
-                'COFINS': getValue('cofins_vendas'),
-                'Total Impostos': getValue('icms_vendas') + getValue('ipi_vendas') + getValue('pis_vendas') + getValue('cofins_vendas')
-            };
-        } else if (rowDef.Indicador === 'Notas de Transferência') {
-            rowData = {
-                'Indicador': rowDef.Indicador,
-                'Quantidade': getValue('total_transferencias'),
-                'Valor': getValue('valor_transferencias'),
-                'ICMS': getValue('icms_transferencias'),
-                'IPI': getValue('ipi_transferencias'),
-                'PIS': getValue('pis_transferencias'),
-                'COFINS': getValue('cofins_transferencias'),
-                'Total Impostos': getValue('icms_transferencias') + getValue('ipi_transferencias') + getValue('pis_transferencias') + getValue('cofins_transferencias')
-            };
-        } else if (rowDef.Indicador === 'CTe') { // Handle new 'CTe'
-            rowData = {
-                'Indicador': rowDef.Indicador,
-                'Quantidade': getValue('total_transporte'),
-                'Valor': getValue('valor_transporte'),
-                'ICMS': getValue('icms_transporte'),
-                'IPI': getValue('ipi_transporte'),
-                'PIS': getValue('pis_transporte'),
-                'COFINS': getValue('cofins_transporte'),
-                'Total Impostos': getValue('icms_transporte') + getValue('ipi_transporte') + getValue('pis_transporte') + getValue('cofins_transporte')
-            };
-        } else if (rowDef.Indicador === 'Notas Canceladas/Devoluções') {
-             rowData = {
-                'Indicador': rowDef.Indicador,
-                'Quantidade': getValue('total_canceladas_devolucoes'),
-                'Valor': getValue('valor_canceladas_devolucoes'),
-                'ICMS': getValue('icms_canceladas') + getValue('icms_devolucoes'),
-                'IPI': getValue('ipi_canceladas') + getValue('ipi_devolucoes'),
-                'PIS': getValue('pis_canceladas') + getValue('pis_devolucoes'),
-                'COFINS': getValue('cofins_canceladas') + getValue('cofins_devolucoes'),
-                'Total Impostos': (getValue('icms_canceladas') + getValue('icms_devolucoes')) +
-                                  (getValue('ipi_canceladas') + getValue('ipi_devolucoes')) +
-                                  (getValue('pis_canceladas') + getValue('pis_devolucoes')) +
-                                  (getValue('cofins_canceladas') + getValue('cofins_devolucoes'))
-            };
-        }
-
         const rowHtml = `
             <tr>
-                <td>${rowData.Indicador}</td>
-                <td>${formatValue(rowData.Quantidade, 'integer')}</td>
-                <td>${formatValue(rowData.Valor, 'currency')}</td>
-                <td>${formatValue(rowData.ICMS, 'currency')}</td>
-                <td>${formatValue(rowData.IPI, 'currency')}</td>
-                <td>${formatValue(rowData.PIS, 'currency')}</td>
-                <td>${formatValue(rowData.COFINS, 'currency')}</td>
-                <td>${formatValue(rowData['Total Impostos'], 'currency')}</td>
+                <td>${rowDef.Indicador}</td>
+                <td>${formatValue(rowDef.Quantidade, 'integer')}</td>
+                <td>${formatValue(rowDef.Valor, 'currency')}</td>
+                <td>${formatValue(rowDef.ICMS, 'currency')}</td>
+                <td>${formatValue(rowDef.IPI, 'currency')}</td>
+                <td>${formatValue(rowDef.PIS, 'currency')}</td>
+                <td>${formatValue(rowDef.COFINS, 'currency')}</td>
+                <td>${formatValue(rowDef['Total Impostos'], 'currency')}</td>
             </tr>
         `;
         tableBody.innerHTML += rowHtml;
