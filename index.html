@@ -180,7 +180,7 @@ const dashboardData = {
   "empresa": "N&P IMPORTAÇÃO E COMÉRCIO LTDA",
   "global_indicators": {
     "total_xml": 1639.0,
-    "total_notas": 1634.0,
+    "total_notas": 819.0,
     "total_vendas": 737.0,
     "valor_vendas": 498322.94999999885,
     "total_servicos": 5.0,
@@ -193,20 +193,20 @@ const dashboardData = {
     "valor_transferencias": 38838.44,
     "total_compras": 0.0,
     "valor_compras": 0.0,
-    "total_transporte": 815.0,
-    "valor_transporte": 31190.540000000015,
-    "icms_vendas": 49449.36000000004,
+    "total_transporte": 0,
+    "valor_transporte": 0,
+    "icms_vendas": 0.0,
     "ipi_vendas": 0.0,
-    "pis_vendas": 7401.490000000016,
-    "cofins_vendas": 34092.240000000056,
+    "pis_vendas": 8222.328674999964,
+    "cofins_vendas": 37872.54419999993,
     "icms_transferencias": 0.0,
     "ipi_transferencias": 0.0,
     "pis_transferencias": 0.0,
     "cofins_transferencias": 0.0,
-    "icms_transporte": 3143.3000000000075,
+    "icms_transporte": 3143.3000000000034,
     "ipi_transporte": 0.0,
-    "pis_transporte": 0.0,
-    "cofins_transporte": 0.0,
+    "pis_transporte": 462.7794599999998,
+    "cofins_transporte": 2131.590240000002,
     "icms_canceladas": 262.68,
     "ipi_canceladas": 0.0,
     "pis_canceladas": 22.96,
@@ -219,16 +219,16 @@ const dashboardData = {
     "ipi_compras": 0.0,
     "pis_compras": 0.0,
     "cofins_compras": 0.0,
-    "total_impostos": 86770.11175000011,
-    "impostos_a_recolher": 94086.39000000012,
+    "total_impostos": 44516.26432499991,
+    "impostos_a_recolher": 51832.542574999905,
     "creditos_tributarios": 7316.278249999999,
-    "faturamento_bruto": 568351.9299999989,
-    "carga_tributaria": 15.266968786399701
+    "faturamento_bruto": 537161.3899999988,
+    "carga_tributaria": 8.287316466472024
   },
   "monthly_indicators": {
     "2026-06": {
       "total_xml": 1639.0,
-      "total_notas": 1634.0,
+      "total_notas": 819.0,
       "total_vendas": 737.0,
       "valor_vendas": 498322.94999999885,
       "total_servicos": 5.0,
@@ -243,20 +243,20 @@ const dashboardData = {
       "valor_transferencias": 38838.44,
       "total_compra": 0.0,
       "valor_compra": 0.0,
-      "total_transporte": 815.0,
-      "valor_transporte": 31190.540000000015,
-      "icms_vendas": 49449.36000000004,
+      "total_transporte": 0,
+      "valor_transporte": 0,
+      "icms_vendas": 0.0,
       "ipi_vendas": 0.0,
-      "pis_vendas": 7401.490000000016,
-      "cofins_vendas": 34092.240000000056,
+      "pis_vendas": 8222.328674999964,
+      "cofins_vendas": 37872.54419999993,
       "icms_transferencias": 0.0,
       "ipi_transferencias": 0.0,
       "pis_transferencias": 0.0,
       "cofins_transferencias": 0.0,
-      "icms_transporte": 3143.3000000000075,
+      "icms_transporte": 3143.3000000000034,
       "ipi_transporte": 0.0,
-      "pis_transporte": 0.0,
-      "cofins_transporte": 0.0,
+      "pis_transporte": 462.7794599999998,
+      "cofins_transporte": 2131.590240000002,
       "icms_canceladas": 262.68,
       "ipi_canceladas": 0.0,
       "pis_canceladas": 22.96,
@@ -269,11 +269,11 @@ const dashboardData = {
       "ipi_compras": 0.0,
       "pis_compras": 0.0,
       "cofins_compras": 0.0,
-      "total_impostos": 86770.11175000011,
-      "impostos_a_recolher": 94086.39000000012,
+      "total_impostos": 44516.26432499991,
+      "impostos_a_recolher": 51832.542574999905,
       "creditos_tributarios": 7316.278249999999,
-      "faturamento_bruto": 568351.9299999989,
-      "carga_tributaria": 15.266968786399701
+      "faturamento_bruto": 537161.3899999988,
+      "carga_tributaria": 8.287316466472024
     }
   },
   "card_definitions": [
@@ -317,11 +317,11 @@ const dashboardData = {
       "Indicador": "Notas de Venda",
       "Quantidade": 737.0,
       "Valor": 498322.94999999885,
-      "ICMS": 49449.36000000004,
+      "ICMS": 0.0,
       "IPI": 0.0,
-      "PIS": 7401.490000000016,
-      "COFINS": 34092.240000000056,
-      "Total Impostos": 90943.09000000011
+      "PIS": 8222.328674999964,
+      "COFINS": 37872.54419999993,
+      "Total Impostos": 46094.8728749999
     },
     {
       "Indicador": "Notas de Transferência",
@@ -334,14 +334,14 @@ const dashboardData = {
       "Total Impostos": 0.0
     },
     {
-      "Indicador": "CTe",
-      "Quantidade": 815.0,
-      "Valor": 31190.540000000015,
-      "ICMS": 3143.3000000000075,
+      "Indicador": "CTe (Transporte)",
+      "Quantidade": 0,
+      "Valor": 0,
+      "ICMS": 3143.3000000000034,
       "IPI": 0.0,
-      "PIS": 0.0,
-      "COFINS": 0.0,
-      "Total Impostos": 3143.3000000000075
+      "PIS": 462.7794599999998,
+      "COFINS": 2131.590240000002,
+      "Total Impostos": 5737.669700000005
     },
     {
       "Indicador": "Serviços",
@@ -367,7 +367,7 @@ const dashboardData = {
   "tax_summary": [
     {
       "Imposto": "ICMS a Recolher",
-      "Valor": 52592.66000000005
+      "Valor": 3143.3000000000034
     },
     {
       "Imposto": "IPI a Recolher",
@@ -375,11 +375,11 @@ const dashboardData = {
     },
     {
       "Imposto": "PIS a Recolher",
-      "Valor": 7401.490000000016
+      "Valor": 8685.108134999964
     },
     {
       "Imposto": "COFINS a Recolher",
-      "Valor": 34092.240000000056
+      "Valor": 40004.134439999936
     },
     {
       "Imposto": "Créditos Tributários",
@@ -387,21 +387,22 @@ const dashboardData = {
     },
     {
       "Imposto": "Saldo Tributário",
-      "Valor": 86770.11175000011
+      "Valor": 44516.26432499991
     }
   ],
   "monthly_summary_table": [
     {
       "Mês": "Junho/2026",
       "Notas Venda": 737.0,
+      "Notas Compra": 0.0,
       "Transferências": 79.0,
-      "CTe": 815.0,
+      "CTe": 0,
       "Canceladas": 3.0,
       "Devoluções": 0.0,
-      "Faturamento Bruto": 568351.9299999989,
-      "Faturamento Líquido": 566697.5099999988,
-      "Impostos": 86770.11175000011,
-      "Carga Tributária %": 15.27
+      "Faturamento Bruto": 537161.3899999988,
+      "Faturamento Líquido": 535506.9699999988,
+      "Impostos": 44516.26432499991,
+      "Carga Tributária %": 8.29
     }
   ]
 };
