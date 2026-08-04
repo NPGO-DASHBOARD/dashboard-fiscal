@@ -288,24 +288,6 @@ td{
     
 <div class="section">
     <div class="section-title">
-        🧾 Tributação
-    </div>
-    <table id="tabelaTributacao">
-        <thead>
-            <tr>
-                <th>Imposto</th>
-                <th>Valor</th>
-            </tr>
-        </thead>
-        <tbody id="corpoTributacao">
-            <!-- Linhas da tabela serão populadas dinamicamente via JavaScript -->
-        </tbody>
-    </table>
-</div>
-
-    
-<div class="section">
-    <div class="section-title">
         📅 Evolução Mensal
     </div>
     <table id="tabelaEvolucaoMensal">
@@ -501,9 +483,9 @@ const dashboardData = {
       "format_type": "percentage"
     },
     {
-      "id": "total_impostos",
-      "title": "Saldo Tributário",
-      "value_key": "total_impostos",
+      "id": "impostos_a_recolher",
+      "title": "Impostos a Recolher",
+      "value_key": "impostos_a_recolher",
       "format_type": "currency"
     },
     {
