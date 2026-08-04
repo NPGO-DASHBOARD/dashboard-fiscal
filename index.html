@@ -242,16 +242,20 @@ const dashboardData = {
     "saldo_icms_anterior": 3150.86,
     "icms_a_recolher": 43155.20000000003,
     "saldo_credor_icms_seguinte": 0.0,
-    "total_impostos": 76776.16145000012,
-    "impostos_a_recolher": 87243.29970000012,
+    "pis_a_recolher": 712.0608000000005,
+    "cofins_a_recolher": 3279.7952000000023,
+    "irpj_a_recolher": 0.0,
+    "csll_a_recolher": 0.0,
+    "total_impostos": 36679.91775000004,
+    "impostos_a_recolher": 47147.05600000003,
     "creditos_tributarios": 10467.13825,
     "faturamento_bruto": 568351.9299999989,
-    "carga_tributaria": 13.508559995564767
+    "carga_tributaria": 6.453733296902874
   },
   "monthly_indicators": {
     "2026-06": {
       "total_xml": 1639.0,
-      "total_notas": 819.0,
+      "total_notas": 1634.0,
       "total_vendas": 737.0,
       "valor_vendas": 498322.94999999885,
       "total_servicos": 5.0,
@@ -259,15 +263,17 @@ const dashboardData = {
       "pis_servicos": 1305.06585,
       "cofins_servicos": 6011.212399999999,
       "total_canceladas": 3.0,
+      "valor_canceladas": 1654.42,
       "total_devolucoes": 0.0,
+      "valor_devolucoes": 0.0,
       "total_canceladas_devolucoes": 3.0,
       "valor_canceladas_devolucoes": 1654.42,
       "total_transferencias": 79.0,
       "valor_transferencias": 38838.44,
       "total_compra": 0.0,
       "valor_compra": 0.0,
-      "total_transporte": 0,
-      "valor_transporte": 0,
+      "total_transporte": 815.0,
+      "valor_transporte": 31190.539999999986,
       "icms_vendas": 49449.36000000004,
       "ipi_vendas": 0.0,
       "pis_vendas": 7401.490000000016,
@@ -292,11 +298,18 @@ const dashboardData = {
       "ipi_compras": 0.0,
       "pis_compras": 0.0,
       "cofins_compras": 0.0,
-      "total_impostos": 89364.48145000012,
-      "impostos_a_recolher": 96680.75970000013,
+      "saldo_icms_anterior_mes": 0.0,
+      "icms_a_recolher": 46306.060000000034,
+      "saldo_credor_icms_seguinte_mes": 0.0,
+      "pis_a_recolher": 764.0499900000005,
+      "cofins_a_recolher": 3519.2605600000024,
+      "irpj_a_recolher": 0.0,
+      "csll_a_recolher": 0.0,
+      "total_impostos": 43273.09230000003,
+      "impostos_a_recolher": 50589.370550000036,
       "creditos_tributarios": 7316.278249999999,
-      "faturamento_bruto": 537161.3899999988,
-      "carga_tributaria": 16.636430524167107
+      "faturamento_bruto": 568351.9299999989,
+      "carga_tributaria": 7.613784702024345
     }
   },
   "card_definitions": [
@@ -322,6 +335,36 @@ const dashboardData = {
       "id": "total_impostos",
       "title": "Saldo Tributário",
       "value_key": "total_impostos",
+      "format_type": "currency"
+    },
+    {
+      "id": "icms_a_recolher",
+      "title": "ICMS a Recolher",
+      "value_key": "icms_a_recolher",
+      "format_type": "currency"
+    },
+    {
+      "id": "pis_a_recolher",
+      "title": "PIS a Recolher",
+      "value_key": "pis_a_recolher",
+      "format_type": "currency"
+    },
+    {
+      "id": "cofins_a_recolher",
+      "title": "COFINS a Recolher",
+      "value_key": "cofins_a_recolher",
+      "format_type": "currency"
+    },
+    {
+      "id": "irpj_a_recolher",
+      "title": "IRPJ a Recolher",
+      "value_key": "irpj_a_recolher",
+      "format_type": "currency"
+    },
+    {
+      "id": "csll_a_recolher",
+      "title": "CSLL a Recolher",
+      "value_key": "csll_a_recolher",
       "format_type": "currency"
     }
   ],
@@ -399,28 +442,52 @@ const dashboardData = {
   ],
   "tax_summary": [
     {
-      "Imposto": "ICMS a Recolher",
-      "Valor": 52592.66000000004
+      "Imposto": "ICMS VENDAS (débito)",
+      "Valor": 49449.36000000004
+    },
+    {
+      "Imposto": "ICMS TRANSPORTE (crédito)",
+      "Valor": -3143.3000000000034
+    },
+    {
+      "Imposto": "ICMS COMPRAS (crédito)",
+      "Valor": -0.0
+    },
+    {
+      "Imposto": "SALDO ICMS MÊS ANTERIOR (crédito)",
+      "Valor": -3150.86
+    },
+    {
+      "Imposto": "ICMS a Recolher (RESULTADO)",
+      "Valor": 43155.20000000003
+    },
+    {
+      "Imposto": "PIS a Recolher",
+      "Valor": 712.0608000000005
+    },
+    {
+      "Imposto": "COFINS a Recolher",
+      "Valor": 3279.7952000000023
+    },
+    {
+      "Imposto": "IRPJ a Recolher",
+      "Valor": 0.0
+    },
+    {
+      "Imposto": "CSLL a Recolher",
+      "Valor": 0.0
     },
     {
       "Imposto": "IPI a Recolher",
       "Valor": 0.0
     },
     {
-      "Imposto": "PIS a Recolher",
-      "Valor": 7864.269460000016
-    },
-    {
-      "Imposto": "COFINS a Recolher",
-      "Valor": 36223.83024000006
-    },
-    {
-      "Imposto": "Créditos Tributários",
+      "Imposto": "Créditos Tributários Totais",
       "Valor": 10467.13825
     },
     {
-      "Imposto": "Saldo Tributário",
-      "Valor": 76776.16145000012
+      "Imposto": "Saldo Tributário Geral",
+      "Valor": 36679.91775000004
     }
   ],
   "monthly_summary_table": [
@@ -429,13 +496,18 @@ const dashboardData = {
       "Notas Venda": 737.0,
       "Notas Compra": 0.0,
       "Transferências": 79.0,
-      "CTe": 0,
+      "CTe": 815.0,
       "Canceladas": 3.0,
       "Devoluções": 0.0,
-      "Faturamento Bruto": 537161.3899999988,
-      "Faturamento Líquido": 535506.9699999988,
-      "Impostos": 89364.48145000012,
-      "Carga Tributária %": 16.64
+      "Faturamento Bruto": 568351.9299999989,
+      "Faturamento Líquido": 566697.5099999988,
+      "Impostos": 43273.09230000003,
+      "Carga Tributária %": 7.61,
+      "ICMS Saldo": 0.0,
+      "PIS Saldo": 764.0499900000005,
+      "COFINS Saldo": 3519.2605600000024,
+      "IRPJ": 0.0,
+      "CSLL": 0.0
     }
   ]
 };
