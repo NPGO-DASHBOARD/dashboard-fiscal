@@ -224,6 +224,46 @@ td{
     
 <div class="section">
     <div class="section-title">
+        🧮 Lucro Presumido: IRPJ e CSLL
+    </div>
+    <div class="tax-cards-container">
+        <!-- IRPJ Card -->
+        <div class="tax-card" id="irpjCard">
+            <div class="card-principal">
+                IRPJ A RECOLHER
+                <span class="value" id="irpjRecolherValue">R$ 0,00</span>
+            </div>
+            <div class="detail-calculation">
+                Detalhamento do Cálculo:
+                <ul>
+                    <li>• Base Cálculo Lucro Presumido (8% Vendas): <span id="irpjBaseCalculo">R$ 0,00</span></li>
+                    <li>• Imposto Básico (15% da Base): <span id="irpjImpostoBasico">R$ 0,00</span></li>
+                    <li>• Excesso para Adicional (Base - R$ 20.000): <span id="irpjExcesso">R$ 0,00</span></li>
+                    <li>• Adicional de IR (10% do Excesso): <span id="irpjAdicional">R$ 0,00</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CSLL Card -->
+        <div class="tax-card" id="csllCard">
+            <div class="card-principal">
+                CSLL A RECOLHER
+                <span class="value" id="csllRecolherValue">R$ 0,00</span>
+            </div>
+            <div class="detail-calculation">
+                Detalhamento do Cálculo:
+                <ul>
+                    <li>• Base Cálculo Lucro Presumido (12% Vendas): <span id="csllBaseCalculo">R$ 0,00</span></li>
+                    <li>• Imposto Devido (9% da Base): <span id="csllImpostoDevido">R$ 0,00</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+<div class="section">
+    <div class="section-title">
         💰 Dados XML Extraídas: <span id="mesResumoFinanceiro">Todos</span>
     </div>
     <table id="tabelaResumoFinanceiro">
@@ -358,13 +398,19 @@ const dashboardData = {
     "saldo_credor_icms_seguinte": 0.0,
     "pis_a_recolher": 7510.267874999981,
     "cofins_a_recolher": 34592.74899999991,
-    "irpj_a_recolher": 0.0,
-    "csll_a_recolher": 0.0,
-    "total_impostos": 74791.07862499992,
-    "impostos_a_recolher": 85258.21687499993,
+    "irpj_a_recolher": 7966.458999999977,
+    "csll_a_recolher": 5381.887859999987,
+    "irpj_base_calculo_8_percent": 39865.83599999991,
+    "irpj_imposto_basico": 5979.875399999986,
+    "irpj_excesso": 19865.83599999991,
+    "irpj_adicional": 1986.5835999999908,
+    "csll_base_calculo_12_percent": 59798.75399999986,
+    "csll_imposto_devido": 5381.887859999987,
+    "total_impostos": 88139.42548499988,
+    "impostos_a_recolher": 98606.56373499989,
     "creditos_tributarios": 10467.13825,
     "faturamento_bruto": 568351.9299999989,
-    "carga_tributaria": 13.159289988687128
+    "carga_tributaria": 15.50789587096151
   },
   "monthly_indicators": {
     "2026-06": {
@@ -420,13 +466,19 @@ const dashboardData = {
       "saldo_credor_icms_seguinte_mes": 0.0,
       "pis_a_recolher": 7458.27868499998,
       "cofins_a_recolher": 34353.28363999991,
-      "irpj_a_recolher": 0.0,
-      "csll_a_recolher": 0.0,
-      "total_impostos": 80801.34407499991,
-      "impostos_a_recolher": 88117.62232499992,
+      "irpj_a_recolher": 7966.458999999977,
+      "csll_a_recolher": 5381.887859999987,
+      "irpj_base_calculo_8_percent": 39865.83599999991,
+      "irpj_imposto_basico": 5979.875399999986,
+      "irpj_excesso": 19865.83599999991,
+      "irpj_adicional": 1986.5835999999908,
+      "csll_base_calculo_12_percent": 59798.75399999986,
+      "csll_imposto_devido": 5381.887859999987,
+      "total_impostos": 94149.69093499988,
+      "impostos_a_recolher": 101465.96918499988,
       "creditos_tributarios": 7316.278249999999,
       "faturamento_bruto": 568351.9299999989,
-      "carga_tributaria": 14.216780098732148
+      "carga_tributaria": 16.565385981006532
     }
   },
   "card_definitions": [
@@ -588,11 +640,11 @@ const dashboardData = {
     },
     {
       "Imposto": "IRPJ a Recolher",
-      "Valor": 0.0
+      "Valor": 7966.458999999977
     },
     {
       "Imposto": "CSLL a Recolher",
-      "Valor": 0.0
+      "Valor": 5381.887859999987
     },
     {
       "Imposto": "IPI a Recolher",
@@ -604,7 +656,7 @@ const dashboardData = {
     },
     {
       "Imposto": "Saldo Tributário Geral",
-      "Valor": 74791.07862499992
+      "Valor": 88139.42548499988
     }
   ],
   "monthly_summary_table": [
@@ -618,13 +670,13 @@ const dashboardData = {
       "Devoluções": 0.0,
       "Faturamento Bruto": 568351.9299999989,
       "Faturamento Líquido": 566697.5099999988,
-      "Impostos": 80801.34407499991,
-      "Carga Tributária %": 14.22,
+      "Impostos": 94149.69093499988,
+      "Carga Tributária %": 16.57,
       "ICMS Saldo": 0.0,
       "PIS Saldo": 7458.27868499998,
       "COFINS Saldo": 34353.28363999991,
-      "IRPJ": 0.0,
-      "CSLL": 0.0
+      "IRPJ": 7966.458999999977,
+      "CSLL": 5381.887859999987
     }
   ]
 };
@@ -719,6 +771,32 @@ function renderDetailedTaxCards(currentIndicators) {
     document.getElementById('cofinsSaldoMesAnteriorCredito').textContent = formatValue(cofinsSaldoMesAnteriorCredito, 'currency');
 }
 
+// New function to render Lucro Presumido cards
+function renderLucroPresumidoCards(currentIndicators) {
+    // IRPJ Card
+    const irpjRecolherValue = currentIndicators['irpj_a_recolher'] || 0.0;
+    const irpjBaseCalculo = currentIndicators['irpj_base_calculo_8_percent'] || 0.0;
+    const irpjImpostoBasico = currentIndicators['irpj_imposto_basico'] || 0.0;
+    const irpjExcesso = currentIndicators['irpj_excesso'] || 0.0;
+    const irpjAdicional = currentIndicators['irpj_adicional'] || 0.0;
+
+    document.getElementById('irpjRecolherValue').textContent = formatValue(irpjRecolherValue, 'currency');
+    document.getElementById('irpjBaseCalculo').textContent = formatValue(irpjBaseCalculo, 'currency');
+    document.getElementById('irpjImpostoBasico').textContent = formatValue(irpjImpostoBasico, 'currency');
+    document.getElementById('irpjExcesso').textContent = formatValue(irpjExcesso, 'currency');
+    document.getElementById('irpjAdicional').textContent = formatValue(irpjAdicional, 'currency');
+
+    // CSLL Card
+    const csllRecolherValue = currentIndicators['csll_a_recolher'] || 0.0;
+    const csllBaseCalculo = currentIndicators['csll_base_calculo_12_percent'] || 0.0;
+    const csllImpostoDevido = currentIndicators['csll_imposto_devido'] || 0.0;
+
+    document.getElementById('csllRecolherValue').textContent = formatValue(csllRecolherValue, 'currency');
+    document.getElementById('csllBaseCalculo').textContent = formatValue(csllBaseCalculo, 'currency');
+    document.getElementById('csllImpostoDevido').textContent = formatValue(csllImpostoDevido, 'currency');
+}
+
+
 function renderFinancialSummaryTable(currentIndicators, mes) {
     const tableBody = document.getElementById('corpoResumoFinanceiro');
     tableBody.innerHTML = '';
@@ -750,8 +828,10 @@ function renderTaxSummaryTable(currentIndicators) {
     const taxDataForDisplay = [
         // --- DÉBITOS (IMPOSTOS A RECOLHER / SAÍDAS) ---
         { 'Imposto': '🔴 (+) ICMS a Recolher (Líquido)', 'Valor': currentIndicators['icms_a_recolher'] || 0.0 },
-        { 'Imposto': '🔴 (+) PIS a Recolher', 'Valor': currentIndicators['pis_vendas'] || 0.0 },
-        { 'Imposto': '🔴 (+) COFINS a Recolher', 'Valor': currentIndicators['cofins_vendas'] || 0.0 },
+        { 'Imposto': '🔴 (+) PIS a Recolher', 'Valor': currentIndicators['pis_a_recolher'] || 0.0 },
+        { 'Imposto': '🔴 (+) COFINS a Recolher', 'Valor': currentIndicators['cofins_a_recolher'] || 0.0 },
+        { 'Imposto': '🔴 (+) IRPJ a Recolher', 'Valor': currentIndicators['irpj_a_recolher'] || 0.0 },
+        { 'Imposto': '🔴 (+) CSLL a Recolher', 'Valor': currentIndicators['csll_a_recolher'] || 0.0 },
         { 'Imposto': '🔴 (+) IPI a Recolher', 'Valor': (currentIndicators['ipi_vendas'] || 0) + (currentIndicators['ipi_transferencias'] || 0) },
 
         // --- CRÉDITOS (ENTRADAS E SALDOS ANTERIORES) ---
@@ -830,12 +910,14 @@ function initDashboard() {
 
         renderCards(currentIndicators);
         renderDetailedTaxCards(currentIndicators); // Call for detailed tax cards
+        renderLucroPresumidoCards(currentIndicators); // Call for Lucro Presumido cards
         renderFinancialSummaryTable(currentIndicators, selectedMonth);
         renderTaxSummaryTable(currentIndicators);
     });
 
     renderCards(dashboardData.global_indicators);
     renderDetailedTaxCards(dashboardData.global_indicators); // Call for detailed tax cards
+    renderLucroPresumidoCards(dashboardData.global_indicators); // Call for Lucro Presumido cards
     renderFinancialSummaryTable(dashboardData.global_indicators, 'GERAL');
     renderTaxSummaryTable(dashboardData.global_indicators);
     renderMonthlyEvolutionTable();
