@@ -176,10 +176,11 @@ td{
             </div>
             <div class="detail-calculation">
                 Detalhamento do Cálculo:
+                <p>ICMS a Recolher = (ICMS Vendas - ICMS Transporte - Saldo Mês Anterior)</p>
                 <ul>
                     <li>• (+) ICMS Vendas (Débito): <span id="icmsVendasDebito">R$ 0,00</span></li>
                     <li>• (-) ICMS Transporte (Crédito): <span id="icmsTransporteCredito">R$ 0,00</span></li>
-                    <li>• (-) Saldo Mês Anterior (Crédito): <span id="icmsSaldoMesAnteriorCredito">R$ 0,00</span></li>
+                    <li>• (-) Saldo Mês Anterior (Crédito Utilizado): <span id="icmsSaldoMesAnteriorCredito">R$ 0,00</span></li>
                 </ul>
             </div>
         </div>
@@ -187,14 +188,16 @@ td{
         <!-- PIS Card -->
         <div class="tax-card" id="pisCard">
             <div class="card-principal">
-                PIS A RECOLHER
+                PIS    A RECOLHER
                 <span class="value" id="pisRecolherValue">R$ 0,00</span>
             </div>
             <div class="detail-calculation">
                 Detalhamento do Cálculo:
+                <p>Base PIS/COFINS (Receita) = (Receita de Vendas - ICMS a Recolher)</p>
+                <p>PIS a Recolher = (Base PIS/COFINS * 1,65%) - Saldo PIS Mês Anterior</p>
                 <ul>
-                    <li>• (+) Base PIS/COFINS (Receita): <span id="pisCofinsBaseReceita">R$ 0,00</span></li>
-                    <li>• (-) Saldo Mês Anterior (Crédito): <span id="pisSaldoMesAnteriorCredito">R$ 0,00</span></li>
+                    <li>• Base PIS/COFINS (Receita): <span id="pisCofinsBaseReceita">R$ 0,00</span></li>
+                    <li>• Saldo PIS Mês Anterior (Crédito): <span id="pisSaldoMesAnteriorCredito">R$ 0,00</span></li>
                 </ul>
             </div>
         </div>
@@ -207,9 +210,11 @@ td{
             </div>
             <div class="detail-calculation">
                 Detalhamento do Cálculo:
+                <p>Base PIS/COFINS (Receita) = (Receita de Vendas - ICMS a Recolher)</p>
+                <p>COFINS a Recolher = (Base PIS/COFINS * 7,60%) - Saldo COFINS Mês Anterior</p>
                 <ul>
-                    <li>• (+) Base PIS/COFINS (Receita): <span id="cofinsCofinsBaseReceita">R$ 0,00</span></li>
-                    <li>• (-) Saldo Mês Anterior (Crédito): <span id="cofinsSaldoMesAnteriorCredito">R$ 0,00</span></li>
+                    <li>• Base PIS/COFINS (Receita): <span id="cofinsCofinsBaseReceita">R$ 0,00</span></li>
+                    <li>• Saldo COFINS Mês Anterior (Crédito): <span id="cofinsSaldoMesAnteriorCredito">R$ 0,00</span></li>
                 </ul>
             </div>
         </div>
