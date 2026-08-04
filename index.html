@@ -159,6 +159,7 @@ td{
             <tr>
                 <th>Mês</th>
                 <th>Notas Venda</th>
+                <th>Notas Compra</th>
                 <th>Transferências</th>
                 <th>CTe</th>
                 <th>Canceladas</th>
@@ -167,6 +168,11 @@ td{
                 <th>Faturamento Líquido</th>
                 <th>Impostos</th>
                 <th>Carga Tributária</th>
+                <th>ICMS Saldo</th>
+                <th>PIS Saldo</th>
+                <th>COFINS Saldo</th>
+                <th>IRPJ</th>
+                <th>CSLL</th>
             </tr>
         </thead>
         <tbody id="corpoEvolucaoMensal">
@@ -551,6 +557,7 @@ function renderMonthlyEvolutionTable() {
             <tr>
                 <td>${rowData['Mês']}</td>
                 <td>${formatValue(rowData['Notas Venda'], 'integer')}</td>
+                <td>${formatValue(rowData['Notas Compra'], 'integer')}</td>
                 <td>${formatValue(rowData['Transferências'], 'integer')}</td>
                 <td>${formatValue(rowData['CTe'], 'integer')}</td>
                 <td>${formatValue(rowData['Canceladas'], 'integer')}</td>
@@ -559,6 +566,11 @@ function renderMonthlyEvolutionTable() {
                 <td>${formatValue(rowData['Faturamento Líquido'], 'currency')}</td>
                 <td>${formatValue(rowData['Impostos'], 'currency')}</td>
                 <td>${formatValue(rowData['Carga Tributária %'], 'percentage')}</td>
+                <td>${formatValue(rowData['ICMS Saldo'], 'currency')}</td>
+                <td>${formatValue(rowData['PIS Saldo'], 'currency')}</td>
+                <td>${formatValue(rowData['COFINS Saldo'], 'currency')}</td>
+                <td>${formatValue(rowData['IRPJ'], 'currency')}</td>
+                <td>${formatValue(rowData['CSLL'], 'currency')}</td>
             </tr>
         `;
         tableBody.innerHTML += rowHtml;
