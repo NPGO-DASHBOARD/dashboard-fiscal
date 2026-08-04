@@ -514,11 +514,11 @@ function renderTaxSummaryTable(currentIndicators) {
         { 'Imposto': '🔴 (+) PIS a Recolher', 'Valor': currentIndicators['pis_vendas'] || 0.0 },
         { 'Imposto': '🔴 (+) COFINS a Recolher', 'Valor': currentIndicators['cofins_vendas'] || 0.0 },
         { 'Imposto': '🔴 (+) IPI a Recolher', 'Valor': (currentIndicators['ipi_vendas'] || 0) + (currentIndicators['ipi_transferencias'] || 0) },
-        
+
         // --- CRÉDITOS (ENTRADAS E SALDOS ANTERIORES) ---
         { 'Imposto': '🟢 (-) Saldo Anterior de ICMS', 'Valor': currentIndicators['saldo_icms_anterior'] || 0.0 },
         { 'Imposto': '🟢 (-) Créditos Tributários (Compras/Entradas)', 'Valor': currentIndicators['creditos_tributarios'] || 0.0 },
-        
+
         // --- TOTAL / RESULTADO FINAL DA APURAÇÃO ---
         { 'Imposto': '📊 (=) TOTAL LÍQUIDO A RECOLHER', 'Valor': currentIndicators['total_impostos'] || 0.0 }
     ];
@@ -527,7 +527,7 @@ function renderTaxSummaryTable(currentIndicators) {
         // Destaca visualmente a linha de total se desejar
         const isTotal = row.Imposto.includes('TOTAL');
         const style = isTotal ? 'font-weight: bold; background-color: #f8f9fa;' : '';
-        
+
         const rowHtml = `
             <tr style="${style}">
                 <td>${row.Imposto}</td>
