@@ -456,13 +456,13 @@ function renderFinancialSummaryTable(currentIndicators, mes) {
         },
         {
             'Indicador': 'Notas de Compra',
-            'Quantidade': currentIndicators.total_compras || 0,
-            'Valor': currentIndicators.valor_compras || 0.0,
-            'ICMS': currentIndicators.icms_compras || 0.0,
-            'IPI': currentIndicators.ipi_compras || 0.0,
-            'PIS': currentIndicators.pis_compras || 0.0,
-            'COFINS': currentIndicators.cofins_compras || 0.0,
-            'Total Impostos': (currentIndicators.icms_compras || 0.0) + (currentIndicators.ipi_compras || 0.0) + (currentIndicators.pis_compras || 0.0) + (currentIndicators.cofins_compras || 0.0)
+            'Quantidade': currentIndicators.total_compra || 0,
+            'Valor': currentIndicators.valor_compra || 0.0,
+            'ICMS': currentIndicators.icms_compra || 0.0,
+            'IPI': currentIndicators.ipi_compra || 0.0,
+            'PIS': currentIndicators.pis_compra || 0.0,
+            'COFINS': currentIndicators.cofins_compra || 0.0,
+            'Total Impostos': (currentIndicators.icms_compra || 0.0) + (currentIndicators.ipi_compra || 0.0) + (currentIndicators.pis_compra || 0.0) + (currentIndicators.cofins_compra || 0.0)
         },
         {
             'Indicador': 'Notas de Transferência',
@@ -476,15 +476,16 @@ function renderFinancialSummaryTable(currentIndicators, mes) {
         },
         {
             'Indicador': 'Notas de Transporte (CTe)',
-            'Quantidade': (currentIndicators['total_ct-e_estadual'] || 0) + (currentIndicators['total_ct-e_interestadual'] || 0),
-            'Valor': (currentIndicators['valor_ct-e_estadual'] || 0.0) + (currentIndicators['valor_ct-e_interestadual'] || 0.0),
-            'ICMS': (currentIndicators['icms_ct-e_estadual'] || 0.0) + (currentIndicators['icms_ct-e_interestadual'] || 0.0),
-            'IPI': 0.0,
-            'PIS': (currentIndicators['pis_ct-e_estadual'] || 0.0) + (currentIndicators['pis_ct-e_interestadual'] || 0.0),
-            'COFINS': (currentIndicators['cofins_ct-e_estadual'] || 0.0) + (currentIndicators['cofins_ct-e_interestadual'] || 0.0),
-            'Total Impostos': ((currentIndicators['icms_ct-e_estadual'] || 0.0) + (currentIndicators['icms_ct-e_interestadual'] || 0.0)) +
-                              ((currentIndicators['pis_ct-e_estadual'] || 0.0) + (currentIndicators['pis_ct-e_interestadual'] || 0.0)) +
-                              ((currentIndicators['cofins_ct-e_estadual'] || 0.0) + (currentIndicators['cofins_ct-e_interestadual'] || 0.0))
+            'Quantidade': currentIndicators.total_transporte || 0,
+            'Valor': currentIndicators.valor_transporte || 0.0,
+            'ICMS': currentIndicators.icms_transporte || 0.0,
+            'IPI': currentIndicators.ipi_transporte || 0.0,
+            'PIS': currentIndicators.pis_transporte || 0.0,
+            'COFINS': currentIndicators.cofins_transporte || 0.0,
+            'Total Impostos': (currentIndicators.icms_transporte || 0.0) +
+                              (currentIndicators.ipi_transporte || 0.0) +
+                              (currentIndicators.pis_transporte || 0.0) +
+                              (currentIndicators.cofins_transporte || 0.0)
         },
         {
             'Indicador': 'Serviços',
