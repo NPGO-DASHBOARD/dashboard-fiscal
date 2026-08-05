@@ -176,10 +176,12 @@ td{
             </div>
             <div class="detail-calculation">
                 Detalhamento do Cálculo:
-                <p>ICMS a Recolher = (ICMS Vendas - ICMS Transporte - Saldo Mês Anterior)</p>
+                <p>ICMS a Recolher = ICMS Vendas - ICMS Transporte - ICMS Devoluções - ICMS Compras - Saldo Anterior de ICMS</p>
                 <ul>
                     <li>• (+) ICMS Vendas (Débito): <span id="icmsVendasDebito">R$ 0,00</span></li>
                     <li>• (-) ICMS Transporte (Crédito): <span id="icmsTransporteCredito">R$ 0,00</span></li>
+                    <li>• (-) ICMS Devoluções (Crédito): <span id="icmsDevolucoesCredito">R$ 0,00</span></li>
+                    <li>• (-) ICMS Compras (Crédito): <span id="icmsComprasCredito">R$ 0,00</span></li>
                     <li>• (-) Saldo Mês Anterior (Crédito Utilizado): <span id="icmsSaldoMesAnteriorCredito">R$ 0,00</span></li>
                 </ul>
             </div>
@@ -193,11 +195,16 @@ td{
             </div>
             <div class="detail-calculation">
                 Detalhamento do Cálculo:
-                <p>Base PIS/COFINS (Receita) = (Receita de Vendas - ICMS a Recolher)</p>
-                <p>PIS a Recolher = (Base PIS/COFINS * 1,65%) - Saldo PIS Mês Anterior</p>
+                <p>Base PIS/COFINS = Valor Total das Vendas - ICMS a Recolher - Valor das Devoluções</p>
+                <p>PIS a Recolher = (Base PIS/COFINS * 1,65%) - Saldo PIS Mês Anterior - PIS Compras - PIS Devoluções</p>
                 <ul>
+                    <li>• Valor Total das Vendas: <span id="valorTotalVendasPIS">R$ 0,00</span></li>
+                    <li>• ICMS a Recolher: <span id="icmsARecolherPIS">R$ 0,00</span></li>
+                    <li>• Valor das Devoluções: <span id="valorDevolucoesPIS">R$ 0,00</span></li>
                     <li>• Base PIS/COFINS (Receita): <span id="pisCofinsBaseReceita">R$ 0,00</span></li>
                     <li>• Saldo PIS Mês Anterior (Crédito): <span id="pisSaldoMesAnteriorCredito">R$ 0,00</span></li>
+                    <li>• PIS Compras (Crédito): <span id="pisComprasCredito">R$ 0,00</span></li>
+                    <li>• PIS Devoluções (Crédito): <span id="pisDevolucoesCredito">R$ 0,00</span></li>
                 </ul>
             </div>
         </div>
@@ -210,11 +217,16 @@ td{
             </div>
             <div class="detail-calculation">
                 Detalhamento do Cálculo:
-                <p>Base PIS/COFINS (Receita) = (Receita de Vendas - ICMS a Recolher)</p>
-                <p>COFINS a Recolher = (Base PIS/COFINS * 7,60%) - Saldo COFINS Mês Anterior</p>
+                <p>Base PIS/COFINS = Valor Total das Vendas - ICMS a Recolher - Valor das Devoluções</p>
+                <p>COFINS a Recolher = (Base PIS/COFINS * 7,60%) - Saldo COFINS Mês Anterior - COFINS Compras - COFINS Devoluções</p>
                 <ul>
+                    <li>• Valor Total das Vendas: <span id="valorTotalVendasCOFINS">R$ 0,00</span></li>
+                    <li>• ICMS a Recolher: <span id="icmsARecolherCOFINS">R$ 0,00</span></li>
+                    <li>• Valor das Devoluções: <span id="valorDevolucoesCOFINS">R$ 0,00</span></li>
                     <li>• Base PIS/COFINS (Receita): <span id="cofinsCofinsBaseReceita">R$ 0,00</span></li>
                     <li>• Saldo COFINS Mês Anterior (Crédito): <span id="cofinsSaldoMesAnteriorCredito">R$ 0,00</span></li>
+                    <li>• COFINS Compras (Crédito): <span id="cofinsComprasCredito">R$ 0,00</span></li>
+                    <li>• COFINS Devoluções (Crédito): <span id="cofinsDevolucoesCredito">R$ 0,00</span></li>
                 </ul>
             </div>
         </div>
@@ -236,9 +248,9 @@ td{
             <div class="detail-calculation">
                 Detalhamento do Cálculo:
                 <ul>
-                    <li>• Base Cálculo Lucro Presumido (8% das Vendas): <span id="irpjBaseCalculo">R$ 0,00</span></li>
-                    <li>• Imposto Básico (15% da Base de Cálculo do Lucro Presumido): <span id="irpjImpostoBasico">R$ 0,00</span></li>
-                    <li>• Excesso para Adicional (Calculado para Lucro acima de R$ 20.000): <span id="irpjExcesso">R$ 0,00</span></li>
+                    <li>• Base de Cálculo IRPJ (8% das Vendas): <span id="irpjBaseCalculo">R$ 0,00</span></li>
+                    <li>• Imposto Básico (15% da Base de Cálculo): <span id="irpjImpostoBasico">R$ 0,00</span></li>
+                    <li>• Excesso (Base de Cálculo IRPJ - R$ 20.000): <span id="irpjExcesso">R$ 0,00</span></li>
                     <li>• Adicional de IR (10% do Excesso): <span id="irpjAdicional">R$ 0,00</span></li>
                 </ul>
             </div>
@@ -253,8 +265,8 @@ td{
             <div class="detail-calculation">
                 Detalhamento do Cálculo:
                 <ul>
-                    <li>• Base Cálculo Lucro Presumido (12% Vendas): <span id="csllBaseCalculo">R$ 0,00</span></li>
-                    <li>• Imposto Devido (9% da Base): <span id="csllImpostoDevido">R$ 0,00</span></li>
+                    <li>• Base de Cálculo CSLL (12% das Vendas): <span id="csllBaseCalculo">R$ 0,00</span></li>
+                    <li>• Imposto Devido (9% da Base de Cálculo): <span id="csllImpostoDevido">R$ 0,00</span></li>
                 </ul>
             </div>
         </div>
@@ -276,7 +288,7 @@ td{
                 <th>IPI DESTACADO</th>
                 <th>PIS DESTACADO</th>
                 <th>COFINS DESTACADO </th>
-                
+
             </tr>
         </thead>
         <tbody id="corpoResumoFinanceiro">
@@ -376,38 +388,55 @@ function renderDetailedTaxCards(currentIndicators) {
     const icmsRecolherValue = currentIndicators['icms_a_recolher'] || 0.0;
     const icmsVendasDebito = currentIndicators['icms_vendas'] || 0.0;
     const icmsTransporteCredito = currentIndicators['icms_transporte'] || 0.0;
+    const icmsDevolucoesCredito = currentIndicators['icms_devolucoes'] || 0.0;
+    const icmsComprasCredito = currentIndicators['icms_compras'] || 0.0;
     const icmsSaldoMesAnteriorCredito = currentIndicators['saldo_icms_anterior_usado'] !== undefined ? currentIndicators['saldo_icms_anterior_usado'] : (currentIndicators['saldo_icms_anterior'] || 0.0);
 
     document.getElementById('icmsRecolherValue').textContent = formatValue(icmsRecolherValue, 'currency');
     document.getElementById('icmsVendasDebito').textContent = formatValue(icmsVendasDebito, 'currency');
     document.getElementById('icmsTransporteCredito').textContent = formatValue(icmsTransporteCredito, 'currency');
+    document.getElementById('icmsDevolucoesCredito').textContent = formatValue(icmsDevolucoesCredito, 'currency');
+    document.getElementById('icmsComprasCredito').textContent = formatValue(icmsComprasCredito, 'currency');
     document.getElementById('icmsSaldoMesAnteriorCredito').textContent = formatValue(icmsSaldoMesAnteriorCredito, 'currency');
 
-    // Calculate base_pis_cofins (valor_vendas - icms_a_recolher)
-    const valorVendas = currentIndicators['valor_vendas'] || 0.0;
+    // Calculate base_pis_cofins (valor_vendas - icms_a_recolher - valor_devolucoes)
+    const valorTotalVendas = currentIndicators['valor_vendas'] || 0.0;
     const icmsARecolherForBase = currentIndicators['icms_a_recolher'] || 0.0;
-    let basePisCofins = valorVendas - icmsARecolherForBase;
+    const valorDevolucoes = currentIndicators['valor_devolucoes'] || 0.0;
+    let basePisCofins = valorTotalVendas - icmsARecolherForBase - valorDevolucoes;
     if (basePisCofins < 0) {
         basePisCofins = 0.0;
     }
 
     // PIS Card
     const pisRecolherValue = currentIndicators['pis_a_recolher'] || 0.0;
-    const pisCofinsBaseReceita = basePisCofins;
     const pisSaldoMesAnteriorCredito = currentIndicators['saldo_pis_anterior_usado'] !== undefined ? currentIndicators['saldo_pis_anterior_usado'] : (currentIndicators['saldo_pis_anterior'] || 0.0);
+    const pisComprasCredito = currentIndicators['pis_compras'] || 0.0;
+    const pisDevolucoesCredito = currentIndicators['pis_devolucoes'] || 0.0;
 
+    document.getElementById('valorTotalVendasPIS').textContent = formatValue(valorTotalVendas, 'currency');
+    document.getElementById('icmsARecolherPIS').textContent = formatValue(icmsARecolherForBase, 'currency');
+    document.getElementById('valorDevolucoesPIS').textContent = formatValue(valorDevolucoes, 'currency');
+    document.getElementById('pisCofinsBaseReceita').textContent = formatValue(basePisCofins, 'currency');
     document.getElementById('pisRecolherValue').textContent = formatValue(pisRecolherValue, 'currency');
-    document.getElementById('pisCofinsBaseReceita').textContent = formatValue(pisCofinsBaseReceita, 'currency');
     document.getElementById('pisSaldoMesAnteriorCredito').textContent = formatValue(pisSaldoMesAnteriorCredito, 'currency');
+    document.getElementById('pisComprasCredito').textContent = formatValue(pisComprasCredito, 'currency');
+    document.getElementById('pisDevolucoesCredito').textContent = formatValue(pisDevolucoesCredito, 'currency');
 
     // COFINS Card
     const cofinsRecolherValue = currentIndicators['cofins_a_recolher'] || 0.0;
-    const cofinsCofinsBaseReceita = basePisCofins;
     const cofinsSaldoMesAnteriorCredito = currentIndicators['saldo_cofins_anterior_usado'] !== undefined ? currentIndicators['saldo_cofins_anterior_usado'] : (currentIndicators['saldo_cofins_anterior'] || 0.0);
+    const cofinsComprasCredito = currentIndicators['cofins_compras'] || 0.0;
+    const cofinsDevolucoesCredito = currentIndicators['cofins_devolucoes'] || 0.0;
 
+    document.getElementById('valorTotalVendasCOFINS').textContent = formatValue(valorTotalVendas, 'currency');
+    document.getElementById('icmsARecolherCOFINS').textContent = formatValue(icmsARecolherForBase, 'currency');
+    document.getElementById('valorDevolucoesCOFINS').textContent = formatValue(valorDevolucoes, 'currency');
+    document.getElementById('cofinsCofinsBaseReceita').textContent = formatValue(basePisCofins, 'currency');
     document.getElementById('cofinsRecolherValue').textContent = formatValue(cofinsRecolherValue, 'currency');
-    document.getElementById('cofinsCofinsBaseReceita').textContent = formatValue(cofinsCofinsBaseReceita, 'currency');
     document.getElementById('cofinsSaldoMesAnteriorCredito').textContent = formatValue(cofinsSaldoMesAnteriorCredito, 'currency');
+    document.getElementById('cofinsComprasCredito').textContent = formatValue(cofinsComprasCredito, 'currency');
+    document.getElementById('cofinsDevolucoesCredito').textContent = formatValue(cofinsDevolucoesCredito, 'currency');
 }
 
 // New function to render Lucro Presumido cards
