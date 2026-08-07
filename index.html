@@ -32,7 +32,17 @@ body{
     font-size:22px;
     font-weight:bold;
     margin-bottom:20px;
+    position: relative;
 }
+/* New style for explanation-text */
+.explanation-text {
+    font-size: 14px;
+    color: #555;
+    margin-top: 5px; /* Space below the title */
+    line-height: 1.4;
+    font-weight: normal;
+}
+
 .cards{
     display:flex;
     gap:20px;
@@ -237,6 +247,16 @@ td{
 <div class="section">
     <div class="section-title">
         🧮 Lucro Presumido: IRPJ e CSLL
+        <div class="explanation-text">
+        A apuração foi realizada com base nas regras do Lucro Presumido (Estimativa Mensal).<br>
+        IRPJ (Imposto de Renda Pessoa Jurídica)<br>
+        Base de Presunção de lucro para 8% das vendas <br>
+        Imposto Alíquota Básica (15%) da base <br>
+        Adicional de IRPJ (10%): Quando lucro for acima de R$ 20.000,00 aplica-se um adicional de 10% sobre o valor que excedeu<br>
+        CSLL (Contribuição Social sobre o Lucro Líquido)<br>
+        Base de Presunção de lucro 12% das vendas <br>
+        Imposto CSLL 9% da base
+    </div>
     </div>
 
     <div class="tax-cards-container">
