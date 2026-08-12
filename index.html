@@ -183,7 +183,7 @@ td{
     
 <div class="section">
     <div class="section-title">
-        IMPOSTOS: ICMS / PIS / COFINS
+        📑 Detalhamento de Impostos (ICMS / PIS / COFINS)
     </div>
     <div class="tax-cards-container">
         <!-- ICMS Card -->
@@ -194,36 +194,29 @@ td{
             </div>
             <div class="detail-calculation">
                 Detalhamento do Cálculo:
-                <p>ICMS a Recolher = ICMS Vendas - ICMS Transporte - ICMS Devoluções - ICMS Compras - Saldo Anterior de ICMS</p>
                 <ul>
-                    <li>• (+) ICMS Vendas (Débito): <span id="icmsVendasDebito">R$ 0,00</span></li>
-                    <li>• (-) ICMS Transporte (Crédito): <span id="icmsTransporteCredito">R$ 0,00</span></li>
-                    <li>• (-) ICMS Devoluções (Crédito): <span id="icmsDevolucoesCredito">R$ 0,00</span></li>
-                    <li>• (-) ICMS Compras (Crédito): <span id="icmsComprasCredito">R$ 0,00</span></li>
-                    <li>• (-) Saldo Mês Anterior (Crédito Utilizado): <span id="icmsSaldoMesAnteriorCredito">R$ 0,00</span></li>
+                    <li>• ICMS Vendas (Débito): <span id="icmsVendasDebito">R$ 0,00</span></li>
+                    <li>• ICMS Transporte (Crédito): <span id="icmsTransporteCredito">R$ 0,00</span></li>
+                    <li>• ICMS Devoluções (Crédito): <span id="icmsDevolucoesCredito">R$ 0,00</span></li>
+                    <li>• ICMS Compras (Crédito): <span id="icmsComprasCredito">R$ 0,00</span></li>
+                    <li>• Saldo Anterior Usado: <span id="icmsSaldoMesAnteriorCredito">R$ 0,00</span></li>
                 </ul>
             </div>
         </div>
 
-
         <!-- PIS Card -->
         <div class="tax-card" id="pisCard">
             <div class="card-principal">
-                PIS    A RECOLHER
+                PIS A RECOLHER
                 <span class="value" id="pisRecolherValue">R$ 0,00</span>
             </div>
             <div class="detail-calculation">
                 Detalhamento do Cálculo:
-                <p>Base PIS/COFINS = Valor Total das Vendas - ICMS a Recolher - Valor das Devoluções</p>
-                <p>PIS a Recolher = (Base PIS/COFINS * 1,65%) - Créditos PIS</p>
                 <ul>
-                    <li>• (+) Vendas: <span id="valorTotalVendasPIS">R$ 0,00</span></li>
-                    <li>• (-) ICMS a Recolher: <span id="icmsARecolherPIS">R$ 0,00</span></li>
-                    <li>• (-) Valor das Devoluções: <span id="valorDevolucoesPIS">R$ 0,00</span></li>
-                    <li>• (=) Base PIS/COFINS (Receita): <span id="pisCofinsBaseReceita">R$ 0,00</span></li>
-                    <li>• (-) Saldo PIS Mês Anterior (Crédito): <span id="pisSaldoMesAnteriorCredito">R$ 0,00</span></li>
-                    <li>• (-) PIS Compras (Crédito): <span id="pisComprasCredito">R$ 0,00</span></li>
-                    <li>• (-) PIS Devolucoes (Crédito): <span id="pisDevolucoesCredito">R$ 0,00</span></li>
+                    <li>• Base de Cálculo: <span id="pisCofinsBaseReceita">R$ 0,00</span></li>
+                    <li>• PIS Compras (Crédito): <span id="pisComprasCredito">R$ 0,00</span></li>
+                    <li>• PIS Devoluções (Crédito): <span id="pisDevolucoesCredito">R$ 0,00</span></li>
+                    <li>• Saldo Anterior Usado: <span id="pisSaldoMesAnteriorCredito">R$ 0,00</span></li>
                 </ul>
             </div>
         </div>
@@ -236,20 +229,16 @@ td{
             </div>
             <div class="detail-calculation">
                 Detalhamento do Cálculo:
-                <p>Base PIS/COFINS = Valor Total das Vendas - ICMS a Recolher - Valor das Devoluções</p>
-                <p>COFINS a Recolher = (Base * 7,60%) - Créitos COFINS</p>
                 <ul>
-                    <li>• (+) Vendas: <span id="valorTotalVendasCOFINS">R$ 0,00</span></li>
-                    <li>• (-) ICMS a Recolher: <span id="icmsARecolherCOFINS">R$ 0,00</span></li>
-                    <li>• (-) Valor das Devoluções: <span id="valorDevolucoesCOFINS">R$ 0,00</span></li>
-                    <li>• (=) Base PIS/COFINS (Receita): <span id="cofinsCofinsBaseReceita">R$ 0,00</span></li>
-                    <li>• (-) Saldo COFINS Mês Anterior (Crédito): <span id="cofinsSaldoMesAnteriorCredito">R$ 0,00</span></li>
-                    <li>• (-) COFINS Compras (Crédito): <span id="cofinsComprasCredito">R$ 0,00</span></li>
-                    <li>• (-) COFINS Devolucoes (Crédito): <span id="cofinsDevolucoesCredito">R$ 0,00</span></li>
+                    <li>• Base de Cálculo: <span id="cofinsCofinsBaseReceita">R$ 0,00</span></li>
+                    <li>• COFINS Compras (Crédito): <span id="cofinsComprasCredito">R$ 0,00</span></li>
+                    <li>• COFINS Devoluções (Crédito): <span id="cofinsDevolucoesCredito">R$ 0,00</span></li>
+                    <li>• Saldo Anterior Usado: <span id="cofinsSaldoMesAnteriorCredito">R$ 0,00</span></li>
                 </ul>
             </div>
         </div>
     </div>
+</div>
 
     
 <div class="section">
