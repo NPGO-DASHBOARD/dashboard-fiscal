@@ -181,6 +181,7 @@ td{
 </div>
  <!-- Insert new section here -->
     
+<!-- Seção de Detalhamento de Impostos -->
 <div class="section">
     <div class="section-title">
         📑 Detalhamento de Impostos (ICMS / PIS / COFINS)
@@ -241,6 +242,7 @@ td{
 </div>
 
     
+<!-- Seção de Lucro Presumido -->
 <div class="section">
     <div class="section-title">
         🧮 Lucro Presumido: IRPJ e CSLL
@@ -250,25 +252,21 @@ td{
     <p class="explanation-intro">A apuração foi realizada com base nas regras do Lucro Presumido (Estimativa Mensal). Nenhuma despesa operacional pode ser deduzida no Lucro Presumido.</p>
 
     <div style="display: flex; gap: 20px; justify-content: space-between;">
-        <!-- Lado Esquerdo: IRPJ -->
         <div style="flex: 1;">
             <strong>IRPJ (Imposto de Renda Pessoa Jurídica)</strong><br>
             • Base de Presunção de lucro para 8% das vendas<br>
             • Imposto Alíquota Básica (15%) da base<br>
             • Adicional de IRPJ (10%): Quando lucro for acima de R$ 20.000,00 aplica-se um adicional de 10% sobre o valor que excedeu
         </div>
-
-        <!-- Lado Direito: CSLL -->
         <div style="flex: 1;">
             <strong>CSLL (Contribuição Social sobre o Lucro Líquido)</strong><br>
             • Base de Presunção de lucro 12% das vendas<br>
             • Imposto CSLL 9% da base
         </div>
     </div>
-</div>
+    </div>
 
     <div class="tax-cards-container">
-        <!-- IRPJ Card -->
         <div class="tax-card" id="irpjCard">
             <div class="card-principal">
                 IRPJ A RECOLHER
@@ -279,13 +277,12 @@ td{
                 <ul>
                     <li>• Base de Cálculo IRPJ (8% das Vendas): <span id="irpjBaseCalculo">R$ 0,00</span></li>
                     <li>• Imposto Básico (15% da Base de Cálculo): <span id="irpjImpostoBasico">R$ 0,00</span></li>
-                    <li>• Excesso (Base de Cálculo IRPJ - R$ 20.000): <span id="irpjExcesso">R$ 0,00</span></li>
+                    <li>• Excesso (Base IRPJ - R$ 20.000): <span id="irpjExcesso">R$ 0,00</span></li>
                     <li>• Adicional de IR (10% do Excesso): <span id="irpjAdicional">R$ 0,00</span></li>
                 </ul>
             </div>
         </div>
 
-        <!-- CSLL Card -->
         <div class="tax-card" id="csllCard">
             <div class="card-principal">
                 CSLL A RECOLHER
