@@ -228,7 +228,7 @@ td{
         <!-- Carga Tributária Card -->
         <div class="card" id="cargaTributariaCard">
             <div class="card-title">Carga Tributária</div>
-            <div class="card-subtitle">Total Impostos / Faturamento Bruto</div>
+            <div class="card-subtitle">Sobre Vendas</div>
             <div class="card-value" id="cargaTributariaValue">0.00%</div>
         </div>
 
@@ -383,6 +383,9 @@ td{
 
         // Update Impostos a Recolher Card (New Card)
         safeSetText('impostosARecolherValue', formatValue(ind.impostos_a_recolher, 'currency'));
+
+        // Update Carga Tributária Card
+        safeSetText('cargaTributariaValue', formatValue(ind.carga_tributaria, 'percentage'));
     }
 
     function renderCards(ind) {
