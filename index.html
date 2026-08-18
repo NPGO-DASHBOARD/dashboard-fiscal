@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset='UTF-8'>
+    <meta charset="UTF-8">
     <title>Relatório Fiscal NF-e - N&P IMPORTAÇÃO E COMÉRCIO LTDA</title>
     
 <style>
@@ -172,70 +172,6 @@ td{
 </div>
 
     
-<!-- Nova Seção de Apuração de Impostos a Recolher -->
-<div class="section"style="background-color: #dfdfdf;">
-    <div class="section-title">
-        APURAÇÃO FORMULA CONTABILIDADE
-        <div class="explanation-text">
-         <li>Apuração realizada sem a apropriação dos créditos fiscais de PIS/COFINS sobre os fretes de transporte de vendas contratados (CT-e)</li>
- <li>Utilizando valor do ICMS a recolher no calculo da base PIS/COFINS</li>
- <li>Foi estimado lucro de 8% para Cálculo do IRPJ e 12% para cálculo do CSLL </li>
-        </div>
-    </div>
-    <div class="cards" id="apuracaoFormulaContabilidadeCards">
-        <!-- ICMS Card -->
-        <div class="card" id="icmsCard">
-            <div class="card-title">ICMS a recolher</div>
-            <div class="card-subtitle">Débito - Crédito</div>
-            <div class="card-value" id="icmsRecolherValue">R$ 0,00</div>
-        </div>
-
-        <!-- PIS Card -->
-        <div class="card" id="pisCard">
-            <div class="card-title">PIS a recolher</div>
-            <div class="card-subtitle">Alíquota 1.65% - usando icms a recolher, sem descontar créditos</div>
-            <div class="card-value" id="pisRecolherValue">R$ 0,00</div>
-        </div>
-
-        <!-- COFINS Card -->
-        <div class="card" id="cofinsCard">
-            <div class="card-title">Cofins a recolher</div>
-            <div class="card-subtitle">Alíquota 7.60% - sem creditos, usando icms a recolher</div>
-            <div class="card-value" id="cofinsRecolherValue">R$ 0,00</div>
-        </div>
-
-        <!-- IRPJ Card -->
-        <div class="card" id="irpjCard">
-            <div class="card-title">IRPJ a recolher</div>
-            <div class="card-subtitle">Lucro Presumido de 8% ignorando despesas</div>
-            <div class="card-value" id="irpjRecolherValue">R$ 0,00</div>
-        </div>
-
-        <!-- CSLL Card -->
-        <div class="card" id="csllCard">
-            <div class="card-title">CSLL A RECOLHER</div>
-            <div class="card-subtitle">Lucro Presumido de 12% ignorando despesas</div>
-            <div class="card-value" id="csllRecolherValue">R$ 0,00</div>
-        </div>
-
-        <!-- Impostos a Recolher Card (New Card) -->
-        <div class="card" id="impostosARecolherCard">
-            <div class="card-title"> Total Impostos a Recolher</div>
-            <div class="card-subtitle">ICMS + PIS + COFINS + IRPJ + CSLL</div>
-            <div class="card-value" id="impostosARecolherValue">R$ 0,00</div>
-        </div>
-
-        <!-- Carga Tributária Card -->
-        <div class="card" id="cargaTributariaCard">
-            <div class="card-title">Carga Tributária</div>
-            <div class="card-subtitle">Sobre Vendas</div>
-            <div class="card-value" id="cargaTributariaValue">0.00%</div>
-        </div>
-
-    </div>
-</div>
-
-    
 <!-- Seção de Apuração Lucro Real -->
 <div class="section">
     <div class="section-title">
@@ -287,7 +223,7 @@ td{
     
 <div class="section">
     <div class="section-title">
-        📊 Resumo Notas Fiscais por Mês: <span id="mesResumoFinanceiro"></span>
+        📊 Resumo Financeiro (Lucro Real): <span id="mesResumoFinanceiro"></span>
     </div>
     <table id="tabelaResumoFinanceiro">
         <thead>
@@ -308,38 +244,30 @@ td{
     
 <div class="section">
     <div class="section-title">
-        📈 Evolução Mensal (Principais Indicadores)
+        📈 Evolução Mensal (Lucro Real)
     </div>
     <table id="tabelaEvolucaoMensal">
         <thead>
             <tr>
                 <th>Mês</th>
                 <th>Vendas</th>
-                <th>Compras</th>
+                <th>Compras Revenda</th>
                 <th>Transferências</th>
                 <th>Devoluções</th>
                 <th>Faturamento Bruto</th>
-                <th>PIS/COFINS</th>
-                <th>IRPJ/CSLL</th>
+                <th>PIS/COFINS (Real)</th>
+                <th>IRPJ/CSLL (Real)</th>
                 <th>Total Impostos</th>
-                <th>Carga Tributária</th>
+                <th>Carga Trib.</th>
             </tr>
         </thead>
-        <tbody id="corpoEvolucaoMensal"></tbody>
+            <tbody id="corpoEvolucaoMensal"></tbody>
     </table>
 </div>
 
     <script>
 (function() {
-    window.onerror = function(msg, url, line, col, error) {
-        const errorDiv = document.createElement('div');
-        errorDiv.style = 'background:#ffebee; color:#c62828; padding:15px; border:2px solid #ef5350; margin:10px; border-radius:5px; font-family:monospace; position:relative; z-index:9999;';
-        errorDiv.innerHTML = `<b>Erro detectado no Dashboard:</b> ${msg}<br><small>Linha: ${line} | Coluna: ${col}</small>`;
-        document.body.prepend(errorDiv);
-        return false;
-    };
-
-    const dashboardData = {"detalhamento_operacoes": {"2025-09": {"receitas": {}, "despesas": {"CFOP 5119": {"qtd": 1, "valor": 177900.0, "nome": "5119 - VENDA MERC ADQ OU REC TERC", "operacao_tipo": "Compra para Revenda"}}}, "2026-07": {"receitas": {"CFOP 6108": {"qtd": 19, "valor": 44635.27, "nome": "6108 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda"}, "CFOP 5102": {"qtd": 19, "valor": 4139.3, "nome": "5102 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda"}, "CFOP 6102": {"qtd": 20, "valor": 31666.670000000002, "nome": "6102 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda"}, "CFOP 6152": {"qtd": 351, "valor": 199259.05000000013, "nome": "6152 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transferência"}, "CFOP 5152": {"qtd": 115, "valor": 71876.50999999992, "nome": "5152 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transferência"}}, "despesas": {"CFOP 2411": {"qtd": 2, "valor": 888.6700000000001, "nome": "2411 - Devolucao de mercadorias", "operacao_tipo": "Devolução"}, "CFOP 2202": {"qtd": 1, "valor": 247.0, "nome": "2202 - Devolucao de mercadorias", "operacao_tipo": "Devolução"}, "CTe 5353": {"qtd": 131, "valor": 4375.639999999998, "nome": "5353 - Frete/Transporte", "operacao_tipo": "CT-e"}, "CTe 6353": {"qtd": 389, "valor": 13935.820000000016, "nome": "6353 - Frete/Transporte", "operacao_tipo": "CT-e"}, "Serviço_2171bb39": {"qtd": 1, "valor": 570.9, "nome": "Serviço: C-PLUS 5 - ORDEM DE SERVICO|C-PLUS 5 - LICENCA SERVIDOR - 1 USUARIO|C-PLUS 5 - EMPRESA ADICIONAL|C-PLUS 5 - INTEGRACAO E-COMMERCE|C-PLUS 5 - USUARIO SIMULTANEO ADICIONAL", "operacao_tipo": "Serviço"}, "Serviço_6421e80c": {"qtd": 1, "valor": 23120.0, "nome": "Serviço: Lead:  239342 - Consultoria Pacote China - ref. março/2026", "operacao_tipo": "Serviço"}, "Serviço_f3405fd4": {"qtd": 1, "valor": 7100.0, "nome": "Serviço: ALTERAÇÃO CONTRATUAL - R'||chr(36)||' 1.000,00REGISTRO DE MARCA - R'||chr(36)||' 2.500,00UPSELL DE RADAR - 3600,00", "operacao_tipo": "Serviço"}, "Serviço_dd5d0975": {"qtd": 1, "valor": 188.3, "nome": "Serviço: Dropshipping|||", "operacao_tipo": "Serviço"}, "Serviço_68e1fedc": {"qtd": 1, "valor": 112.1, "nome": "Serviço: Shipping Serviços de transportes Melienvios|||", "operacao_tipo": "Serviço"}, "Serviço_44954871": {"qtd": 1, "valor": 5404.76, "nome": "Serviço: Tarifa MercadoPago  Cobrança ON||||", "operacao_tipo": "Serviço"}, "Serviço_80825ea9": {"qtd": 1, "valor": 8793.77, "nome": "Serviço: VEICULAÇÃO DE ANUNCIO EOU MIDIAS ONLINE|||", "operacao_tipo": "Serviço"}, "Serviço_6f9414c4": {"qtd": 1, "valor": 25201.34, "nome": "Serviço: Intermediação de negócios|||", "operacao_tipo": "Serviço"}}}, "2026-06": {"receitas": {"CFOP 6108": {"qtd": 492, "valor": 326269.8099999995, "nome": "6108 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda"}, "CFOP 5102": {"qtd": 211, "valor": 146649.55999999994, "nome": "5102 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda"}, "CFOP 6102": {"qtd": 34, "valor": 25403.58, "nome": "6102 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda"}, "CFOP 6152": {"qtd": 60, "valor": 30059.950000000004, "nome": "6152 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transferência"}, "CFOP 5152": {"qtd": 19, "valor": 8778.49, "nome": "5152 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transferência"}}, "despesas": {"CTe 6353": {"qtd": 586, "valor": 23082.62999999999, "nome": "6353 - Frete/Transporte", "operacao_tipo": "CT-e"}, "CTe 5353": {"qtd": 229, "valor": 8107.91, "nome": "5353 - Frete/Transporte", "operacao_tipo": "CT-e"}, "Serviço_6b8dd97f": {"qtd": 1, "valor": 26.9, "nome": "Serviço: Prestação de serviço conforme fatura 1007656935 de 09.06.2026 a 08.06.2027 Valor aproximado dos tributos (ISS, PIS e COFINS), conforme Lei 12.741 de 08/12/2012: R$3,27 (12.15%)", "operacao_tipo": "Serviço"}, "Serviço_15ee860e": {"qtd": 1, "valor": 119.88, "nome": "Serviço: Prestação de serviço conforme fatura 1007657627 de 09.06.2026 a 08.06.2027 Valor aproximado dos tributos (ISS, PIS e COFINS), conforme Lei 12.741 de 08/12/2012: R$14,57 (12.15%)", "operacao_tipo": "Serviço"}, "Serviço_4538b4be": {"qtd": 1, "valor": 19726.49, "nome": "Serviço: VEICULAÇÃO DE ANUNCIO EOU MIDIAS ONLINE|||", "operacao_tipo": "Serviço"}, "Serviço_7b8a2336": {"qtd": 1, "valor": 10704.2, "nome": "Serviço: Tarifa MercadoPago  Cobrança ON|||", "operacao_tipo": "Serviço"}, "Serviço_adc6c7bd": {"qtd": 1, "valor": 48389.31, "nome": "Serviço: Intermediação de negócios|||", "operacao_tipo": "Serviço"}, "Serviço_aec328e5": {"qtd": 1, "valor": 27.7, "nome": "Serviço: Shipping Serviços de transportes Melienvios|||", "operacao_tipo": "Serviço"}, "Serviço_8cec88f6": {"qtd": 1, "valor": 247.2, "nome": "Serviço: Dropshipping|||", "operacao_tipo": "Serviço"}}}, "2026-08": {"receitas": {}, "despesas": {"CFOP 5102": {"qtd": 1, "valor": 50.0, "nome": "5102 - Venda Dentro do Estado", "operacao_tipo": "Compra para Consumo"}}}}, "empresa": "N&P IMPORTAÇÃO E COMÉRCIO LTDA", "global_indicators": {"total_xml": 2698.0, "total_compra_para_revenda": 1.0, "valor_compra_para_revenda": 177900.0, "icms_compra_para_revenda": 18563.48, "ipi_compra_para_revenda": 23204.35, "pis_compra_para_revenda": 2246.18, "cofins_compra_para_revenda": 10346.04, "total_devolucao": 3.0, "valor_devolucao": 1135.67, "icms_devolucao": 9.88, "ipi_devolucao": 0.0, "pis_devolucao": 3.91, "cofins_devolucao": 18.02, "total_venda": 795.0, "valor_venda": 578764.1899999995, "ipi_venda": 0.0, "pis_venda": 8608.070000000018, "cofins_venda": 39650.00000000011, "total_ct-e": 1335.0, "valor_ct-e": 49502.0000000002, "icms_ct-e": 4978.120000000013, "ipi_ct-e": 0.0, "pis_ct-e": 0.0, "cofins_ct-e": 0.0, "total_transferencia": 545.0, "valor_transferencia": 309974.0000000003, "icms_transferencia": 0.0, "ipi_transferencia": 0.0, "pis_transferencia": 0.0, "cofins_transferencia": 0.0, "total_servico": 15.0, "valor_servico": 149732.85000000003, "icms_servico": 0.0, "ipi_servico": 0.0, "pis_servico": 0.0, "cofins_servico": 0.0, "total_cancelada": 3.0, "valor_cancelada": 1654.42, "icms_cancelada": 262.68, "ipi_cancelada": 0.0, "pis_cancelada": 22.96, "cofins_cancelada": 105.78, "total_compra_para_consumo": 1.0, "valor_compra_para_consumo": 50.0, "icms_compra_para_consumo": 0.0, "ipi_compra_para_consumo": 0.0, "pis_compra_para_consumo": 0.0, "cofins_compra_para_consumo": 0.0, "total_notas": 0, "faturamento_bruto": 0.0, "impostos_a_recolher": 0.0, "creditos_tributarios": 0.0, "total_impostos": 0.0, "icms_a_recolher": 0.0, "pis_a_recolher": 0.0, "cofins_a_recolher": 0.0, "irpj_a_recolher": 0.0, "csll_a_recolher": 0.0, "irpj_base_calculo_8_percent": 0.0, "csll_base_calculo_12_percent": 0.0, "valor_vendas_liquidas": 0.0, "valor_despesas": 0.0, "carga_tributaria": 0.0, "saldo_icms_anterior": 0.0, "saldo_abatimento_disponivel": 0.0, "lucro_real_liquido_global": 316782.9502599994}, "monthly_indicators": {"2025-09": {"total_xml": 1.0, "total_compra_para_revenda": 1.0, "valor_compra_para_revenda": 177900.0, "icms_compra_para_revenda": 18563.48, "ipi_compra_para_revenda": 23204.35, "frete_compra_para_revenda": 0.0, "total_compra_para_consumo": 0.0, "valor_compra_para_consumo": 0.0, "icms_compra_para_consumo": 0.0, "ipi_compra_para_consumo": 0.0, "frete_compra_para_consumo": 0.0, "total_vendas": 0.0, "valor_vendas": 0.0, "icms_vendas": 0.0, "icms_real": 0.0, "base_piscofins_real": 0, "pis_real": 0.0, "cofins_real": 0.0, "total_pis_cofins_real": 0.0, "dre": 0.0, "csll_real": 0.0, "irpj_basico_real": 0.0, "irpj_real": 0.0, "lucro_real_liquido": 0.0, "saldo_abatimento_inicial": 0.0, "abatimento_aplicado": 0.0, "base_calculo_apos_escudo": 0.0, "saldo_abatimento_final": 0.0, "csll_com_escudo": 0.0, "irpj_com_escudo": 0.0, "total_impostos_real": 0.0, "carga_tributaria_real": 0.0, "carga_tributaria_real_ML": 0.0}, "2026-06": {"total_xml": 1641.0, "total_compra_para_revenda": 0.0, "valor_compra_para_revenda": 0.0, "icms_compra_para_revenda": 0.0, "ipi_compra_para_revenda": 0.0, "frete_compra_para_revenda": 0.0, "total_compra_para_consumo": 0.0, "valor_compra_para_consumo": 0.0, "icms_compra_para_consumo": 0.0, "ipi_compra_para_consumo": 0.0, "frete_compra_para_consumo": 0.0, "total_vendas": 737.0, "valor_vendas": 498322.9499999991, "icms_vendas": 49449.36000000006, "icms_real": 49449.36000000006, "base_piscofins_real": 448873.58999999904, "pis_real": 7406.414234999985, "cofins_real": 34114.39283999993, "total_pis_cofins_real": 41520.80707499991, "dre": 407352.78292499913, "csll_real": 36661.75046324992, "irpj_basico_real": 61102.917438749864, "irpj_real": 99838.19573124978, "lucro_real_liquido": 270852.8367304994, "saldo_abatimento_inicial": 0.0, "abatimento_aplicado": 0.0, "base_calculo_apos_escudo": 407352.78292499913, "saldo_abatimento_final": 0.0, "csll_com_escudo": 36661.75046324992, "irpj_com_escudo": 99838.19573124978, "total_impostos_real": 227470.11326949968, "carga_tributaria_real": 0.0, "carga_tributaria_real_ML": 0.0}, "2026-07": {"total_xml": 1055.0, "total_compra_para_revenda": 0.0, "valor_compra_para_revenda": 0.0, "icms_compra_para_revenda": 0.0, "ipi_compra_para_revenda": 0.0, "frete_compra_para_revenda": 0.0, "total_compra_para_consumo": 0.0, "valor_compra_para_consumo": 0.0, "icms_compra_para_consumo": 0.0, "ipi_compra_para_consumo": 0.0, "frete_compra_para_consumo": 0.0, "total_vendas": 58.0, "valor_vendas": 80441.23999999998, "icms_vendas": 7096.029999999999, "icms_real": 7096.029999999999, "base_piscofins_real": 73345.20999999998, "pis_real": 1210.1959649999997, "cofins_real": 5574.235959999998, "total_pis_cofins_real": 6784.431924999998, "dre": 66560.77807499998, "csll_real": 5990.470026749998, "irpj_basico_real": 9984.116711249997, "irpj_real": 14640.194518749995, "lucro_real_liquido": 45930.113529499984, "saldo_abatimento_inicial": 0.0, "abatimento_aplicado": 0.0, "base_calculo_apos_escudo": 66560.77807499998, "saldo_abatimento_final": 0.0, "csll_com_escudo": 5990.470026749998, "irpj_com_escudo": 14640.194518749995, "total_impostos_real": 34511.12647049999, "carga_tributaria_real": 0.0, "carga_tributaria_real_ML": 0.0}, "2026-08": {"total_xml": 1.0, "total_compra_para_revenda": 0.0, "valor_compra_para_revenda": 0.0, "icms_compra_para_revenda": 0.0, "ipi_compra_para_revenda": 0.0, "frete_compra_para_revenda": 0.0, "total_compra_para_consumo": 1.0, "valor_compra_para_consumo": 50.0, "icms_compra_para_consumo": 0.0, "ipi_compra_para_consumo": 0.0, "frete_compra_para_consumo": 0.0, "total_vendas": 0.0, "valor_vendas": 0.0, "icms_vendas": 0.0, "icms_real": 0.0, "base_piscofins_real": 0, "pis_real": 0.0, "cofins_real": 0.0, "total_pis_cofins_real": 0.0, "dre": 0.0, "csll_real": 0.0, "irpj_basico_real": 0.0, "irpj_real": 0.0, "lucro_real_liquido": 0.0, "saldo_abatimento_inicial": 0.0, "abatimento_aplicado": 0.0, "base_calculo_apos_escudo": 0.0, "saldo_abatimento_final": 0.0, "csll_com_escudo": 0.0, "irpj_com_escudo": 0.0, "total_impostos_real": 0.0, "carga_tributaria_real": 0.0, "carga_tributaria_real_ML": 0.0}}, "card_definitions": [{"id": "faturamento_ml", "title": "Faturamento ML", "subtitle": "Vendas + Transferências", "value_key": "faturamento_ml", "format_type": "currency"}, {"id": "faturamento_bruto", "title": "Faturamento Bruto", "subtitle": "Sobre notas de vendas", "value_key": "faturamento_bruto", "format_type": "currency"}, {"id": "valor_despesas", "title": "Despesas Operacionais", "subtitle": "Serviços e Fretes", "value_key": "valor_despesas", "format_type": "currency"}, {"id": "total_impostos_real", "title": "Total de Impostos", "subtitle": "PIS + COFINS + IRPJ + CSL", "value_key": "total_impostos_real", "format_type": "currency"}, {"id": "carga_tributaria_real", "title": "Carga Tributária ", "subtitle": "sobre vendas", "value_key": "carga_tributaria_real", "format_type": "percentage"}, {"id": "carga_tributaria_real_ML", "title": "Carga Tributária ML", "subtitle": "sobre vendas+transferencias", "value_key": "carga_tributaria_real_ML", "format_type": "percentage"}], "lucro_real_card_definitions": [{"id": "icms_real", "title": "ICMS Real", "subtitle": "Base Lucro Real", "value_key": "icms_real", "format_type": "currency"}, {"id": "pis_real", "title": "PIS Real", "subtitle": "Alíquota 1.65% - usando ICMS destacado, descontando créditos de frete", "value_key": "pis_real", "format_type": "currency"}, {"id": "cofins_real", "title": "COFINS Real", "subtitle": "Alíquota 7.6% - usando ICMS destacado, descontando créditos de frete", "value_key": "cofins_real", "format_type": "currency"}, {"id": "irpj_real", "title": "IRPJ Real", "subtitle": "IRPJ será 0 caso houver prejuizo", "value_key": "irpj_real", "format_type": "currency"}, {"id": "csll_real", "title": "CSLL Real", "subtitle": "CSLL será 0 caso houver prejuízo", "value_key": "csll_real", "format_type": "currency"}, {"id": "total_impostos_real", "title": "Total Impostos Real", "subtitle": "PIS + COFINS + IRPJ + CSLL", "value_key": "total_impostos_real", "format_type": "currency"}, {"id": "lucro_real_liquido", "title": "Lucro Real Líquido", "subtitle": "Resultado descontando despesas e impostos ICMS/PIS/COFINS", "value_key": "lucro_real_liquido", "format_type": "currency"}], "financial_summary": [], "tax_summary": [], "monthly_summary_table": []};
+    const dashboardData = {"detalhamento_operacoes": {"2025-09": {"receitas": {}, "despesas": {"CFOP 5119": {"qtd": 1, "valor": 177900.0, "nome": "5119 - VENDA MERC ADQ OU REC TERC", "operacao_tipo": "Compra para Revenda"}}}, "2026-07": {"receitas": {"CFOP 6108": {"qtd": 19, "valor": 44635.27, "nome": "6108 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda"}, "CFOP 5102": {"qtd": 19, "valor": 4139.3, "nome": "5102 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda"}, "CFOP 6102": {"qtd": 20, "valor": 31666.670000000002, "nome": "6102 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda"}, "CFOP 6152": {"qtd": 351, "valor": 199259.05000000013, "nome": "6152 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transferência"}, "CFOP 5152": {"qtd": 115, "valor": 71876.50999999992, "nome": "5152 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transferência"}}, "despesas": {"CFOP 2411": {"qtd": 2, "valor": 888.6700000000001, "nome": "2411 - Devolucao de mercadorias", "operacao_tipo": "Devolução"}, "CFOP 2202": {"qtd": 1, "valor": 247.0, "nome": "2202 - Devolucao de mercadorias", "operacao_tipo": "Devolução"}, "CTe 5353": {"qtd": 131, "valor": 4375.639999999998, "nome": "5353 - Frete/Transporte", "operacao_tipo": "CT-e"}, "CTe 6353": {"qtd": 389, "valor": 13935.820000000016, "nome": "6353 - Frete/Transporte", "operacao_tipo": "CT-e"}, "Serviço_2171bb39": {"qtd": 1, "valor": 570.9, "nome": "Serviço: C-PLUS 5 - ORDEM DE SERVICO|C-PLUS 5 - LICENCA SERVIDOR - 1 USUARIO|C-PLUS 5 - EMPRESA ADICIONAL|C-PLUS 5 - INTEGRACAO E-COMMERCE|C-PLUS 5 - USUARIO SIMULTANEO ADICIONAL", "operacao_tipo": "Serviço"}, "Serviço_6421e80c": {"qtd": 1, "valor": 23120.0, "nome": "Serviço: Lead:  239342 - Consultoria Pacote China - ref. março/2026", "operacao_tipo": "Serviço"}, "Serviço_f3405fd4": {"qtd": 1, "valor": 7100.0, "nome": "Serviço: ALTERAÇÃO CONTRATUAL - R'||chr(36)||' 1.000,00REGISTRO DE MARCA - R'||chr(36)||' 2.500,00UPSELL DE RADAR - 3600,00", "operacao_tipo": "Serviço"}, "Serviço_dd5d0975": {"qtd": 1, "valor": 188.3, "nome": "Serviço: Dropshipping|||", "operacao_tipo": "Serviço"}, "Serviço_68e1fedc": {"qtd": 1, "valor": 112.1, "nome": "Serviço: Shipping Serviços de transportes Melienvios|||", "operacao_tipo": "Serviço"}, "Serviço_44954871": {"qtd": 1, "valor": 5404.76, "nome": "Serviço: Tarifa MercadoPago  Cobrança ON||||", "operacao_tipo": "Serviço"}, "Serviço_80825ea9": {"qtd": 1, "valor": 8793.77, "nome": "Serviço: VEICULAÇÃO DE ANUNCIO EOU MIDIAS ONLINE|||", "operacao_tipo": "Serviço"}, "Serviço_6f9414c4": {"qtd": 1, "valor": 25201.34, "nome": "Serviço: Intermediação de negócios|||", "operacao_tipo": "Serviço"}}}, "2026-06": {"receitas": {"CFOP 6108": {"qtd": 492, "valor": 326269.8099999995, "nome": "6108 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda"}, "CFOP 5102": {"qtd": 211, "valor": 146649.55999999994, "nome": "5102 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda"}, "CFOP 6102": {"qtd": 34, "valor": 25403.58, "nome": "6102 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda"}, "CFOP 6152": {"qtd": 60, "valor": 30059.950000000004, "nome": "6152 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transferência"}, "CFOP 5152": {"qtd": 19, "valor": 8778.49, "nome": "5152 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transferência"}}, "despesas": {"CTe 6353": {"qtd": 586, "valor": 23082.62999999999, "nome": "6353 - Frete/Transporte", "operacao_tipo": "CT-e"}, "CTe 5353": {"qtd": 229, "valor": 8107.91, "nome": "5353 - Frete/Transporte", "operacao_tipo": "CT-e"}, "Serviço_6b8dd97f": {"qtd": 1, "valor": 26.9, "nome": "Serviço: Prestação de serviço conforme fatura 1007656935 de 09.06.2026 a 08.06.2027 Valor aproximado dos tributos (ISS, PIS e COFINS), conforme Lei 12.741 de 08/12/2012: R$3,27 (12.15%)", "operacao_tipo": "Serviço"}, "Serviço_15ee860e": {"qtd": 1, "valor": 119.88, "nome": "Serviço: Prestação de serviço conforme fatura 1007657627 de 09.06.2026 a 08.06.2027 Valor aproximado dos tributos (ISS, PIS e COFINS), conforme Lei 12.741 de 08/12/2012: R$14,57 (12.15%)", "operacao_tipo": "Serviço"}, "Serviço_4538b4be": {"qtd": 1, "valor": 19726.49, "nome": "Serviço: VEICULAÇÃO DE ANUNCIO EOU MIDIAS ONLINE|||", "operacao_tipo": "Serviço"}, "Serviço_7b8a2336": {"qtd": 1, "valor": 10704.2, "nome": "Serviço: Tarifa MercadoPago  Cobrança ON|||", "operacao_tipo": "Serviço"}, "Serviço_adc6c7bd": {"qtd": 1, "valor": 48389.31, "nome": "Serviço: Intermediação de negócios|||", "operacao_tipo": "Serviço"}, "Serviço_aec328e5": {"qtd": 1, "valor": 27.7, "nome": "Serviço: Shipping Serviços de transportes Melienvios|||", "operacao_tipo": "Serviço"}, "Serviço_8cec88f6": {"qtd": 1, "valor": 247.2, "nome": "Serviço: Dropshipping|||", "operacao_tipo": "Serviço"}}}, "2026-08": {"receitas": {}, "despesas": {"CFOP 5102": {"qtd": 1, "valor": 50.0, "nome": "5102 - Venda Dentro do Estado", "operacao_tipo": "Compra para Consumo"}}}}, "empresa": "N&P IMPORTAÇÃO E COMÉRCIO LTDA", "global_indicators": {"total_xml": 2698.0, "total_compra_para_revenda": 1.0, "valor_compra_para_revenda": 177900.0, "icms_compra_para_revenda": 18563.48, "ipi_compra_para_revenda": 23204.35, "pis_compra_para_revenda": 2246.18, "cofins_compra_para_revenda": 10346.04, "total_devolucao": 3.0, "valor_devolucao": 1135.67, "icms_devolucao": 9.88, "ipi_devolucao": 0.0, "pis_devolucao": 3.91, "cofins_devolucao": 18.02, "total_venda": 795.0, "valor_venda": 578764.1899999995, "ipi_venda": 0.0, "pis_venda": 8608.070000000018, "cofins_venda": 39650.00000000011, "total_ct-e": 1335.0, "valor_ct-e": 49502.0000000002, "icms_ct-e": 4978.120000000013, "ipi_ct-e": 0.0, "pis_ct-e": 0.0, "cofins_ct-e": 0.0, "total_transferencia": 545.0, "valor_transferencia": 309974.0000000003, "icms_transferencia": 0.0, "ipi_transferencia": 0.0, "pis_transferencia": 0.0, "cofins_transferencia": 0.0, "total_servico": 15.0, "valor_servico": 149732.85000000003, "icms_servico": 0.0, "ipi_servico": 0.0, "pis_servico": 0.0, "cofins_servico": 0.0, "total_cancelada": 3.0, "valor_cancelada": 1654.42, "icms_cancelada": 262.68, "ipi_cancelada": 0.0, "pis_cancelada": 22.96, "cofins_cancelada": 105.78, "total_compra_para_consumo": 1.0, "valor_compra_para_consumo": 50.0, "icms_compra_para_consumo": 0.0, "ipi_compra_para_consumo": 0.0, "pis_compra_para_consumo": 0.0, "cofins_compra_para_consumo": 0.0, "total_notas": 0, "faturamento_bruto": 0.0, "impostos_a_recolher": 0.0, "creditos_tributarios": 0.0, "total_impostos": 0.0, "icms_a_recolher": 0.0, "pis_a_recolher": 0.0, "cofins_a_recolher": 0.0, "irpj_a_recolher": 0.0, "csll_a_recolher": 0.0, "irpj_base_calculo_8_percent": 0.0, "csll_base_calculo_12_percent": 0.0, "valor_vendas_liquidas": 0.0, "valor_despesas": 0.0, "carga_tributaria": 0.0, "saldo_icms_anterior": 0.0, "total_impostos_real": 261981.23973999967, "icms_real": 56545.39000000006, "pis_real": 8616.610199999985, "cofins_real": 39688.628799999926, "irpj_real": 114478.39024999978, "csll_real": 42652.22048999992, "lucro_real_liquido": 316782.9502599994, "dre": 473913.5609999991, "saldo_abatimento_disponivel": 0.0}, "monthly_indicators": {"2025-09": {"total_xml": 1.0, "total_compra_para_revenda": 1.0, "valor_compra_para_revenda": 177900.0, "icms_compra_para_revenda": 18563.48, "ipi_compra_para_revenda": 23204.35, "frete_compra_para_revenda": 0.0, "total_compra_para_consumo": 0.0, "valor_compra_para_consumo": 0.0, "icms_compra_para_consumo": 0.0, "ipi_compra_para_consumo": 0.0, "frete_compra_para_consumo": 0.0, "total_vendas": 0.0, "valor_vendas": 0.0, "icms_vendas": 0.0, "icms_real": 0.0, "base_piscofins_real": 0, "pis_real": 0.0, "cofins_real": 0.0, "total_pis_cofins_real": 0.0, "dre": 0.0, "csll_real": 0.0, "irpj_basico_real": 0.0, "irpj_real": 0.0, "lucro_real_liquido": 0.0, "saldo_abatimento_inicial": 0.0, "abatimento_aplicado": 0.0, "base_calculo_apos_escudo": 0.0, "saldo_abatimento_final": 0.0, "total_impostos_real": 0.0, "carga_tributaria_real": 0.0, "carga_tributaria_real_ML": 0.0}, "2026-06": {"total_xml": 1641.0, "total_compra_para_revenda": 0.0, "valor_compra_para_revenda": 0.0, "icms_compra_para_revenda": 0.0, "ipi_compra_para_revenda": 0.0, "frete_compra_para_revenda": 0.0, "total_compra_para_consumo": 0.0, "valor_compra_para_consumo": 0.0, "icms_compra_para_consumo": 0.0, "ipi_compra_para_consumo": 0.0, "frete_compra_para_consumo": 0.0, "total_vendas": 737.0, "valor_vendas": 498322.9499999991, "icms_vendas": 49449.36000000006, "icms_real": 49449.36000000006, "base_piscofins_real": 448873.58999999904, "pis_real": 7406.414234999985, "cofins_real": 34114.39283999993, "total_pis_cofins_real": 41520.80707499991, "dre": 407352.78292499913, "csll_real": 36661.75046324992, "irpj_basico_real": 61102.917438749864, "irpj_real": 99838.19573124978, "lucro_real_liquido": 270852.8367304994, "saldo_abatimento_inicial": 0.0, "abatimento_aplicado": 0.0, "base_calculo_apos_escudo": 407352.78292499913, "saldo_abatimento_final": 0.0, "total_impostos_real": 227470.11326949968, "carga_tributaria_real": 0.0, "carga_tributaria_real_ML": 0.0}, "2026-07": {"total_xml": 1055.0, "total_compra_para_revenda": 0.0, "valor_compra_para_revenda": 0.0, "icms_compra_para_revenda": 0.0, "ipi_compra_para_revenda": 0.0, "frete_compra_para_revenda": 0.0, "total_compra_para_consumo": 0.0, "valor_compra_para_consumo": 0.0, "icms_compra_para_consumo": 0.0, "ipi_compra_para_consumo": 0.0, "frete_compra_para_consumo": 0.0, "total_vendas": 58.0, "valor_vendas": 80441.23999999998, "icms_vendas": 7096.029999999999, "icms_real": 7096.029999999999, "base_piscofins_real": 73345.20999999998, "pis_real": 1210.1959649999997, "cofins_real": 5574.235959999998, "total_pis_cofins_real": 6784.431924999998, "dre": 66560.77807499998, "csll_real": 5990.470026749998, "irpj_basico_real": 9984.116711249997, "irpj_real": 14640.194518749995, "lucro_real_liquido": 45930.113529499984, "saldo_abatimento_inicial": 0.0, "abatimento_aplicado": 0.0, "base_calculo_apos_escudo": 66560.77807499998, "saldo_abatimento_final": 0.0, "total_impostos_real": 34511.12647049999, "carga_tributaria_real": 0.0, "carga_tributaria_real_ML": 0.0}, "2026-08": {"total_xml": 1.0, "total_compra_para_revenda": 0.0, "valor_compra_para_revenda": 0.0, "icms_compra_para_revenda": 0.0, "ipi_compra_para_revenda": 0.0, "frete_compra_para_revenda": 0.0, "total_compra_para_consumo": 1.0, "valor_compra_para_consumo": 50.0, "icms_compra_para_consumo": 0.0, "ipi_compra_para_consumo": 0.0, "frete_compra_para_consumo": 0.0, "total_vendas": 0.0, "valor_vendas": 0.0, "icms_vendas": 0.0, "icms_real": 0.0, "base_piscofins_real": 0, "pis_real": 0.0, "cofins_real": 0.0, "total_pis_cofins_real": 0.0, "dre": 0.0, "csll_real": 0.0, "irpj_basico_real": 0.0, "irpj_real": 0.0, "lucro_real_liquido": 0.0, "saldo_abatimento_inicial": 0.0, "abatimento_aplicado": 0.0, "base_calculo_apos_escudo": 0.0, "saldo_abatimento_final": 0.0, "total_impostos_real": 0.0, "carga_tributaria_real": 0.0, "carga_tributaria_real_ML": 0.0}}, "card_definitions": [{"id": "faturamento_ml", "title": "Faturamento ML", "subtitle": "Vendas + Transferências", "value_key": "faturamento_ml", "format_type": "currency"}, {"id": "faturamento_bruto", "title": "Faturamento Bruto", "subtitle": "Sobre notas de vendas", "value_key": "faturamento_bruto", "format_type": "currency"}, {"id": "valor_despesas", "title": "Despesas Operacionais", "subtitle": "Serviços e Fretes", "value_key": "valor_despesas", "format_type": "currency"}, {"id": "total_impostos_real", "title": "Total de Impostos", "subtitle": "PIS + COFINS + IRPJ + CSL", "value_key": "total_impostos_real", "format_type": "currency"}, {"id": "carga_tributaria_real", "title": "Carga Tributária ", "subtitle": "sobre vendas", "value_key": "carga_tributaria_real", "format_type": "percentage"}, {"id": "carga_tributaria_real_ML", "title": "Carga Tributária ML", "subtitle": "sobre vendas+transferencias", "value_key": "carga_tributaria_real_ML", "format_type": "percentage"}], "lucro_real_card_definitions": [{"id": "icms_real", "title": "ICMS Real", "subtitle": "Base Lucro Real", "value_key": "icms_real", "format_type": "currency"}, {"id": "pis_real", "title": "PIS Real", "subtitle": "Alíquota 1.65% - usando ICMS destacado, descontando créditos de frete", "value_key": "pis_real", "format_type": "currency"}, {"id": "cofins_real", "title": "COFINS Real", "subtitle": "Alíquota 7.6% - usando ICMS destacado, descontando créditos de frete", "value_key": "cofins_real", "format_type": "currency"}, {"id": "irpj_real", "title": "IRPJ Real", "subtitle": "IRPJ será 0 caso houver prejuizo", "value_key": "irpj_real", "format_type": "currency"}, {"id": "csll_real", "title": "CSLL Real", "subtitle": "CSLL será 0 caso houver prejuízo", "value_key": "csll_real", "format_type": "currency"}, {"id": "total_impostos_real", "title": "Total Impostos Real", "subtitle": "PIS + COFINS + IRPJ + CSLL", "value_key": "total_impostos_real", "format_type": "currency"}, {"id": "lucro_real_liquido", "title": "Lucro Real Líquido", "subtitle": "Resultado descontando despesas e impostos ICMS/PIS/COFINS", "value_key": "lucro_real_liquido", "format_type": "currency"}]};
 
     function formatValue(value, type) {
         if (typeof value !== 'number') value = parseFloat(value) || 0;
@@ -352,40 +280,11 @@ td{
     }
 
     function formatMonthName(mes) {
-        if (mes === 'GERAL' || !mes) return 'Todos';
+        if (mes === 'GERAL' || !mes) return 'Geral';
         const partes = mes.split('-');
         if (partes.length < 2) return mes;
-        const nomesMeses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-            'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+        const nomesMeses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
         return nomesMeses[parseInt(partes[1]) - 1] + '/' + partes[0];
-    }
-
-    function safeSetText(id, text) {
-        const el = document.getElementById(id);
-        if (el) el.textContent = text;
-    }
-
-    function updateTaxDetails(ind) {
-        // Update simplified ICMS Card
-        safeSetText('icmsRecolherValue', formatValue(ind.icms_a_recolher, 'currency'));
-
-        // Update simplified PIS Card
-        safeSetText('pisRecolherValue', formatValue(ind.pis_a_recolher, 'currency'));
-
-        // Update simplified COFINS Card
-        safeSetText('cofinsRecolherValue', formatValue(ind.cofins_a_recolher, 'currency'));
-
-        // Update simplified IRPJ Card
-        safeSetText('irpjRecolherValue', formatValue(ind.irpj_a_recolher, 'currency'));
-
-        // Update simplified CSLL Card
-        safeSetText('csllRecolherValue', formatValue(ind.csll_a_recolher, 'currency'));
-
-        // Update Impostos a Recolher Card (New Card)
-        safeSetText('impostosARecolherValue', formatValue(ind.impostos_a_recolher, 'currency'));
-
-        // Update Carga Tributária Card
-        safeSetText('cargaTributariaValue', formatValue(ind.carga_tributaria, 'percentage'));
     }
 
     function renderCards(ind) {
@@ -393,14 +292,8 @@ td{
         if (!container) return;
         container.innerHTML = '';
         (dashboardData.card_definitions || []).forEach(d => {
-            const subtitleHtml = d.subtitle ? `<div class="card-subtitle">${d.subtitle}</div>` : '';
-            container.innerHTML += `
-                <div class="card">
-                    <div class="card-title">${d.title}</div>
-                    ${subtitleHtml}
-                    <div class="card-value">${formatValue(ind[d.value_key], d.format_type)}</div>
-                </div>
-            `;
+            const val = ind[d.value_key] || 0;
+            container.innerHTML += `<div class="card"><div class="card-title">${d.title}</div><div class="card-value">${formatValue(val, d.format_type)}</div></div>`;
         });
     }
 
@@ -409,101 +302,25 @@ td{
         if (!container) return;
         container.innerHTML = '';
         (dashboardData.lucro_real_card_definitions || []).forEach(d => {
-            const subtitleHtml = d.subtitle ? `<div class="card-subtitle">${d.subtitle}</div>` : '';
-            container.innerHTML += `
-                <div class="card">
-                    <div class="card-title">${d.title}</div>
-                    ${subtitleHtml}
-                    <div class="card-value">${formatValue(ind[d.value_key], d.format_type)}</div>
-                </div>
-            `;
+            const val = ind[d.value_key] || 0;
+            container.innerHTML += `<div class="card"><div class="card-title">${d.title}</div><div class="card-value">${formatValue(val, d.format_type)}</div></div>`;
         });
     }
 
-    function renderRevenueExpenseTables(mes_ref) {
-        const corpoReceitas = document.getElementById('corpoReceitas');
-        const corpoDespesas = document.getElementById('corpoDespesas');
-        if (!corpoReceitas || !corpoDespesas) return;
-
-        corpoReceitas.innerHTML = '';
-        corpoDespesas.innerHTML = '';
-
-        const detalhesMes = dashboardData.detalhamento_operacoes[mes_ref];
-        if (!detalhesMes) return;
-
-        for (const chave_op in detalhesMes.receitas) {
-            const item = detalhesMes.receitas[chave_op];
-            corpoReceitas.innerHTML += `<tr><td>${item.operacao_tipo}</td><td>${formatValue(item.qtd, 'integer')}</td><td>${formatValue(item.valor, 'currency')}</td><td>${item.nome}</td></tr>`;
-        }
-
-        for (const chave_op in detalhesMes.despesas) {
-            const item = detalhesMes.despesas[chave_op];
-            corpoDespesas.innerHTML += `<tr><td>${item.operacao_tipo}</td><td>${formatValue(item.qtd, 'integer')}</td><td>${formatValue(item.valor, 'currency')}</td><td>${item.nome}</td></tr>`;
-        }
-    }
-
-    function renderFinancialSummary(ind) {
-        const corpoResumoFinanceiro = document.getElementById('corpoResumoFinanceiro');
-        if (!corpoResumoFinanceiro) return;
-        corpoResumoFinanceiro.innerHTML = '';
-
-        const mesResumoFinanceiro = document.getElementById('mesResumoFinanceiro');
-        if (mesResumoFinanceiro) mesResumoFinanceiro.textContent = formatMonthName(ind.mes_ref) || 'Todos';
-
-        const summaryData = [
-            {'Indicador': 'Notas de Venda', 'Quantidade': ind.total_vendas, 'Valor': ind.valor_vendas, 'ICMS': ind.icms_vendas, 'IPI': ind.ipi_vendas, 'PIS': ind.pis_vendas, 'COFINS': ind.cofins_vendas},
-            {'Indicador': 'Notas de Compra', 'Quantidade': ind.total_compra, 'Valor': ind.valor_compra, 'ICMS': ind.icms_compras, 'IPI': ind.ipi_compras, 'PIS': ind.pis_compras, 'COFINS': ind.cofins_compras},
-            {'Indicador': 'Notas de Transferência', 'Quantidade': ind.total_transferencias, 'Valor': ind.valor_transferencias, 'ICMS': ind.icms_transferencias, 'IPI': ind.ipi_transferencias, 'PIS': ind.pis_transferencias, 'COFINS': ind.cofins_transferencias},
-            {'Indicador': 'Notas de Transporte (CTe)', 'Quantidade': ind.total_transporte, 'Valor': ind.valor_transporte, 'ICMS': ind.icms_transporte, 'IPI': 0, 'PIS': ind.pis_transporte, 'COFINS': ind.cofins_transporte},
-            {'Indicador': 'Serviços', 'Quantidade': ind.total_servicos, 'Valor': ind.valor_servicos, 'ICMS': 0, 'IPI': 0, 'PIS': ind.pis_servicos, 'COFINS': ind.cofins_servicos},
-            {'Indicador': 'Devoluções', 'Quantidade': ind.total_devolucoes, 'Valor': ind.valor_devolucoes, 'ICMS': ind.icms_devolucoes, 'IPI': ind.ipi_devolucoes, 'PIS': ind.pis_devolucoes, 'COFINS': ind.cofins_devolucoes},
-            {'Indicador': 'Canceladas', 'Quantidade': ind.total_canceladas, 'Valor': ind.valor_canceladas, 'ICMS': ind.icms_canceladas, 'IPI': ind.ipi_canceladas, 'PIS': ind.pis_canceladas, 'COFINS': ind.cofins_canceladas}
-        ];
-
-        summaryData.forEach(row => {
-            corpoResumoFinanceiro.innerHTML += `<tr><td>${row.Indicador}</td><td>${formatValue(row.Quantidade, 'integer')}</td><td>${formatValue(row.Valor, 'currency')}</td><td>${formatValue(row.ICMS, 'currency')}</td><td>${formatValue(row.IPI, 'currency')}</td><td>${formatValue(row.PIS, 'currency')}</td><td>${formatValue(row.COFINS, 'currency')}</td></tr>`;
+    function updateTaxDetails(ind) {
+        const fields = ['icmsRecolherValue', 'pisRecolherValue', 'cofinsRecolherValue', 'irpjRecolherValue', 'csllRecolherValue', 'impostosARecolherValue'];
+        const dataKeys = ['icms_real', 'pis_real', 'cofins_real', 'irpj_real', 'csll_real', 'total_impostos_real'];
+        fields.forEach((id, i) => {
+            const el = document.getElementById(id);
+            if (el) el.textContent = formatValue(ind[dataKeys[i]], 'currency');
         });
-    }
-
-    function renderTaxSummary(ind) {
-        const corpoTributacao = document.getElementById('corpoTributacao');
-        if (!corpoTributacao) return;
-        corpoTributacao.innerHTML = '';
-
-        const taxData = [
-            {'Imposto': 'ICMS VENDAS (débito)', 'Valor': ind.icms_vendas},
-            {'Imposto': 'ICMS TRANSPORTE (crédito)', 'Valor': -ind.icms_transporte},
-            {'Imposto': 'ICMS COMPRAS (crédito)', 'Valor': -ind.icms_compras},
-            {'Imposto': 'ICMS a Recolher (RESULTADO)', 'Valor': ind.icms_a_recolher},
-            {'Imposto': 'PIS a Recolher', 'Valor': ind.pis_a_recolher},
-            {'Imposto': 'COFINS a Recolher', 'Valor': ind.cofins_a_recolher},
-            {'Imposto': 'IRPJ a Recolher', 'Valor': ind.irpj_a_recolher},
-            {'Imposto': 'CSLL a Recolher', 'Valor': ind.csll_a_recolher},
-            {'Imposto': 'Saldo Tributário Geral', 'Valor': ind.total_impostos}
-        ];
-
-        taxData.forEach(row => {
-            corpoTributacao.innerHTML += `<tr><td>${row.Imposto}</td><td>${formatValue(row.Valor, 'currency')}</td></tr>`;
-        });
-    }
-
-    function renderMonthlyEvolutionTable() {
-        const corpoEvolucaoMensal = document.getElementById('corpoEvolucaoMensal');
-        if (!corpoEvolucaoMensal) return;
-        corpoEvolucaoMensal.innerHTML = '';
-
-        (dashboardData.monthly_summary_table || []).forEach(row => {
-            corpoEvolucaoMensal.innerHTML += `<tr><td>${row['Mês']}</td><td>${formatValue(row['Vendas'], 'currency')}</td><td>${formatValue(row['Compras'], 'currency')}</td><td>${formatValue(row['Transferências'], 'currency')}</td><td>${formatValue(row['Devoluções'], 'currency')}</td><td>${formatValue(row['Faturamento Bruto'], 'currency')}</td><td>${formatValue(row['PIS/COFINS'], 'currency')}</td><td>${formatValue(row['IRPJ/CSLL'], 'currency')}</td><td>${formatValue(row['total impostos'], 'currency')}</td><td>${formatValue(row['carga tributaria'], 'percentage')}</td></tr>`;
-        });
+        const ct = document.getElementById('cargaTributariaValue');
+        if (ct) ct.textContent = formatValue(ind.carga_tributaria_real, 'percentage');
     }
 
     function init() {
         const selectMes = document.getElementById('selectMes');
-        if (!selectMes) return;
-
         const meses = Object.keys(dashboardData.monthly_indicators || {}).sort();
-        selectMes.innerHTML = '';
-
         meses.forEach(m => {
             const opt = document.createElement('option');
             opt.value = m; opt.textContent = formatMonthName(m);
@@ -511,29 +328,18 @@ td{
         });
 
         selectMes.addEventListener('change', function() {
-            const selectedMonth = this.value;
-            const ind = dashboardData.monthly_indicators[selectedMonth];
-            if (ind) {
-                ind.mes_ref = selectedMonth;
-                renderCards(ind);
-                renderLucroRealCards(ind);
-                updateTaxDetails(ind);
-                renderRevenueExpenseTables(selectedMonth);
-                renderFinancialSummary(ind);
-                renderTaxSummary(ind);
-            }
+            const ind = dashboardData.monthly_indicators[this.value];
+            renderCards(ind);
+            renderLucroRealCards(ind);
+            updateTaxDetails(ind);
         });
-
-        renderMonthlyEvolutionTable();
 
         if (meses.length > 0) {
             selectMes.value = meses[meses.length - 1];
             selectMes.dispatchEvent(new Event('change'));
         }
     }
-
     document.addEventListener('DOMContentLoaded', init);
-    if (document.readyState !== 'loading') init();
 })();
 </script>
 </body>
