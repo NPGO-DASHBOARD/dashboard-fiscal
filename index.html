@@ -79,13 +79,13 @@ body{
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start; /* Alinha os cards à esquerda */
 }
 .card{
     background: var(--cor-card-claro);
     border-left: 6px solid var(--cor-principal);
     padding: 20px;
-    width: 250px;
+    width: calc(20% - 16px); /* Ajusta a largura para 5 cards por linha, considerando o gap */
     border-radius: 8px;
     box-shadow: 0 2px 5px var(--cor-sombra-clara);
     transition: transform 0.2s ease-in-out;
