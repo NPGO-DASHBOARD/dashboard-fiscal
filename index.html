@@ -259,6 +259,7 @@ td{
                 <th>PIS/COFINS</th>
                 <th>IRPJ/CSLL</th>
                 <th>IRPJ/CSLL Estimado</th>
+                <th>Lucro Real Líquido</th>
             </tr>
         </thead>
         <tbody id="corpoEvolucaoMensal"></tbody>
@@ -407,7 +408,7 @@ td{
         corpoEvolucaoMensal.innerHTML = '';
 
         (dashboardData.monthly_summary_table || []).forEach(row => {
-            corpoEvolucaoMensal.innerHTML += `<tr><td>${row['Mês']}</td><td>${formatValue(row['Vendas'], 'currency')}</td><td>${formatValue(row['Compras'], 'currency')}</td><td>${formatValue(row['Transferências'], 'currency')}</td><td>${formatValue(row['Faturamento ML'], 'currency')}</td><td>${formatValue(row['PIS/COFINS'], 'currency')}</td><td>${formatValue(row['IRPJ/CSLL'], 'currency')}</td><td>${formatValue(row['IRPJ/CSLL Estimado'], 'currency')}</td></tr>`;
+            corpoEvolucaoMensal.innerHTML += `<tr><td>${row['Mês']}</td><td>${formatValue(row['Vendas'], 'currency')}</td><td>${formatValue(row['Compras'], 'currency')}</td><td>${formatValue(row['Transferências'], 'currency')}</td><td>${formatValue(row['Faturamento ML'], 'currency')}</td><td>${formatValue(row['PIS/COFINS'], 'currency')}</td><td>${formatValue(row['IRPJ/CSLL'], 'currency')}</td><td>${formatValue(row['IRPJ/CSLL Estimado'], 'currency')}</td><td>${formatValue(row['Lucro Real Líquido'], 'currency')}</td></tr>`;
         });
     }
 
