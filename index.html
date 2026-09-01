@@ -383,11 +383,18 @@ td{
 
         for (const chave_op in detalhesMes.despesas) {
             const item = detalhesMes.despesas[chave_op];
-            let operacao_display = item.nome;
+            let operacao_display = ''; // Initialize to empty string
+
             if (item.operacao_tipo === 'Serviço') {
                 operacao_display = (item.emitente_name ? item.emitente_name + '<br>' : '') + item.nome;
-            } else if (item.emitente_name) { // For Purchases and CTe (Despesas), show only emitente name
+            } else if (item.operacao_tipo.startsWith('CT-e')) { // For CT-e, explicitly use item.nome
+                operacao_display = item.nome;
+            } else if (item.operacao_tipo === 'Devolução') { // For Devolução, explicitly use item.nome
+                operacao_display = item.nome;
+            } else if (item.emitente_name) { // For other Purchases, show emitente name
                 operacao_display = item.emitente_name;
+            } else { // Fallback if no specific condition met
+                operacao_display = item.nome;
             }
             corpoDespesas.innerHTML += `<tr><td>${item.operacao_tipo}</td><td>${formatValue(item.qtd, 'integer')}</td><td>${formatValue(item.valor, 'currency')}</td><td>${operacao_display}</td></tr>`;
         }
