@@ -7,8 +7,8 @@
     
 <style>
 :root {
-    --cor-principal: #1F4E79;
-    --cor-fundo: #f4f6f8;
+    --cor-principal: #6f9f00;
+    --cor-fundo: #22281f;
     --cor-sombra-clara: #ccc;
     --cor-sombra-escura: rgba(0,0,0,0.1);
     --cor-texto-secundario: #666;
@@ -23,12 +23,12 @@
 
 body{
     font-family: Arial, Helvetica, sans-serif;
-    background: var(--cor-fundo);
+    background:var(--cor-fundo);
     margin:40px;
 }
 .header{
-    background: var(--cor-principal);
-    color: white;
+    background:var(--cor-principal);
+    color:white;
     padding:25px;
     border-radius:8px;
 }
@@ -36,17 +36,14 @@ body{
     margin:0;
 }
 .section{
-    background: white;
+    background:white;
     margin-top:25px;
     padding:25px;
     border-radius:8px;
     box-shadow:0 2px 5px var(--cor-sombra-clara);
 }
-.section[style*="background-color: #dfdfdf"] { /* Específico para o apuracao_formula_contabilidade_html */
-    background-color: var(--cor-secao-alternativa) !important;
-}
 .section-title{
-    color: var(--cor-principal);
+    color:var(--cor-principal);
     font-size:22px;
     font-weight:bold;
     margin-bottom:20px;
@@ -66,7 +63,7 @@ body{
     flex-wrap:wrap;
 }
 .card{
-    background: white;
+    background:white;
     border-left:6px solid var(--cor-principal);
     padding:20px;
     width:220px;
@@ -74,17 +71,17 @@ body{
     box-shadow:0 2px 5px var(--cor-sombra-clara);
 }
 .card-title{
-    color: var(--cor-texto-secundario);
+    color:var(--cor-texto-secundario);
     font-size:14px;
     font-weight: bold;
 }
 .card-subtitle{
-    color: var(--cor-texto-terciario);
+    color:var(--cor-texto-terciario);
     font-size:12px;
     margin-top:2px;
 }
 .card-value{
-    color: var(--cor-principal);
+    color:var(--cor-principal);
     font-size:25px;
     font-weight:bold;
     margin-top:10px;
@@ -100,8 +97,8 @@ table{
     border-collapse:collapse;
 }
 th{
-    background: var(--cor-principal);
-    color: white;
+    background:var(--cor-principal);
+    color:white;
     padding:12px;
     text-align:center;
 }
@@ -193,11 +190,9 @@ td{
 <!-- Seção de Apuração Lucro Real -->
 <div class="section">
     <div class="section-title">
-        📈 APURAÇÃO LUCRO REAL
+        📈 IMPOSTOS
         <div class="explanation-text">
-<li>Apuração realizada utilizando dos créditos fiscais de PIS/COFINS sobre os fretes de transporte de vendas contratados (CT-e)</li>
- <li>Utilizado valor do ICMS a DESTACADO no calculo da base PIS/COFINS</li>
- <li>Lucro Calculado Descontando o valor dos impostos e Despesas</li>
+<li>Auração de impostos</li>
 
         </div>
     </div>
