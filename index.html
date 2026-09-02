@@ -19,11 +19,13 @@
     --cor-sombra-clara: rgba(0,0,0,0.1);
     --cor-sombra-escura: rgba(0,0,0,0.2);
     --cor-borda-clara: #ddd;
-    --cor-card-claro: #f9f9f9;
+    --cor-card-claro: #141812;
     --cor-card-principal-bg: #e9eef4;
     --cor-borda-tracejada: #eee;
     --cor-secao-alternativa: #dfdfdf;
     --cor-alerta-erro: #ef5350;
+    --cor-tabela1: #22281f;
+    --cor-tabela2: #f9f9f9;
 }
 
 body{
@@ -52,7 +54,7 @@ body{
     color: var(--cor-borda-clara);
 }
 .section{
-    background: white;
+    background: black;
     margin-top: 25px;
     padding: 25px;
     border-radius: 8px;
@@ -125,6 +127,7 @@ select:focus{
     box-shadow: 0 0 0 2px rgba(111, 159, 0, 0.2);
 }
 table{
+    background-color: var(--cor-tabela1);
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
@@ -146,7 +149,7 @@ th{
     font-size: 14px;
 }
 tr:nth-child(even) {
-    background-color: var(--cor-card-claro);
+    background-color: var(--cor-tabela2);
 }
 tr:hover {
     background-color: #f0f0f0;
