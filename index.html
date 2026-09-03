@@ -283,9 +283,6 @@ tr:hover {
                     <th>Tipo</th>
                     <th>Qtd</th>
                     <th>Valor</th>
-                    <th>vProd</th>
-                    <th>vBCICMS</th>
-                    <th>ICMS</th>
                     <th>Operação</th>
                 </tr>
             </thead>
@@ -458,27 +455,19 @@ tr:hover {
         for (const chave_op in detalhesMes.despesas) {
             const item = detalhesMes.despesas[chave_op];
             let operacao_display = ''; // Initialize to empty string
-            let vprod_val = 0;
-            let vbcicms_val = 0;
-            let icms_val = 0;
 
             if (item.operacao_tipo === 'Serviço') {
                 operacao_display = (item.emitente_name ? item.emitente_name + '<br>' : '') + item.nome;
-            } else if (item.operacao_tipo.startsWith('CT-e')) {
+            } else if (item.operacao_tipo.startsWith('CT-e')) { // For CT-e, explicitly use item.nome
                 operacao_display = item.nome;
-            } else if (item.operacao_tipo === 'Devolução') {
+            } else if (item.operacao_tipo === 'Devolução') { // For Devolução, explicitly use item.nome
                 operacao_display = item.nome;
-            } else if (item.operacao_tipo === 'Energia Elétrica') { // NEW: For Energia Elétrica, extract specific values
-                operacao_display = item.nome;
-                vprod_val = item.vProd_items_NF3e || 0;
-                vbcicms_val = item.vBCICMS_items_NF3e || 0;
-                icms_val = item.vICMS_items_NF3e || 0;
-            } else if (item.emitente_name) {
+            } else if (item.emitente_name) { // For other Purchases, show emitente name
                 operacao_display = item.emitente_name;
-            } else {
+            } else { // Fallback if no specific condition met
                 operacao_display = item.nome;
             }
-            corpoDespesas.innerHTML += `<tr><td>${item.operacao_tipo}</td><td>${formatValue(item.qtd, 'integer')}</td><td>${formatValue(item.valor, 'currency')}</td><td>${formatValue(vprod_val, 'currency')}</td><td>${formatValue(vbcicms_val, 'currency')}</td><td>${formatValue(icms_val, 'currency')}</td><td>${formatValue(operacao_display, 'text')}</td></tr>`;
+            corpoDespesas.innerHTML += `<tr><td>${item.operacao_tipo}</td><td>${formatValue(item.qtd, 'integer')}</td><td>${formatValue(item.valor, 'currency')}</td><td>${operacao_display}</td></tr>`;
         }
     }
 
