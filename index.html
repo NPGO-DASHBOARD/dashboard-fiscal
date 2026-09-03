@@ -462,6 +462,8 @@ tr:hover {
                 operacao_display = item.nome;
             } else if (item.operacao_tipo === 'Devolução') { // For Devolução, explicitly use item.nome
                 operacao_display = item.nome;
+            } else if (item.operacao_tipo === 'Energia Elétrica') { // For Energia Elétrica, use emitente name
+                operacao_display = item.emitente_name;
             } else if (item.emitente_name) { // For other Purchases, show emitente name
                 operacao_display = item.emitente_name;
             } else { // Fallback if no specific condition met
