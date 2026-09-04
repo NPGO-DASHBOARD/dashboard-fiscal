@@ -303,12 +303,11 @@ tr:hover {
                 <th>Qtd</th>
                 <th>Valor</th>
                 <th>vProd</th>
+                <th>vOutro</th>
                 <th>vBCICMS</th>
                 <th>ICMS</th>
-                <th>IPI</th>
                 <th>PIS</th>
                 <th>COFINS</th>
-                <th>vOutro</th>
             </tr>
         </thead>
         <tbody id="corpoResumoFinanceiro"></tbody>
@@ -486,15 +485,15 @@ tr:hover {
             const indicador = def.label;
             const quantidade = ind[def.qty_key] || 0;
             const valor = ind[def.value_key] || 0;
-            const vProd = def.vprod_key ? (ind[def.vprod_key] || 0) : 0; // NEW: vProd
+            const vProd = def.vprod_key ? (ind[def.vprod_key] || 0) : 0;
+            const vOutro = def.voutro_key ? (ind[def.voutro_key] || 0) : 0;
             const vBCICMS = def.vBCICMS_key ? (ind[def.vBCICMS_key] || 0) : 0;
             const icms = def.icms_key ? (ind[def.icms_key] || 0) : 0;
-            const ipi = def.ipi_key ? (ind[def.ipi_key] || 0) : 0;
+            // const ipi = def.ipi_key ? (ind[def.ipi_key] || 0) : 0; // Removido IPI
             const pis = def.pis_key ? (ind[def.pis_key] || 0) : 0;
             const cofins = def.cofins_key ? (ind[def.cofins_key] || 0) : 0;
-            const vOutro = def.voutro_key ? (ind[def.voutro_key] || 0) : 0; // NEW: vOutro
 
-            corpoResumoFinanceiro.innerHTML += `<tr><td>${indicador}</td><td>${formatValue(quantidade, 'integer')}</td><td>${formatValue(valor, 'currency')}</td><td>${formatValue(vProd, 'currency')}</td><td>${formatValue(vBCICMS, 'currency')}</td><td>${formatValue(icms, 'currency')}</td><td>${formatValue(ipi, 'currency')}</td><td>${formatValue(pis, 'currency')}</td><td>${formatValue(cofins, 'currency')}</td><td>${formatValue(vOutro, 'currency')}</td></tr>`;
+            corpoResumoFinanceiro.innerHTML += `<tr><td>${indicador}</td><td>${formatValue(quantidade, 'integer')}</td><td>${formatValue(valor, 'currency')}</td><td>${formatValue(vProd, 'currency')}</td><td>${formatValue(vOutro, 'currency')}</td><td>${formatValue(vBCICMS, 'currency')}</td><td>${formatValue(icms, 'currency')}</td><td>${formatValue(pis, 'currency')}</td><td>${formatValue(cofins, 'currency')}</td></tr>`;
         });
     }
 
