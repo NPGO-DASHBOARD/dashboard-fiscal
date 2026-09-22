@@ -1,0 +1,28 @@
+name: Injetar Favicon Automaticamente
+
+on:
+  push:
+    branches:
+      - main  # Altere para o nome da sua branch (ex: master ou main)
+    paths:
+      - 'index.html'  # Só roda quando o index.html for alterado pelo Colab
+
+jobs:
+  inject-favicon:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Baixar o código do repositório
+        uses: actions/checkout@v4
+
+      - name: Injetar a tag do favicon no HTML
+        run: |
+          # Substitui a tag </head> pela tag do favicon + </head>
+          # Substitua 'seu_arquivo.jpg' pelo nome exato da sua imagem no repositório
+          sed -i 's|</head>|<link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/NPGO-DASHBOARD/dashboard-fiscal/refs/heads/main/FAVICON1.jpg">\n</head>|g' index.html
+
+      - name: Salvar as alterações no GitHub
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Bot: Favicon injetado automaticamente"
