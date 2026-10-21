@@ -155,77 +155,67 @@ tr:hover {
     background-color: var(--cor-principal);
 }
 .tax-cards-container {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-top: 20px;
-    justify-content: center;
+    display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px; justify-content: center;
 }
 .tax-card {
-    background: var(--cor-card-claro);
-    border: 1px solid var(--cor-borda-clara);
-    border-radius: 8px;
-    padding: 20px;
-    width: 320px;
-    box-shadow: 0 2px 5px var(--cor-sombra-escura);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: transform 0.2s ease-in-out;
+    background: var(--cor-card-claro); border: 1px solid var(--cor-borda-clara); border-radius: 8px; padding: 20px; width: 320px; box-shadow: 0 2px 5px var(--cor-sombra-escura); display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s ease-in-out;
 }
 .tax-card:hover{
     transform: translateY(-5px);
 }
 .card-principal {
-    background: var(--cor-card-principal-bg);
-    padding: 15px;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    font-weight: bold;
-    color: var(--cor-principal);
-    font-size: 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    background: var(--cor-card-principal-bg); padding: 15px; border-radius: 5px; margin-bottom: 15px; font-weight: bold; color: var(--cor-principal); font-size: 16px; display: flex; justify-content: space-between; align-items: center;
 }
 .card-principal .value {
-    font-size: 24px;
-    font-weight: bold;
-    color: var(--cor-principal);
+    font-size: 24px; font-weight: bold; color: var(--cor-principal);
 }
 .detail-calculation {
-    font-size: 13px;
-    color: var(--cor-texto-explicacao);
-    flex-grow: 1;
+    font-size: 13px; color: var(--cor-texto-explicacao); flex-grow: 1;
 }
 .detail-calculation ul {
-    list-style: none;
-    padding: 0;
-    margin: 10px 0 0 0;
+    list-style: none; padding: 0; margin: 10px 0 0 0;
 }
 .detail-calculation li {
-    display: flex;
-    justify-content: space-between;
-    padding: 5px 0;
-    border-bottom: 1px dashed var(--cor-borda-tracejada);
+    display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px dashed var(--cor-borda-tracejada);
 }
 .detail-calculation li:last-child {
     border-bottom: none;
 }
 
-.section.lucro-real {
-    background-color: var(--cor-secao-alternativa);
+.section.lucro-real { background-color: var(--cor-secao-alternativa); }
+.section.apuracao-contabilidade { background-color: var(--cor-secao-alternativa); }
+
+/* Botão Flutuante Voltar ao Topo */
+.btn-topo {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--cor-principal);
+    color: white;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, transform 0.2s;
+    z-index: 1000;
+    text-decoration: none;
 }
-.section.apuracao-contabilidade {
-    background-color: var(--cor-secao-alternativa);
+.btn-topo:hover {
+    background-color: var(--cor-secundaria);
+    transform: scale(1.1);
 }
 </style>
 
-<link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/NPGO-DASHBOARD/dashboard-fiscal/refs/heads/main/FAVICON1.jpg">
 </head>
 <body>
     
-<div class="header">
+<div class="header" id="inicio">
     <h1>📊 ANALISADOR FISCAL NF-e</h1>
     <h2>N&P IMPORTAÇÃO E COMÉRCIO LTDA</h2>
     <p>Relatório Fiscal Empresarial</p>
@@ -361,6 +351,12 @@ tr:hover {
         <tbody id="corpoEvolucaoMensal"></tbody>
     </table>
 </div>
+
+    
+    <!-- Botão Flutuante Voltar ao Topo -->
+    <button class="btn-topo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao topo">
+        ▲
+    </button>
 
     <script>
 (function() {
