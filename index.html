@@ -221,7 +221,6 @@ tr:hover {
 }
 </style>
 
-<link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/NPGO-DASHBOARD/dashboard-fiscal/refs/heads/main/FAVICON1.jpg">
 </head>
 <body>
     
@@ -232,6 +231,30 @@ tr:hover {
     <select id="selectMes">
         <!-- Opções de meses serão populadas dinamicamente via JavaScript -->
     </select>
+</div>
+
+    
+<div class="section" style="background-color: #1a1f18; display: flex; gap: 15px; justify-content: center; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+    <button onclick="document.getElementById('dashboardCards').scrollIntoView({behavior: 'smooth'})"
+            style="background: #6f9f00; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; transition: background 0.3s;">
+        📌 Indicadores Globais
+    </button>
+    <button onclick="document.getElementById('lucroRealCards').scrollIntoView({behavior: 'smooth'})"
+            style="background: #6f9f00; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; transition: background 0.3s;">
+        📈 Impostos e Lucro Real
+    </button>
+    <button onclick="document.getElementById('tabelaReceitas').scrollIntoView({behavior: 'smooth'})"
+            style="background: #6f9f00; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; transition: background 0.3s;">
+        📊 Receitas e Despesas
+    </button>
+    <button onclick="document.getElementById('tabelaResumoFinanceiro').scrollIntoView({behavior: 'smooth'})"
+            style="background: #6f9f00; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; transition: background 0.3s;">
+        📑 Resumo das Notas Fiscais
+    </button>
+    <button onclick="document.getElementById('tabelaEvolucaoMensal').scrollIntoView({behavior: 'smooth'})"
+            style="background: #6f9f00; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; transition: background 0.3s;">
+        📅 Acompanhamento Mensal
+    </button>
 </div>
 
     
