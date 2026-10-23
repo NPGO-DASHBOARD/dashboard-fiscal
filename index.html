@@ -212,7 +212,6 @@ tr:hover {
 }
 </style>
 
-<link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/NPGO-DASHBOARD/dashboard-fiscal/refs/heads/main/FAVICON1.jpg">
 </head>
 <body>
     
@@ -341,8 +340,8 @@ tr:hover {
                 <th>Mês</th>
                 <th>Vendas</th>
                 <th>Compras</th>
-                <th>Transferências</th>
                 <th>Faturamento ML</th>
+                <th>ICMS</th>
                 <th>PIS/COFINS</th>
                 <th>IRPJ/CSLL</th>
                 <th>IRPJ/CSLL Estimado</th>
@@ -396,25 +395,12 @@ tr:hover {
     }
 
     function updateTaxDetails(ind) {
-        // Update simplified ICMS Card
         safeSetText('icmsRecolherValue', formatValue(ind.icms_a_recolher, 'currency'));
-
-        // Update simplified PIS Card
         safeSetText('pisRecolherValue', formatValue(ind.pis_a_recolher, 'currency'));
-
-        // Update simplified COFINS Card
         safeSetText('cofinsRecolherValue', formatValue(ind.cofins_a_recolher, 'currency'));
-
-        // Update simplified IRPJ Card
         safeSetText('irpjRecolherValue', formatValue(ind.irpj_a_recolher, 'currency'));
-
-        // Update simplified CSLL Card
         safeSetText('csllRecolherValue', formatValue(ind.csll_a_recolher, 'currency'));
-
-        // Update Impostos a Recolher Card (New Card)
         safeSetText('impostosARecolherValue', formatValue(ind.impostos_a_recolher, 'currency'));
-
-        // Update Carga Tributária Card
         safeSetText('cargaTributariaValue', formatValue(ind.carga_tributaria, 'percentage'));
     }
 
@@ -465,8 +451,6 @@ tr:hover {
             const item = detalhesMes.receitas[chave_op];
             let operacao_display = item.nome;
             if (item.operacao_tipo === 'Venda' || item.operacao_tipo === 'Transferência') {
-                // For Receitas, keep original 'Operação' if it's not a service.
-                // If it was a NFe from another company (i.e. 'Outros') and has emitente_name, display it.
                 if (item.emitente_name && item.operacao_tipo !== 'Serviço') {
                     operacao_display = item.emitente_name + (item.nome ? ' (' + item.nome + ')' : '');
                 }
@@ -476,19 +460,19 @@ tr:hover {
 
         for (const chave_op in detalhesMes.despesas) {
             const item = detalhesMes.despesas[chave_op];
-            let operacao_display = ''; // Initialize to empty string
+            let operacao_display = '';
 
             if (item.operacao_tipo === 'Serviço') {
                 operacao_display = (item.emitente_name ? item.emitente_name + '<br>' : '') + item.nome;
-            } else if (item.operacao_tipo.startsWith('CT-e')) { // For CT-e, explicitly use item.nome
+            } else if (item.operacao_tipo.startsWith('CT-e')) {
                 operacao_display = item.nome;
-            } else if (item.operacao_tipo === 'Devolução') { // For Devolução, explicitly use item.nome
+            } else if (item.operacao_tipo === 'Devolução') {
                 operacao_display = item.nome;
-            } else if (item.operacao_tipo === 'Energia Elétrica') { // For Energia Elétrica, use emitente name
+            } else if (item.operacao_tipo === 'Energia Elétrica') {
                 operacao_display = item.emitente_name;
-            } else if (item.emitente_name) { // For other Purchases, show emitente name
+            } else if (item.emitente_name) {
                 operacao_display = item.emitente_name;
-            } else { // Fallback if no specific condition met
+            } else {
                 operacao_display = item.nome;
             }
             corpoDespesas.innerHTML += `<tr><td>${item.operacao_tipo}</td><td>${formatValue(item.qtd, 'integer')}</td><td>${formatValue(item.valor, 'currency')}</td><td>${operacao_display}</td></tr>`;
@@ -511,7 +495,6 @@ tr:hover {
             const vOutro = def.voutro_key ? (ind[def.voutro_key] || 0) : 0;
             const vBCICMS = def.vBCICMS_key ? (ind[def.vBCICMS_key] || 0) : 0;
             const icms = def.icms_key ? (ind[def.icms_key] || 0) : 0;
-            // const ipi = def.ipi_key ? (ind[def.ipi_key] || 0) : 0;
             const pis = def.pis_key ? (ind[def.pis_key] || 0) : 0;
             const cofins = def.cofins_key ? (ind[def.cofins_key] || 0) : 0;
 
@@ -525,7 +508,7 @@ tr:hover {
         corpoEvolucaoMensal.innerHTML = '';
 
         (dashboardData.monthly_summary_table || []).forEach(row => {
-            corpoEvolucaoMensal.innerHTML += `<tr><td>${row['Mês']}</td><td>${formatValue(row['Vendas'], 'currency')}</td><td>${formatValue(row['Compras'], 'currency')}</td><td>${formatValue(row['Transferências'], 'currency')}</td><td>${formatValue(row['Faturamento ML'], 'currency')}</td><td>${formatValue(row['PIS/COFINS'], 'currency')}</td><td>${formatValue(row['IRPJ/CSLL'], 'currency')}</td><td>${formatValue(row['IRPJ/CSLL Estimado'], 'currency')}</td><td>${formatValue(row['Lucro Real Líquido'], 'currency')}</td></tr>`;
+            corpoEvolucaoMensal.innerHTML += `<tr><td>${row['Mês']}</td><td>${formatValue(row['Vendas'], 'currency')}</td><td>${formatValue(row['Compras'], 'currency')}</td><td>${formatValue(row['Faturamento ML'], 'currency')}</td><td>${formatValue(row['ICMS_vendas'] || row['ICMS'] || 0, 'currency')}</td><td>${formatValue(row['PIS/COFINS'], 'currency')}</td><td>${formatValue(row['IRPJ/CSLL'], 'currency')}</td><td>${formatValue(row['IRPJ/CSLL Estimado'], 'currency')}</td><td>${formatValue(row['Lucro Real Líquido'], 'currency')}</td></tr>`;
         });
     }
 
@@ -557,7 +540,7 @@ tr:hover {
 
         renderMonthlyEvolutionTable();
 
-        if (meses.length > 0) {
+        if (meses.length > 0) { 
             selectMes.value = meses[meses.length - 1];
             selectMes.dispatchEvent(new Event('change'));
         }
