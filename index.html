@@ -31,7 +31,7 @@
 body{
     font-family: 'Geist Sans', sans-serif;
     background: var(--cor-fundo);
-    margin: 20px;
+    margin: 20px; 
     color: var(--cor-texto-primario);
 }
 
@@ -78,7 +78,7 @@ body{
     box-shadow: 0 4px 8px var(--cor-sombra-escura);
 }
 @media(min-width: 768px) {
-    .section {                
+    .section {
         padding: 25px;
     }
 }
@@ -96,19 +96,25 @@ body{
         font-size: 24px;
     }
 }
-.explanation-text {    
-    font-size: 14px;
+.explanation-text {    font-size: 14px;
     color: var(--cor-texto-explicacao);
     margin-top: 5px;
     line-height: 1.4;
     font-weight: normal;
 }
 
+/* Grid de cards corrigido para quebrar linha em no máximo 4 por linha no PC */
 .cards{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 15px;
 }
+@media(min-width: 1200px) {
+    .cards {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
 .card{
     background: var(--cor-card-claro);
     border-left: 6px solid var(--cor-principal);
@@ -163,7 +169,9 @@ select:focus{
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    margin-top: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
 }
 
 table{
@@ -173,14 +181,15 @@ table{
     box-shadow: 0 2px 5px var(--cor-sombra-clara);
     border-radius: 8px;
     overflow: hidden;
-    min-width: 600px; /* Garante que a tabela não esmague em telas minúsculas */
+    min-width: 700px; /* Mantém largura para forçar rolagem lateral em telas pequenas */
 }
-th,
+th, 
 td{
-    padding: 10px 12px;
+    padding: 12px 14px;
     text-align: left;
     border-bottom: 1px solid var(--cor-borda-clara);
     font-size: 13px;
+    white-space: nowrap; /* Impede quebra feia de linhas nas colunas */
 }
 th{
     background: var(--cor-principal);
@@ -191,7 +200,7 @@ th{
 tr:nth-child(even) {
     background-color: var(--cor-tabela2);
 }
-tr:hover {    
+tr:hover { 
     background-color: var(--cor-principal);
 }
 
@@ -202,11 +211,12 @@ tr:hover {
     gap: 20px;
 }
 @media(min-width: 1024px) {
-    .flex-tables-container { 
-        flex-direction: row; 
+    .flex-tables-container {
+        flex-direction: row;
     }
     .flex-tables-container > div {
         flex: 1;
+        min-width: 0; /* Corrige quebra de layout flex em tabelas */
     }
 }
 
@@ -233,8 +243,7 @@ tr:hover {
 .tax-card:hover{
     transform: translateY(-5px);
 }
-.card-principal {
-    background: var(--cor-card-principal-bg);
+.card-principal {    background: var(--cor-card-principal-bg);
     padding: 12px;
     border-radius: 5px;
     margin-bottom: 15px;
@@ -247,8 +256,7 @@ tr:hover {
     flex-wrap: wrap;
     gap: 5px;
 }
-.card-principal .value {
-    font-size: 20px;
+.card-principal .value {    font-size: 20px;
     font-weight: bold;
     color: var(--cor-principal);
 }
@@ -268,7 +276,7 @@ tr:hover {
     padding: 5px 0;
     border-bottom: 1px dashed var(--cor-borda-tracejada);
 }
-.detail-calculation li:last-child {
+.detail-calculation li:last-child { 
     border-bottom: none;
 }
 
@@ -329,7 +337,6 @@ tr:hover {
 }
 </style>
 
-<link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/NPGO-DASHBOARD/dashboard-fiscal/refs/heads/main/FAVICON1.jpg">
 </head>
 <body>
     
@@ -393,34 +400,38 @@ tr:hover {
 </div>
 
     
-<div class="section" style="display: flex; gap: 20px;">
-    <div style="flex: 1;">
+<div class="section flex-tables-container">
+    <div>
         <div class="section-title">📈 Receitas (Entradas de Caixa)</div>
-        <table id="tabelaReceitas">
-            <thead>
-                <tr>
-                    <th>Tipo</th>
-                    <th>Qtd</th>
-                    <th>Valor</th>
-                    <th>Operação</th>
-                </tr>
-            </thead>
-            <tbody id="corpoReceitas"></tbody>
-        </table>
+        <div class="table-container">
+            <table id="tabelaReceitas">
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Qtd</th>
+                        <th>Valor</th>
+                        <th>Operação</th>
+                    </tr>
+                </thead>
+                <tbody id="corpoReceitas"></tbody>
+            </table>
+        </div>
     </div>
-    <div style="flex: 1;">
+    <div>
         <div class="section-title">📉 Despesas / Deduções</div>
-        <table id="tabelaDespesas">
-            <thead>
-                <tr>
-                    <th>Tipo</th>
-                    <th>Qtd</th>
-                    <th>Valor</th>
-                    <th>Operação</th>
-                </tr>
-            </thead>
-            <tbody id="corpoDespesas"></tbody>
-        </table>
+        <div class="table-container">
+            <table id="tabelaDespesas">
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Qtd</th>
+                        <th>Valor</th>
+                        <th>Operação</th>
+                    </tr>
+                </thead>
+                <tbody id="corpoDespesas"></tbody>
+            </table>
+        </div>
     </div>
 </div>
 
@@ -429,22 +440,24 @@ tr:hover {
     <div class="section-title">
         📊 Resumo Notas Fiscais por Mês: <span id="mesResumoFinanceiro"></span>
     </div>
-    <table id="tabelaResumoFinanceiro">
-        <thead>
-            <tr>
-                <th>Indicador</th>
-                <th>Qtd</th>
-                <th>Valor</th>
-                <th>vProd</th>
-                <th>vOutro</th>
-                <th>vBCICMS</th>
-                <th>vICMS</th>
-                <th>vPIS</th>
-                <th>vCOFINS</th>
-            </tr>
-        </thead>
-        <tbody id="corpoResumoFinanceiro"></tbody>
-    </table>
+    <div class="table-container">
+        <table id="tabelaResumoFinanceiro">
+            <thead>
+                <tr>
+                    <th>Indicador</th>
+                    <th>Qtd</th>
+                    <th>Valor</th>
+                    <th>vProd</th>
+                    <th>vOutro</th>
+                    <th>vBCICMS</th>
+                    <th>vICMS</th>
+                    <th>vPIS</th>
+                    <th>vCOFINS</th>
+                </tr>
+            </thead>
+            <tbody id="corpoResumoFinanceiro"></tbody>
+        </table>
+    </div>
 </div>
 
     
@@ -452,22 +465,24 @@ tr:hover {
     <div class="section-title">
         📈 Acompanhamento Mensal
     </div>
-    <table id="tabelaEvolucaoMensal">
-        <thead>
-            <tr>
-                <th>Mês</th>
-                <th>Vendas</th>
-                <th>Compras</th>
-                <th>Faturamento ML</th>
-                <th>ICMS</th>
-                <th>PIS/COFINS</th>
-                <th>IRPJ/CSLL</th>
-                <th>IRPJ/CSLL Estimado</th>
-                <th>Lucro Real Líquido</th>
-            </tr>
-        </thead>
-        <tbody id="corpoEvolucaoMensal"></tbody>
-    </table>
+    <div class="table-container">
+        <table id="tabelaEvolucaoMensal">
+            <thead>
+                <tr>
+                    <th>Mês</th>
+                    <th>Vendas</th>
+                    <th>Compras</th>
+                    <th>Faturamento ML</th>
+                    <th>ICMS</th>
+                    <th>PIS/COFINS</th>
+                    <th>IRPJ/CSLL</th>
+                    <th>IRPJ/CSLL Estimado</th>
+                    <th>Lucro Real Líquido</th>
+                </tr>
+            </thead>
+            <tbody id="corpoEvolucaoMensal"></tbody>
+        </table>
+    </div>
 </div>
 
 
