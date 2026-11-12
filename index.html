@@ -337,7 +337,6 @@ tr:hover {
 }
 </style>
 
-<link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/NPGO-DASHBOARD/dashboard-fiscal/refs/heads/main/FAVICON1.jpg">
 </head>
 <body>
     
@@ -514,7 +513,7 @@ tr:hover {
     }
 
     function formatMonthName(mes) {
-        if (mes === 'GERAL' || !mes) return 'Todos';
+        if (mes === 'GERAL' || !mes) return 'Acumulado Geral';
         const partes = mes.split('-');
         if (partes.length < 2) return mes;
         const nomesMeses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
@@ -589,7 +588,7 @@ tr:hover {
         safeSetText('icmsVendasDebito', formatValue(ind.icms_vendas, 'currency'));
         safeSetText('icmsTransporteCredito', formatValue(ind.icms_transporte, 'currency'));
         safeSetText('icmsDevolucoesCredito', formatValue(ind.icms_devolucoes, 'currency'));
-        safeSetText('icmsComprasCredito', formatValue(ind.icms_compra_para_revenda + (ind.icms_compra_para_consumo || 0), 'currency'));
+        safeSetText('icmsComprasCredito', formatValue((ind.icms_compra_para_revenda || 0) + (ind.icms_compra_para_consumo || 0), 'currency'));
         safeSetText('icmsSaldoMesAnteriorCredito', formatValue(ind.saldo_icms_anterior, 'currency'));
 
         safeSetText('pisRecolherValue', formatValue(ind.pis_real, 'currency'));
@@ -633,7 +632,26 @@ tr:hover {
 
         let dataToUse = [];
         if (mes === 'GERAL') {
-            dataToUse = dashboardData.financial_summary || [];
+            const consolidado = {};
+            (dashboardData.financial_summary_definitions || []).forEach(def => {
+                consolidado[def.label] = { label: def.label, qtd: 0, valor: 0, vprod: def.vprod_key ? 0 : null, voutro: def.voutro_key ? 0 : null, vbcicms: def.vBCICMS_key ? 0 : null, icms: def.icms_key ? 0 : null, pis: def.pis_key ? 0 : null, cofins: def.cofins_key ? 0 : null };
+            });
+
+            Object.keys(dashboardData.monthly_indicators || {}).forEach(m => {
+                const ind = dashboardData.monthly_indicators[m];
+                (dashboardData.financial_summary_definitions || []).forEach(def => {
+                    const item = consolidado[def.label];
+                    item.qtd += ind[def.qty_key] || 0;
+                    item.valor += ind[def.value_key] || 0;
+                    if (def.vprod_key && item.vprod !== null) item.vprod += ind[def.vprod_key] || 0;
+                    if (def.voutro_key && item.voutro !== null) item.voutro += ind[def.voutro_key] || 0;
+                    if (def.vBCICMS_key && item.vbcicms !== null) item.vbcicms += ind[def.vBCICMS_key] || 0;
+                    if (def.icms_key && item.icms !== null) item.icms += ind[def.icms_key] || 0;
+                    if (def.pis_key && item.pis !== null) item.pis += ind[def.pis_key] || 0;
+                    if (def.cofins_key && item.cofins !== null) item.cofins += ind[def.cofins_key] || 0;
+                });
+            });
+            dataToUse = Object.values(consolidado);
         } else {
             const ind = dashboardData.monthly_indicators[mes];
             if (ind) {
@@ -673,7 +691,15 @@ tr:hover {
     function updateDashboard(mes) {
         let ind = {};
         if (mes === 'GERAL') {
-            ind = dashboardData.global_indicators || {};
+            const consolidado = { faturamento_ml: 0, faturamento_bruto: 0, valor_despesas: 0, total_impostos_real: 0, icms_real: 0, pis_real: 0, cofins_real: 0, lucro_real_liquido: 0, irpj_a_recolher: 0, csll_a_recolher: 0, base_piscofins_real: 0, saldo_icms_anterior: 0, saldo_pis_anterior: 0, saldo_cofins_anterior: 0 };
+            Object.keys(dashboardData.monthly_indicators || {}).forEach(m => {
+                const mi = dashboardData.monthly_indicators[m];
+                for (const k in consolidado) {
+                    consolidado[k] += mi[k] || 0;
+                }
+            });
+            consolidado.carga_tributaria_real = consolidado.faturamento_bruto > 0 ? (consolidado.total_impostos_real / consolidado.faturamento_bruto) * 100 : 0;
+            ind = consolidado;
         } else {
             ind = dashboardData.monthly_indicators[mes] || {};
         }
@@ -697,7 +723,6 @@ tr:hover {
         }
     });
 
-    // Inicialização direta imediata caso o DOM já esteja carregado
     if (document.readyState === 'interactive' || document.readyState === 'complete') {
         populateMonthSelector();
         renderMonthlySummaryTable();
