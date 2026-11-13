@@ -189,7 +189,7 @@ td{
     text-align: left;
     border-bottom: 1px solid var(--cor-borda-clara);
     font-size: 13px;
-    white-space: nowrap; /* Impede quebra feia de linhas nas colunas */
+    white-space: normal ; /* quebrade linhas nas colunas */
 }
 th{
     background: var(--cor-principal);
@@ -220,202 +220,65 @@ tr:hover {
     }
 }
 
-
-
-/* ==========================================
-   APURAÇÃO DETALHADA - COMPACTO PREMIUM
-========================================== */
-
-#apuracaoDetalhadaImpostos,
-#apuracaoDetalhadaImpostos * {
-    box-sizing: border-box;
+.tax-cards-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    justify-content: center;
 }
-
-#apuracaoDetalhadaImpostos .tax-cards-container {
-    display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 14px !important;
+.tax-card {
+    background: var(--cor-card-claro);
+    border: 1px solid var(--cor-borda-clara);
+    border-radius: 8px;
+    padding: 15px;
     width: 100%;
-    margin-top: 16px;
-    align-items: stretch;
-}
-
-#apuracaoDetalhadaImpostos .tax-card {
-    --tax-color: var(--cor-principal);
-    --tax-glow: rgba(85,197,138,0.12);
-
-    background: #141812;
-    border: 1px solid rgba(255,255,255,0.08);
-    border-top: 3px solid var(--tax-color);
-    border-radius: 11px;
-    padding: 14px;
-    width: 100%;
-    max-width: none;
-    min-width: 0;
-    margin: 0;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.20);
+    max-width: 320px;
+    box-shadow: 0 2px 5px var(--cor-sombra-escura);
     display: flex;
     flex-direction: column;
-    position: relative;
-    overflow: hidden;
+    justify-content: space-between;
+    transition: transform 0.2s ease-in-out;
 }
-
-
-
-/* CABEÇALHO */
-
-#apuracaoDetalhadaImpostos .tax-header {
+.tax-card:hover{
+    transform: translateY(-5px);
+}
+.card-principal {    background: var(--cor-card-principal-bg);
+    padding: 12px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: var(--cor-principal);
+    font-size: 14px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 5px;
 }
-
-#apuracaoDetalhadaImpostos .tax-label {
-    display: block;
-    font-size: 9px;
-    letter-spacing: 1px;
-    color: #9ba79f;
-    font-weight: 700;
-    margin-bottom: 3px;
+.card-principal .value {    font-size: 20px;
+    font-weight: bold;
+    color: var(--cor-principal);
 }
-
-#apuracaoDetalhadaImpostos .tax-header h3 {
-    margin: 0;
-    color: white;
-    font-size: 19px;
-    font-weight: 800;
-}
-
-#apuracaoDetalhadaImpostos .tax-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    color: var(--icon-color);
-    background: color-mix(in srgb, var(--icon-color) 15%, transparent);
-    font-size: 17px;
-}
-
-/* Cores individuais somente dos ícones */
-
-#apuracaoDetalhadaImpostos .tax-icms {
-    --icon-color: #9a91ff;
-}
-
-#apuracaoDetalhadaImpostos .tax-pis {
-    --icon-color: #FFDE21;
-}
-
-#apuracaoDetalhadaImpostos .tax-cofins {
-    --icon-color: #FFDE21;
-}
-
-#apuracaoDetalhadaImpostos .tax-irpj {
-    --icon-color: #e58dbd;
-}
-
-#apuracaoDetalhadaImpostos .tax-csll {
-    --icon-color: #e58dbd;
-}
-
-/* VALOR PRINCIPAL */
-
-#apuracaoDetalhadaImpostos .tax-result {
-    background: var(--tax-glow);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 8px;
-    padding: 11px 12px;
-    margin-bottom: 13px;
-}
-
-#apuracaoDetalhadaImpostos .tax-result span {
-    display: block;
-    color: #aab5ad;
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: .8px;
-    margin-bottom: 5px;
-}
-
-#apuracaoDetalhadaImpostos .tax-result strong {
-    display: block;
-    color: var(--tax-color);
-    font-size: clamp(18px, 1.6vw, 23px);
-    font-weight: 800;
-    overflow-wrap: anywhere;
-}
-
-/* DETALHAMENTO */
-
-#apuracaoDetalhadaImpostos .detail-calculation {
-    color: #dce3dd;
-    font-size: 11px;
+.detail-calculation {
+    font-size: 12px;
+    color: var(--cor-texto-explicacao);
     flex-grow: 1;
 }
-
-#apuracaoDetalhadaImpostos .detail-group {
-    margin-bottom: 11px;
-}
-
-#apuracaoDetalhadaImpostos .detail-title {
-    display: block;
-    color: var(--tax-color);
-    font-size: 10px;
-    font-weight: 800;
-    padding-bottom: 6px;
-    border-bottom: 1px solid rgba(255,255,255,0.12);
-    text-transform: uppercase;
-    letter-spacing: .4px;
-}
-
-#apuracaoDetalhadaImpostos .detail-calculation ul {
+.detail-calculation ul {
     list-style: none;
     padding: 0;
-    margin: 5px 0 0;
+    margin: 10px 0 0 0;
 }
-
-#apuracaoDetalhadaImpostos .detail-calculation li {
+.detail-calculation li {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    gap: 5px 10px;
-    width: 100%;
-    padding: 6px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    color: #c4cec6;
-    line-height: 1.35;
+    padding: 5px 0;
+    border-bottom: 1px dashed var(--cor-borda-tracejada);
 }
-
-#apuracaoDetalhadaImpostos .detail-calculation li:last-child {
+.detail-calculation li:last-child {
     border-bottom: none;
 }
-
-#apuracaoDetalhadaImpostos .detail-calculation li span,
-#apuracaoDetalhadaImpostos .detail-calculation li strong {
-    max-width: 100%;
-    overflow-wrap: anywhere;
-}
-
-#apuracaoDetalhadaImpostos .detail-calculation li span:last-child,
-#apuracaoDetalhadaImpostos .detail-calculation li strong:last-child {
-    color: white;
-    font-weight: 700;
-    text-align: right;
-    white-space: nowrap;
-}
-
-/* TABLET E CELULAR */
-
-@media (max-width: 650px) {
-    #apuracaoDetalhadaImpostos .tax-cards-container {
-        grid-template-columns: 1fr !important;
-    }
-}
-
-
 
 .section.lucro-real { background-color: var(--cor-secao-alternativa); }
 .section.apuracao-contabilidade { background-color: var(--cor-secao-alternativa); }
@@ -472,68 +335,8 @@ tr:hover {
     background-color: var(--cor-secundaria);
     transform: scale(1.1);
 }
-
-
-/* CORREÇÃO DE ALINHAMENTO DOS CARDS */
-#apuracaoDetalhadaImpostos,
-#apuracaoDetalhadaImpostos * {
-    box-sizing: border-box;
-}
-
-#apuracaoDetalhadaImpostos .tax-cards-container {
-    display: grid !important;
-    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-    gap: 18px !important;
-    width: 100% !important;
-    align-items: stretch !important;
-    justify-content: stretch !important;
-}
-
-#apuracaoDetalhadaImpostos .tax-card {
-    width: 100% !important;
-    max-width: none !important;
-    min-width: 0 !important;
-    margin: 0 !important;
-    padding: 18px !important;
-    position: relative !important;
-    overflow: hidden;
-    transform: none;
-}
-
-#apuracaoDetalhadaImpostos .tax-card:hover {
-    transform: translateY(-2px);
-}
-
-#apuracaoDetalhadaImpostos .tax-header,
-#apuracaoDetalhadaImpostos .tax-result {
-    width: 100%;
-    min-width: 0;
-}
-
-#apuracaoDetalhadaImpostos .detail-calculation li {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 6px 12px;
-    width: 100%;
-}
-
-#apuracaoDetalhadaImpostos .detail-calculation li span,
-#apuracaoDetalhadaImpostos .detail-calculation li strong {
-    max-width: 100%;
-    overflow-wrap: anywhere;
-    white-space: normal !important;
-}
-
-@media (max-width: 650px) {
-    #apuracaoDetalhadaImpostos .tax-cards-container {
-        grid-template-columns: 1fr !important;
-    }
-}
-
 </style>
 
-<link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/NPGO-DASHBOARD/dashboard-fiscal/refs/heads/main/FAVICON1.jpg">
 </head>
 <body>
     
@@ -552,9 +355,9 @@ tr:hover {
             style="background: #6f9f00; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; transition: background 0.3s;">
         📌 Indicadores Globais
     </button>
-    <button onclick="document.getElementById('apuracaoDetalhadaImpostos').scrollIntoView({behavior: 'smooth'})"
+    <button onclick="document.getElementById('lucroRealCards').scrollIntoView({behavior: 'smooth'})"
             style="background: #6f9f00; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; transition: background 0.3s;">
-        🧾 Como os Impostos São Calculados
+        📈 Impostos e Lucro Real
     </button>
     <button onclick="document.getElementById('tabelaReceitas').scrollIntoView({behavior: 'smooth'})"
             style="background: #6f9f00; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; transition: background 0.3s;">
@@ -582,154 +385,19 @@ tr:hover {
 </div>
 
     
+<!-- Seção de Apuração Lucro Real -->
+<div class="section">
+    <div class="section-title">
+        📈 IMPOSTOS
+        <div class="explanation-text">
+<li>Apuração de impostos</li>
 
-<div class="section" id="apuracaoDetalhadaImpostos">
-    <div class="section-title">🧾 Apuração Detalhada dos Impostos</div>
-
-    <div class="explanation-text">
-        Confira a composição dos impostos, os débitos, créditos e valores finais apurados.
+        </div>
     </div>
-
-    <div class="tax-cards-container" id="apuracaoDetalhadaCards">
-
-        <!-- ICMS -->
-        <div class="tax-card tax-icms">
-            <div class="tax-header">
-                <div>
-                    <span class="tax-label">IMPOSTO ESTADUAL</span>
-                    <h3>ICMS</h3>
-                </div>
-                <span class="tax-icon">▣</span>
-            </div>
-
-            <div class="tax-result">
-                <span>ICMS A RECOLHER</span>
-                <strong id="novoIcmsResultado">R$ 0,00</strong>
-            </div>
-
-            <div class="detail-calculation">
-                <div class="detail-group">
-                    <strong class="detail-title">Débitos</strong>
-                    <ul id="novoIcmsDebitos"></ul>
-                </div>
-                <div class="detail-group">
-                    <strong class="detail-title">Créditos / Abatimentos</strong>
-                    <ul id="novoIcmsCreditos"></ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- PIS -->
-        <div class="tax-card tax-pis">
-            <div class="tax-header">
-                <div>
-                    <span class="tax-label">CONTRIBUIÇÃO FEDERAL</span>
-                    <h3>PIS</h3>
-                </div>
-                <span class="tax-icon">▣</span>
-            </div>
-
-            <div class="tax-result">
-                <span>PIS A RECOLHER</span>
-                <strong id="novoPisResultado">R$ 0,00</strong>
-            </div>
-
-            <div class="detail-calculation">
-                <div class="detail-group">
-                    <strong class="detail-title">Débitos</strong>
-                    <ul id="novoPisDebitos"></ul>
-                </div>
-                <div class="detail-group">
-                    <strong class="detail-title">Créditos / Abatimentos</strong>
-                    <ul id="novoPisCreditos"></ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- COFINS -->
-        <div class="tax-card tax-cofins">
-            <div class="tax-header">
-                <div>
-                    <span class="tax-label">CONTRIBUIÇÃO FEDERAL</span>
-                    <h3>COFINS</h3>
-                </div>
-                <span class="tax-icon">▣</span>
-            </div>
-
-            <div class="tax-result">
-                <span>COFINS A RECOLHER</span>
-                <strong id="novoCofinsResultado">R$ 0,00</strong>
-            </div>
-
-            <div class="detail-calculation">
-                <div class="detail-group">
-                    <strong class="detail-title">Débitos</strong>
-                    <ul id="novoCofinsDebitos"></ul>
-                </div>
-                <div class="detail-group">
-                    <strong class="detail-title">Créditos / Abatimentos</strong>
-                    <ul id="novoCofinsCreditos"></ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- IRPJ -->
-        <div class="tax-card tax-irpj">
-            <div class="tax-header">
-                <div>
-                    <span class="tax-label">IMPOSTO FEDERAL</span>
-                    <h3>IRPJ</h3>
-                </div>
-                <span class="tax-icon">▣</span>
-            </div>
-
-            <div class="tax-result">
-                <span>IRPJ A RECOLHER</span>
-                <strong id="novoIrpjResultado">R$ 0,00</strong>
-            </div>
-
-            <div class="detail-calculation">
-                <div class="detail-group">
-                    <strong class="detail-title">Base e cálculo</strong>
-                    <ul id="novoIrpjDebitos"></ul>
-                </div>
-                <div class="detail-group">
-                    <strong class="detail-title">Abatimentos / Adicionais</strong>
-                    <ul id="novoIrpjCreditos"></ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- CSLL -->
-        <div class="tax-card tax-csll">
-            <div class="tax-header">
-                <div>
-                    <span class="tax-label">CONTRIBUIÇÃO FEDERAL</span>
-                    <h3>CSLL</h3>
-                </div>
-                <span class="tax-icon">▣</span>
-            </div>
-
-            <div class="tax-result">
-                <span>CSLL A RECOLHER</span>
-                <strong id="novoCsllResultado">R$ 0,00</strong>
-            </div>
-
-            <div class="detail-calculation">
-                <div class="detail-group">
-                    <strong class="detail-title">Base e cálculo</strong>
-                    <ul id="novoCsllDebitos"></ul>
-                </div>
-                <div class="detail-group">
-                    <strong class="detail-title">Abatimentos / Adicionais</strong>
-                    <ul id="novoCsllCreditos"></ul>
-                </div>
-            </div>
-        </div>
-
+    <div class="cards" id="lucroRealCards">
+        <!-- Cards de lucro real serão populados dinamicamente via JavaScript -->
     </div>
 </div>
-
 
     
 <div class="section flex-tables-container">
@@ -807,6 +475,8 @@ tr:hover {
                     <th>Faturamento ML</th>
                     <th>ICMS</th>
                     <th>PIS/COFINS</th>
+                    <th>IRPJ/CSLL</th>
+                    <th>IRPJ/CSLL Estimado</th>
                     <th>Lucro Real Líquido</th>
                 </tr>
             </thead>
@@ -831,7 +501,7 @@ tr:hover {
         return false;
     };
 
-    const dashboardData = {"detalhamento_operacoes": {"2026-10": {"receitas": {"CFOP 5102": {"qtd": 32, "valor": 34716.560000000005, "nome": "5102 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "CFOP 6102": {"qtd": 40, "valor": 32681.030000000006, "nome": "6102 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "CFOP 6108": {"qtd": 15, "valor": 16174.089999999998, "nome": "6108 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "CFOP 6152": {"qtd": 266, "valor": 78989.82000000004, "nome": "6152 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transferência", "emitente_name": "N&P IMPORTACAO E COMERCIO LTDA"}, "CFOP 5152": {"qtd": 97, "valor": 29101.29999999999, "nome": "5152 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transferência", "emitente_name": "N&P IMPORTACAO E COMERCIO LTDA"}}, "despesas": {"NF3e_35261004172213000151660000249016451070269914": {"qtd": 1, "valor": 282.09, "nome": "Energia Elétrica - COMPANHIA PIRATININGA DE FORÇA E LUZ", "operacao_tipo": "Energia Elétrica", "emitente_name": "COMPANHIA PIRATININGA DE FORÇA E LUZ"}, "CFOP 6102": {"qtd": 2, "valor": 154.3, "nome": "6102 - Venda", "operacao_tipo": "Compra para Consumo", "emitente_name": "LINE PORTAS E PISOS LTDA"}, "CFOP 6108": {"qtd": 1, "valor": 5810.0, "nome": "6108 - (NF-e) Venda de mercadorias de terceiros para consumidor fin", "operacao_tipo": "Compra Outras", "emitente_name": "PERSONALIZZE LTDA"}, "CFOP 6106": {"qtd": 5, "valor": 124.75, "nome": "6106 - Venda de mercadorias", "operacao_tipo": "Compra Outras", "emitente_name": "PARK COMPUTADORES JPRR COMERCIO LTDA"}, "CFOP 5101": {"qtd": 1, "valor": 278.0, "nome": "5101 - Venda de mercadorias", "operacao_tipo": "Compra para Consumo", "emitente_name": "MTAG ETIQUETAS ACESSORIOS EM GERAL LTDA"}, "CFOP 5102": {"qtd": 1, "valor": 50.0, "nome": "5102 - Venda Dentro do Estado", "operacao_tipo": "Compra para Consumo", "emitente_name": "MINA DAGUA COMERCIAL LTDA"}, "CFOP 6949": {"qtd": 97, "valor": 47349.450000000004, "nome": "6949 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transporte", "emitente_name": "N&P IMPORTACAO E COMERCIO LTDA"}, "CFOP 5949": {"qtd": 42, "valor": 17536.589999999997, "nome": "5949 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transporte", "emitente_name": "N&P IMPORTACAO E COMERCIO LTDA"}, "CFOP 2202": {"qtd": 3, "valor": 3852.83, "nome": "2202 - Retorno de mercadoria nao entregue", "operacao_tipo": "Devolução", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "CFOP 1202": {"qtd": 2, "valor": 3085.67, "nome": "1202 - Retorno de mercadoria nao entregue", "operacao_tipo": "Devolução", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "Serviço_564a92d8": {"qtd": 1, "valor": 467.95, "nome": "Serviço: C-PLUS 5 - ORDEM DE SERVICO|C-PLUS 5 - USUARIO SIMULTANEO ADICIONAL|C-PLUS 5 - EMPRESA ADICIONAL|C-PLUS 5 - INTEGRACAO E-COMMERCE|C-PLUS 5 - LICENCA SERVIDOR - 1 USUARIO", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_d3b73673": {"qtd": 1, "valor": 263.2, "nome": "Serviço: Dropshipping||||PI: -|Condicion de pagamento: |Data de vencimento: -", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_6b128d34": {"qtd": 1, "valor": 962.07, "nome": "Serviço: VEICULAÇÃO DE ANUNCIO EOU MIDIAS ONLINE;;;;; PI: -;;; Data de vencimento: -", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_3ebdab1b": {"qtd": 1, "valor": 987.62, "nome": "Serviço: REC - MENS-6829679-20/10/26", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_7bb3e84c": {"qtd": 1, "valor": 3560.17, "nome": "Serviço: Tarifa MercadoPago  Cobrança ON||||PI: -|Condicion de pagamento: |Data de vencimento: -", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_de020fae": {"qtd": 1, "valor": 21099.42, "nome": "Serviço: Intermediação de negócios||||PI: -|Condicion de pagamento: |Data de vencimento: -", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_c94c34f1": {"qtd": 1, "valor": 14.2, "nome": "Serviço: Conjunto de pedidos de insercao de anuncios na internet durante o mes Setembro Conforme Lei 12.741/2012, os valores aproximados dos tributos sao:  Tributos Federais: R$ 1,91  Tributos Estaduais R$ 0,00  Tributos Municipais R$ 0,58 Para qualquer duvida relacionada a esta nota fiscal, entre em contato conosco atraves do link facebook.com/business/resources (http://facebook.com/business/resources) Referente a conta de anuncios: 1535429861952080", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_b2eac73d": {"qtd": 1, "valor": 27.05, "nome": "Serviço: Shipping Serviços de transportes Melienvios||||PI: -|Condicion de pagamento: |Data de vencimento: -", "operacao_tipo": "Serviço", "emitente_name": ""}, "CTe 6353": {"qtd": 417, "valor": 15279.46000000005, "nome": "6353 - Frete/Transporte", "operacao_tipo": "CT-e Interestadual", "emitente_name": "EBAZARCOMBR LTDA"}, "CTe 5353": {"qtd": 168, "valor": 5387.149999999993, "nome": "5353 - Frete/Transporte", "operacao_tipo": "CT-e Estadual", "emitente_name": "EBAZARCOMBR LTDA"}}}, "2026-11": {"receitas": {}, "despesas": {"CFOP 6102": {"qtd": 1, "valor": 1280.0, "nome": "6102 - VENDA DE MERCADORIA", "operacao_tipo": "Compra para Consumo", "emitente_name": "FABIO HENRIQUE S MARIZ"}, "CFOP 5102": {"qtd": 1, "valor": 50.0, "nome": "5102 - Venda Dentro do Estado", "operacao_tipo": "Compra para Consumo", "emitente_name": "MINA DAGUA COMERCIAL LTDA"}, "CFOP 2202": {"qtd": 2, "valor": 44.910000000000004, "nome": "2202 - Retorno de mercadoria nao entregue", "operacao_tipo": "Devolução", "emitente_name": "PARK COMPUTADORES JPRR COMERCIO LTDA"}, "Serviço_0793c396": {"qtd": 1, "valor": 57000.0, "nome": "Serviço: Fornecimento e instalação de fachada em ACM, composta por estrutura metálica em aço galvanizado em toda a extensão da fachada, com tratamento anticorrosivo e aplicação de zarcão. Revestimento integral da fachada em chapas de ACM de 3 mm, na cor preto fosco, incluindo execução de sanca para iluminação e canaleta para fita de LED, com iluminação na temperatura de cor 3.000 K (branco quente), instalada de forma sobreposta e disposta verticalmente. Execução de detalhe lateral em ACM na cor verde, com sistema de iluminação retroiluminada, contemplando acabamento em três faces. Fornecimento e instalação da logomarca NPGO em PVC expandido de 20 mm, com sistema de retroiluminação, ou seja, iluminação posicionada na parte posterior das letras. Fornecimento e instalação de letreiros informativos em PVC expandido de 20 mm. Fornecimento e instalação de luminoso tipo bandeira, dupla face, conforme layout e especificações aprovados pelo CONTRATANTE.     Cartão de crédito - parcelamento emissor em 12 vezes.", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_c5dbf3c2": {"qtd": 1, "valor": 337.33, "nome": "Serviço: Conjunto de pedidos de insercao de anuncios na internet durante o mes Outubro Conforme Lei 12.741/2012, os valores aproximados dos tributos sao:  Tributos Federais: R$ 45,37  Tributos Estaduais R$ 0,00  Tributos Municipais R$ 13,83 Para qualquer duvida relacionada a esta nota fiscal, entre em contato conosco atraves do link facebook.com/business/resources (http://facebook.com/business/resources) Referente a conta de anuncios: 1535429861952080", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_7b0438c8": {"qtd": 1, "valor": 3000.0, "nome": "Serviço: 1 SERVICO DE MARKETING. 3.000,00", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_810323af": {"qtd": 1, "valor": 1800.96, "nome": "Serviço: REC - MENS-6909901-15/11/26 - R$ 1.800,96", "operacao_tipo": "Serviço", "emitente_name": ""}}}, "2026-09": {"receitas": {"CFOP 5102": {"qtd": 16, "valor": 18637.77, "nome": "5102 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "CFOP 6152": {"qtd": 433, "valor": 194774.43000000002, "nome": "6152 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transferência", "emitente_name": "N&P IMPORTACAO E COMERCIO LTDA"}, "CFOP 6102": {"qtd": 42, "valor": 39248.219999999994, "nome": "6102 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "CFOP 5152": {"qtd": 112, "valor": 58991.580000000016, "nome": "5152 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transferência", "emitente_name": "N&P IMPORTACAO E COMERCIO LTDA"}, "CFOP 6108": {"qtd": 11, "valor": 6371.839999999999, "nome": "6108 - VENDA DE MERCADORIA", "operacao_tipo": "Venda", "emitente_name": "N&P IMPORTACAO E COMERCIO LTDA"}}, "despesas": {"NF3e_35260904172213000151660000226550271030773585": {"qtd": 1, "valor": 350.08, "nome": "Energia Elétrica - COMPANHIA PIRATININGA DE FORÇA E LUZ", "operacao_tipo": "Energia Elétrica", "emitente_name": "COMPANHIA PIRATININGA DE FORÇA E LUZ"}, "CFOP 5102": {"qtd": 4, "valor": 341.8, "nome": "5102 - Venda de mercadoria para consumidor final", "operacao_tipo": "Compra para Consumo", "emitente_name": "MEGA CONTROLES PRESENTES LTDA"}, "CFOP 5106": {"qtd": 2, "valor": 170.0, "nome": "5106 - Venda de mercadorias", "operacao_tipo": "Compra para Consumo", "emitente_name": "L L FERNANDES COMERCIO DE EMBALAGENS"}, "CFOP 5405": {"qtd": 1, "valor": 21.0, "nome": "5405 - Venda merc adq rec terc suj ICMS-ST (substituido)", "operacao_tipo": "Compra para Consumo", "emitente_name": "TIM S.A.-São Paulo"}, "CFOP 5105": {"qtd": 1, "valor": 54.5, "nome": "5105 - Venda de mercadorias", "operacao_tipo": "Compra Outras", "emitente_name": "IJ PLAST INDUSTRIA E COMERCIO DE PLASTICOS LTDA"}, "Serviço_eb71a9c3": {"qtd": 1, "valor": 467.95, "nome": "Serviço: C-PLUS 5 - INTEGRACAO E-COMMERCE|C-PLUS 5 - LICENCA SERVIDOR - 1 USUARIO|C-PLUS 5 - ORDEM DE SERVICO|C-PLUS 5 - USUARIO SIMULTANEO ADICIONAL|C-PLUS 5 - EMPRESA ADICIONAL", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_6146b8c3": {"qtd": 1, "valor": 85.7, "nome": "Serviço: Shipping Serviços de transportes Melienvios|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_b97412d2": {"qtd": 1, "valor": 813.54, "nome": "Serviço: VEICULAÇÃO DE ANUNCIO EOU MIDIAS ONLINE|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_53d11062": {"qtd": 1, "valor": 25136.32, "nome": "Serviço: Intermediação de negócios|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_8a5c1f34": {"qtd": 1, "valor": 4340.02, "nome": "Serviço: Tarifa MercadoPago  Cobrança ON|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "CTe 6353": {"qtd": 495, "valor": 20096.660000000058, "nome": "6353 - Frete/Transporte", "operacao_tipo": "CT-e Interestadual", "emitente_name": "EBAZARCOMBR LTDA"}, "CTe 5353": {"qtd": 139, "valor": 4693.949999999997, "nome": "5353 - Frete/Transporte", "operacao_tipo": "CT-e Estadual", "emitente_name": "EBAZARCOMBR LTDA"}}}, "2026-08": {"receitas": {"CFOP 6108": {"qtd": 3, "valor": 1202.23, "nome": "6108 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "CFOP 6102": {"qtd": 17, "valor": 10398.98, "nome": "6102 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "CFOP 5102": {"qtd": 6, "valor": 6274.12, "nome": "5102 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "CFOP 6152": {"qtd": 191, "valor": 129183.43000000005, "nome": "6152 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transferência", "emitente_name": "N&P IMPORTACAO E COMERCIO LTDA"}, "CFOP 5152": {"qtd": 55, "valor": 39631.07, "nome": "5152 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transferência", "emitente_name": "N&P IMPORTACAO E COMERCIO LTDA"}}, "despesas": {"CTe 6353": {"qtd": 220, "valor": 8342.390000000001, "nome": "6353 - Frete/Transporte", "operacao_tipo": "CT-e Interestadual", "emitente_name": "EBAZARCOMBR LTDA"}, "CTe 5353": {"qtd": 73, "valor": 2307.3100000000013, "nome": "5353 - Frete/Transporte", "operacao_tipo": "CT-e Estadual", "emitente_name": "EBAZARCOMBR LTDA"}, "CFOP 2202": {"qtd": 1, "valor": 250.8, "nome": "2202 - Devolucao de mercadorias", "operacao_tipo": "Devolução", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "NF3e_35260804172213000151660000211144541038566482": {"qtd": 1, "valor": 205.36, "nome": "Energia Elétrica - COMPANHIA PIRATININGA DE FORÇA E LUZ", "operacao_tipo": "Energia Elétrica", "emitente_name": "COMPANHIA PIRATININGA DE FORÇA E LUZ"}, "CFOP 5102": {"qtd": 1, "valor": 50.0, "nome": "5102 - Venda Dentro do Estado", "operacao_tipo": "Compra para Consumo", "emitente_name": "MINA DAGUA COMERCIAL LTDA"}, "CFOP 5405": {"qtd": 3, "valor": 823.3299999999999, "nome": "5405 - Venda", "operacao_tipo": "Compra para Consumo", "emitente_name": "BIN MATERIAIS DE CONSTRUCAO"}, "Serviço_22d51450": {"qtd": 1, "valor": 375.18, "nome": "Serviço: VEICULAÇÃO DE ANUNCIO EOU MIDIAS ONLINE|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_d1ccd744": {"qtd": 1, "valor": 27.0, "nome": "Serviço: Shipping Serviços de transportes Melienvios", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_3aa7bb53": {"qtd": 1, "valor": 9140.95, "nome": "Serviço: Intermediação de negócios|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_8696b5db": {"qtd": 1, "valor": 3044.0, "nome": "Serviço: Instalação de 01 vídeo porteiro, 01 sensor IVP pet area semiaberto e revisão do alarme.\n\nDados Pagamento\nSinal R$ 1.000,00 via pix e o restante parcelado em 3x no boleto.", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_f9fa29ac": {"qtd": 1, "valor": 186.9, "nome": "Serviço: Dropshipping|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_d22dbacf": {"qtd": 1, "valor": 1588.93, "nome": "Serviço: Tarifa MercadoPago  Cobrança ON|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_d8cf2ee4": {"qtd": 1, "valor": 570.9, "nome": "Serviço: C-PLUS 5 - INTEGRACAO E-COMMERCE|C-PLUS 5 - USUARIO SIMULTANEO ADICIONAL|C-PLUS 5 - ORDEM DE SERVICO|C-PLUS 5 - LICENCA SERVIDOR - 1 USUARIO|C-PLUS 5 - EMPRESA ADICIONAL", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_055071e0": {"qtd": 1, "valor": 0.0, "nome": "Serviço: Retirada e correção de vazamentos e duas saídas de água ,retirada das conexões em T existentes nas tubulaçãoes , colocação de junções em Y conforme necessidade de instalação,e colocação de Fitas de aço e execução de serviços necessários.", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_c8df49b9": {"qtd": 1, "valor": 71.7, "nome": "Serviço: Prestação de serviço conforme fatura 1007871379 de 31.07.2026 a 08.06.2027 Valor aproximado dos tributos (ISS, PIS e COFINS), conforme Lei 12.741 de 08/12/2012: R$8,71 (12.15%)", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_787f9090": {"qtd": 1, "valor": 8000.0, "nome": "Serviço: Referente a remoção da porta do local e instalação de uma porta automática com pintura eletrostática cinza e uma portinhola.Pagamento - 2.500 de entrada1.500 apos conclusão4.000 pra 30 diasDados bancários: Ag 2919CC 426320-0CNPJ 11258303000125Banco do BradescoRazão socialAntonio Erlito da costa serviços me", "operacao_tipo": "Serviço", "emitente_name": ""}}}, "2026-06": {"receitas": {"CFOP 6108": {"qtd": 492, "valor": 326269.8099999991, "nome": "6108 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "CFOP 6102": {"qtd": 34, "valor": 25403.580000000005, "nome": "6102 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "CFOP 5102": {"qtd": 211, "valor": 146649.55999999997, "nome": "5102 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "CFOP 6152": {"qtd": 60, "valor": 30059.949999999993, "nome": "6152 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transferência", "emitente_name": "N&P IMPORTACAO E COMERCIO LTDA"}, "CFOP 5152": {"qtd": 19, "valor": 8778.49, "nome": "5152 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transferência", "emitente_name": "N&P IMPORTACAO E COMERCIO LTDA"}}, "despesas": {"Serviço_6b8dd97f": {"qtd": 1, "valor": 26.9, "nome": "Serviço: Prestação de serviço conforme fatura 1007656935 de 09.06.2026 a 08.06.2027 Valor aproximado dos tributos (ISS, PIS e COFINS), conforme Lei 12.741 de 08/12/2012: R$3,27 (12.15%)", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_adc6c7bd": {"qtd": 1, "valor": 48389.31, "nome": "Serviço: Intermediação de negócios|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_4538b4be": {"qtd": 1, "valor": 19726.49, "nome": "Serviço: VEICULAÇÃO DE ANUNCIO EOU MIDIAS ONLINE|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_aec328e5": {"qtd": 1, "valor": 27.7, "nome": "Serviço: Shipping Serviços de transportes Melienvios|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_7b8a2336": {"qtd": 1, "valor": 10704.2, "nome": "Serviço: Tarifa MercadoPago  Cobrança ON|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_15ee860e": {"qtd": 1, "valor": 119.88, "nome": "Serviço: Prestação de serviço conforme fatura 1007657627 de 09.06.2026 a 08.06.2027 Valor aproximado dos tributos (ISS, PIS e COFINS), conforme Lei 12.741 de 08/12/2012: R$14,57 (12.15%)", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_8cec88f6": {"qtd": 1, "valor": 247.2, "nome": "Serviço: Dropshipping|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "CTe 6353": {"qtd": 586, "valor": 23082.62999999997, "nome": "6353 - Frete/Transporte", "operacao_tipo": "CT-e Interestadual", "emitente_name": "EBAZARCOMBR LTDA"}, "CTe 5353": {"qtd": 229, "valor": 8107.910000000001, "nome": "5353 - Frete/Transporte", "operacao_tipo": "CT-e Estadual", "emitente_name": "EBAZARCOMBR LTDA"}}}, "2026-07": {"receitas": {"CFOP 5102": {"qtd": 19, "valor": 4139.300000000001, "nome": "5102 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "CFOP 6102": {"qtd": 20, "valor": 31666.670000000002, "nome": "6102 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "CFOP 6108": {"qtd": 19, "valor": 44635.27, "nome": "6108 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "CFOP 6152": {"qtd": 351, "valor": 199259.05000000008, "nome": "6152 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transferência", "emitente_name": "N&P IMPORTACAO E COMERCIO LTDA"}, "CFOP 5152": {"qtd": 115, "valor": 71876.50999999997, "nome": "5152 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transferência", "emitente_name": "N&P IMPORTACAO E COMERCIO LTDA"}}, "despesas": {"Serviço_f3405fd4": {"qtd": 1, "valor": 7100.0, "nome": "Serviço: ALTERAÇÃO CONTRATUAL - R'||chr(36)||' 1.000,00REGISTRO DE MARCA - R'||chr(36)||' 2.500,00UPSELL DE RADAR - 3600,00", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_2171bb39": {"qtd": 1, "valor": 570.9, "nome": "Serviço: C-PLUS 5 - ORDEM DE SERVICO|C-PLUS 5 - LICENCA SERVIDOR - 1 USUARIO|C-PLUS 5 - EMPRESA ADICIONAL|C-PLUS 5 - INTEGRACAO E-COMMERCE|C-PLUS 5 - USUARIO SIMULTANEO ADICIONAL", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_44954871": {"qtd": 1, "valor": 5404.76, "nome": "Serviço: Tarifa MercadoPago  Cobrança ON||||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_68e1fedc": {"qtd": 1, "valor": 112.1, "nome": "Serviço: Shipping Serviços de transportes Melienvios|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_dd5d0975": {"qtd": 1, "valor": 188.3, "nome": "Serviço: Dropshipping|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_6f9414c4": {"qtd": 1, "valor": 25201.34, "nome": "Serviço: Intermediação de negócios|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_80825ea9": {"qtd": 1, "valor": 8793.77, "nome": "Serviço: VEICULAÇÃO DE ANUNCIO EOU MIDIAS ONLINE|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_6421e80c": {"qtd": 1, "valor": 21698.12, "nome": "Serviço: Lead:  239342 - Consultoria Pacote China - ref. março/2026", "operacao_tipo": "Serviço", "emitente_name": ""}, "CTe 5353": {"qtd": 131, "valor": 4375.639999999997, "nome": "5353 - Frete/Transporte", "operacao_tipo": "CT-e Estadual", "emitente_name": "EBAZARCOMBR LTDA"}, "CTe 6353": {"qtd": 389, "valor": 13935.820000000005, "nome": "6353 - Frete/Transporte", "operacao_tipo": "CT-e Interestadual", "emitente_name": "EBAZARCOMBR LTDA"}, "CFOP 2411": {"qtd": 2, "valor": 888.6700000000001, "nome": "2411 - Devolucao de mercadorias", "operacao_tipo": "Outros", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "CFOP 2202": {"qtd": 1, "valor": 247.0, "nome": "2202 - Devolucao de mercadorias", "operacao_tipo": "Devolução", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}}}}, "empresa": "N&P IMPORTAÇÃO E COMÉRCIO LTDA", "global_indicators": {"total_xml": 5746.0, "total_energia_elétrica": 3.0, "valor_energia_elétrica": 837.53, "icms_energia_elétrica": 141.24, "ipi_energia_elétrica": 0.0, "pis_energia_elétrica": 10.620000000000001, "cofins_energia_elétrica": 48.9, "total_venda": 977.0, "valor_venda": 744469.0299999989, "ipi_venda": 0.0, "pis_venda": 10750.270000000006, "cofins_venda": 49517.21000000005, "total_compra_para_consumo": 17.0, "valor_compra_para_consumo": 3218.4300000000003, "icms_compra_para_consumo": 62.71, "ipi_compra_para_consumo": 9.38, "pis_compra_para_consumo": 5.539999999999999, "cofins_compra_para_consumo": 25.52, "total_compra_outras": 7.0, "valor_compra_outras": 5989.25, "icms_compra_outras": 9.81, "ipi_compra_outras": 4.84, "pis_compra_outras": 0.26, "cofins_compra_outras": 1.2, "total_transporte": 139.0, "valor_transporte": 64886.039999999986, "icms_transporte": 0.0, "ipi_transporte": 0.0, "pis_transporte": 0.0, "cofins_transporte": 0.0, "total_transferencia": 1699.0, "valor_transferencia": 840645.6299999965, "icms_transferencia": 0.0, "ipi_transferencia": 0.0, "pis_transferencia": 0.0, "cofins_transferencia": 0.0, "total_devolucao": 9.0, "valor_devolucao": 7481.21, "icms_devolucao": 765.2399999999999, "ipi_devolucao": 0.0, "pis_devolucao": 110.06, "cofins_devolucao": 506.99999999999994, "total_servico": 42.0, "valor_servico": 291680.02999999997, "icms_servico": 0.0, "ipi_servico": 0.0, "pis_servico": 0.0, "cofins_servico": 0.0, "total_ct-e_interestadual": 2107.0, "valor_ct-e_interestadual": 80736.96000000057, "icms_ct-e_interestadual": 7751.859999999956, "pis_ct-e_interestadual": 1204.2541500000018, "cofins_ct-e_interestadual": 5546.867600000027, "total_ct-e_estadual": 740.0, "valor_ct-e_estadual": 24871.959999999966, "icms_ct-e_estadual": 2984.3000000000116, "pis_ct-e_estadual": 361.14638999999926, "cofins_ct-e_estadual": 1663.4621600000044, "total_cancelada": 4.0, "valor_cancelada": 9627.210000000001, "icms_cancelada": 262.68, "ipi_cancelada": 0.0, "pis_cancelada": 154.51000000000002, "cofins_cancelada": 711.7099999999999, "total_outros": 2.0, "valor_outros": 888.6700000000001, "icms_outros": 0.0, "ipi_outros": 0.0, "pis_outros": 0.0, "cofins_outros": 0.0, "total_notas": 0, "faturamento_bruto": 744469.0299999986, "impostos_a_recolher": 0.0, "creditos_tributarios": 0.0, "total_impostos": 0.0, "icms_a_recolher": 0.0, "pis_a_recolher": 0.0, "cofins_a_recolher": 0.0, "irpj_a_recolher": 0.0, "csll_a_recolher": 0.0, "irpj_base_calculo_8_percent": 0.0, "csll_base_calculo_12_percent": 0.0, "valor_vendas_liquidas": 736987.8199999987, "valor_despesas": 401344.9100000001, "carga_tributaria": 0.0, "saldo_icms_anterior": 0.0}, "monthly_indicators": {"2026-06": {"saldo_icms_anterior": 3150.86, "saldo_pis_anterior": 0.0, "saldo_cofins_anterior": 0.0, "total_vendas": 737.0, "valor_vendas": 498322.9499999986, "total_compra_para_revenda": 0.0, "valor_compra_para_revenda": 0.0, "total_compra_para_consumo": 0.0, "valor_compra_para_consumo": 0.0, "total_transporte": 815.0, "valor_transporte": 31190.539999999968, "faturamento_bruto": 498322.9499999986, "total_devolucoes": 0.0, "valor_devolucoes": 0.0, "vbcicms_devolucoes": 0.0, "vprod_devolucoes": 0.0, "voutro_devolucoes": 0.0, "total_transferencias": 79.0, "valor_transferencias": 38838.44, "vbcicms_transferencias": 0.0, "vprod_transferencias": 38753.46, "voutro_transferencias": 0.0, "valor_vendas_liquidas": 498322.9499999986, "faturamento_ml": 537161.3899999986, "total_servicos": 7.0, "valor_servicos": 79241.68, "total_energia_eletrica": 0, "valor_energia_eletrica": 0.0, "total_canceladas": 3.0, "valor_canceladas": 1654.42, "total_ct-e_estadual": 229.0, "valor_ct-e_estadual": 8107.910000000001, "total_ct-e_interestadual": 586.0, "valor_ct-e_interestadual": 23082.62999999997, "cmv_vendas": 403055.5199999992, "cmv_transferencias": 33180.94, "cmv_total": 436236.4599999992, "cmv_total_percentual": 81.21143256405684, "vprod_vendas": 497488.24999999884, "voutro_vendas": 290.96, "vbcicms_vendas": 498031.98999999865, "vprod_compra_para_revenda": 0.0, "voutro_compra_para_revenda": 0.0, "vbcicms_compra_para_revenda": 0.0, "vprod_compra_para_consumo": 0.0, "voutro_compra_para_consumo": 0.0, "vbcicms_compra_para_consumo": 0.0, "valor_despesas": 110432.21999999996, "icms_vendas": 51674.4426000001, "ipi_venda": 0.0, "pis_vendas": 7401.490000000013, "cofins_vendas": 34092.24000000001, "icms_devolucoes": 0.0, "pis_devolucoes": 0.0, "cofins_devolucoes": 0.0, "icms_transferencias": 0.0, "pis_transferencia": 0.0, "cofins_transferencia": 0.0, "icms_transporte": 3143.300000000004, "pis_transporte": 462.77946, "cofins_transporte": 2131.5902399999986, "icms_energia_eletrica": 0.0, "pis_energia_eletrica": 0.0, "cofins_energia_eletrica": 0.0, "icms_compra_para_revenda": 0.0, "icms_compra_para_consumo": 0.0, "pis_compra_para_consumo": 0.0, "cofins_compra_para_consumo": 0.0, "icms_real": 45380.28260000009, "base_piscofins_real": 446648.5073999985, "pis_real": 6906.92, "cofins_real": 31813.7, "total_pis_cofins_real": 38720.62, "dre": 294722.56, "csll_real": 26525.03, "irpj_basico_real": 44208.38, "irpj_real": 71680.64, "lucro_real_liquido": 196516.89, "irpj_base_calculo_8_percent": 39865.83599999989, "irpj_imposto_basico": 5979.875399999983, "irpj_excesso": 19865.835999999887, "irpj_adicional": 1986.5835999999888, "irpj_a_recolher": 7966.458999999972, "csll_base_calculo_12_percent": 59798.75399999983, "csll_imposto_devido": 5381.887859999985, "csll_a_recolher": 5381.887859999985, "saldo_abatimento_inicial": 0.0, "abatimento_aplicado": 0.0, "base_calculo_apos_escudo": 294722.55739999854, "saldo_abatimento_final": 0.0, "csll_com_escudo": 26525.030165999866, "irpj_com_escudo": 71680.63934999963, "total_impostos_real": 97449.24946000005, "carga_tributaria_real": 19.55544079597384, "carga_tributaria_real_ML": 18.14152157510805}, "2026-07": {"saldo_icms_anterior": 0.0, "saldo_pis_anterior": 0.0, "saldo_cofins_anterior": 0.0, "total_vendas": 58.0, "valor_vendas": 80441.24, "total_compra_para_revenda": 0.0, "valor_compra_para_revenda": 0.0, "total_compra_para_consumo": 0.0, "valor_compra_para_consumo": 0.0, "total_transporte": 520.0, "valor_transporte": 18311.460000000003, "faturamento_bruto": 80441.24, "total_devolucoes": 1.0, "valor_devolucoes": 247.0, "vbcicms_devolucoes": 247.0, "vprod_devolucoes": 247.0, "voutro_devolucoes": 0.0, "total_transferencias": 466.0, "valor_transferencias": 271135.56000000023, "vbcicms_transferencias": 0.0, "vprod_transferencias": 270968.66000000027, "voutro_transferencias": 0.0, "valor_vendas_liquidas": 80194.24, "faturamento_ml": 351329.8000000002, "total_servicos": 8.0, "valor_servicos": 69069.29, "total_energia_eletrica": 0, "valor_energia_eletrica": 0.0, "total_canceladas": 0.0, "valor_canceladas": 0.0, "total_ct-e_estadual": 131.0, "valor_ct-e_estadual": 4375.639999999997, "total_ct-e_interestadual": 389.0, "valor_ct-e_interestadual": 13935.820000000005, "cmv_vendas": 59383.57, "cmv_transferencias": 220899.54999999976, "cmv_total": 280283.11999999976, "cmv_total_percentual": 79.77778144637875, "vprod_vendas": 80167.83, "voutro_vendas": 216.42, "vbcicms_vendas": 80224.82000000002, "vprod_compra_para_revenda": 0.0, "voutro_compra_para_revenda": 0.0, "vbcicms_compra_para_revenda": 0.0, "vprod_compra_para_consumo": 0.0, "voutro_compra_para_consumo": 0.0, "vbcicms_compra_para_consumo": 0.0, "valor_despesas": 87380.75, "icms_vendas": 7533.257200000003, "ipi_venda": 0.0, "pis_vendas": 1206.5800000000002, "cofins_vendas": 5557.760000000002, "icms_devolucoes": 9.88, "pis_devolucoes": 3.91, "cofins_devolucoes": 18.02, "icms_transferencias": 0.0, "pis_transferencia": 0.0, "cofins_transferencia": 0.0, "icms_transporte": 1834.820000000001, "pis_transporte": 271.86456, "cofins_transporte": 1252.22464, "icms_energia_eletrica": 0.0, "pis_energia_eletrica": 0.0, "cofins_energia_eletrica": 0.0, "icms_compra_para_revenda": 0.0, "icms_compra_para_consumo": 0.0, "pis_compra_para_consumo": 0.0, "cofins_compra_para_consumo": 0.0, "icms_real": 5688.557200000001, "base_piscofins_real": 72907.9828, "pis_real": 927.21, "cofins_real": 4284.88, "total_pis_cofins_real": 5212.09, "dre": -21452.3, "csll_real": 0.0, "irpj_basico_real": 0.0, "irpj_real": 0.0, "lucro_real_liquido": -21452.3, "irpj_base_calculo_8_percent": 6415.5392, "irpj_imposto_basico": 962.33088, "irpj_excesso": 0, "irpj_adicional": 0.0, "irpj_a_recolher": 962.33088, "csll_base_calculo_12_percent": 9623.3088, "csll_imposto_devido": 866.097792, "csll_a_recolher": 866.097792, "saldo_abatimento_inicial": 0.0, "abatimento_aplicado": 0.0, "base_calculo_apos_escudo": 0.0, "saldo_abatimento_final": 21452.297199999986, "csll_com_escudo": 0.0, "irpj_com_escudo": 0.0, "total_impostos_real": 12729.075872000001, "carga_tributaria_real": 15.82406719737289, "carga_tributaria_real_ML": 3.6231130612888496}, "2026-08": {"saldo_icms_anterior": 0.0, "saldo_pis_anterior": 0.0, "saldo_cofins_anterior": 0.0, "total_vendas": 26.0, "valor_vendas": 17875.33, "total_compra_para_revenda": 0.0, "valor_compra_para_revenda": 0.0, "total_compra_para_consumo": 4.0, "valor_compra_para_consumo": 873.3299999999999, "total_transporte": 293.0, "valor_transporte": 10649.700000000003, "faturamento_bruto": 17875.33, "total_devolucoes": 1.0, "valor_devolucoes": 250.8, "vbcicms_devolucoes": 250.8, "vprod_devolucoes": 250.8, "voutro_devolucoes": 0.0, "total_transferencias": 246.0, "valor_transferencias": 168814.49999999988, "vbcicms_transferencias": 0.0, "vprod_transferencias": 168804.51999999987, "voutro_transferencias": 0.0, "valor_vendas_liquidas": 17624.530000000002, "faturamento_ml": 186439.0299999999, "total_servicos": 10.0, "valor_servicos": 23005.56, "total_energia_eletrica": 1, "valor_energia_eletrica": 205.36, "total_canceladas": 1.0, "valor_canceladas": 7972.79, "total_ct-e_estadual": 73.0, "valor_ct-e_estadual": 2307.3100000000013, "total_ct-e_interestadual": 220.0, "valor_ct-e_interestadual": 8342.390000000001, "cmv_vendas": 12044.759999999998, "cmv_transferencias": 135470.94999999992, "cmv_total": 147515.70999999993, "cmv_total_percentual": 79.12276200965002, "vprod_vendas": 17353.29, "voutro_vendas": 522.04, "vbcicms_vendas": 17353.29, "vprod_compra_para_revenda": 0.0, "voutro_compra_para_revenda": 0.0, "vbcicms_compra_para_revenda": 0.0, "vprod_compra_para_consumo": 873.3299999999999, "voutro_compra_para_consumo": 0.0, "vbcicms_compra_para_consumo": 0.0, "valor_despesas": 34733.950000000004, "icms_vendas": 2100.8427999999994, "ipi_venda": 0.0, "pis_vendas": 269.26000000000005, "cofins_vendas": 1240.2799999999997, "icms_devolucoes": 10.03, "pis_devolucoes": 3.97, "cofins_devolucoes": 18.3, "icms_transferencias": 0.0, "pis_transferencia": 0.0, "cofins_transferencia": 0.0, "icms_transporte": 1106.1599999999994, "pis_transporte": 157.46841, "cofins_transporte": 725.30904, "icms_energia_eletrica": 34.9, "pis_energia_eletrica": 2.63, "cofins_energia_eletrica": 12.08, "icms_compra_para_revenda": 0.0, "icms_compra_para_consumo": 0.0, "pis_compra_para_consumo": 0.0, "cofins_compra_para_consumo": 0.0, "icms_real": 984.6527999999998, "base_piscofins_real": 15774.487200000003, "pis_real": 96.21, "cofins_real": 457.5, "total_pis_cofins_real": 553.71, "dre": -20687.5, "csll_real": 0.0, "irpj_basico_real": 0.0, "irpj_real": 0.0, "lucro_real_liquido": -20687.5, "irpj_base_calculo_8_percent": 1409.9624000000001, "irpj_imposto_basico": 211.49436, "irpj_excesso": 0, "irpj_adicional": 0.0, "irpj_a_recolher": 211.49436, "csll_base_calculo_12_percent": 2114.9436, "csll_imposto_devido": 190.344924, "csll_a_recolher": 190.344924, "saldo_abatimento_inicial": 21452.297199999986, "abatimento_aplicado": 0.0, "base_calculo_apos_escudo": 0.0, "saldo_abatimento_final": 42139.79999999999, "csll_com_escudo": 0.0, "irpj_com_escudo": 0.0, "total_impostos_real": 1940.2020839999998, "carga_tributaria_real": 10.854077010046806, "carga_tributaria_real_ML": 1.0406630435697937}, "2026-09": {"saldo_icms_anterior": 0.0, "saldo_pis_anterior": 0.0, "saldo_cofins_anterior": 0.0, "total_vendas": 69.0, "valor_vendas": 64257.829999999994, "total_compra_para_revenda": 0.0, "valor_compra_para_revenda": 0.0, "total_compra_para_consumo": 7.0, "valor_compra_para_consumo": 532.8, "total_transporte": 634.0, "valor_transporte": 24790.610000000055, "faturamento_bruto": 64257.829999999994, "total_devolucoes": 0.0, "valor_devolucoes": 0.0, "vbcicms_devolucoes": 0.0, "vprod_devolucoes": 0.0, "voutro_devolucoes": 0.0, "total_transferencias": 545.0, "valor_transferencias": 253766.00999999983, "vbcicms_transferencias": 0.0, "vprod_transferencias": 253679.05999999982, "voutro_transferencias": 0.0, "valor_vendas_liquidas": 64257.829999999994, "faturamento_ml": 318023.83999999985, "total_servicos": 5.0, "valor_servicos": 30843.53, "total_energia_eletrica": 1, "valor_energia_eletrica": 350.08, "total_canceladas": 0.0, "valor_canceladas": 0.0, "total_ct-e_estadual": 139.0, "valor_ct-e_estadual": 4693.949999999997, "total_ct-e_interestadual": 495.0, "valor_ct-e_interestadual": 20096.660000000058, "cmv_vendas": 53334.07, "cmv_transferencias": 210113.37000000002, "cmv_total": 263447.44, "cmv_total_percentual": 82.83889660599033, "vprod_vendas": 64002.93999999999, "voutro_vendas": 94.92, "vbcicms_vendas": 54202.689999999995, "vprod_compra_para_revenda": 0.0, "voutro_compra_para_revenda": 0.0, "vbcicms_compra_para_revenda": 0.0, "vprod_compra_para_consumo": 532.8, "voutro_compra_para_consumo": 0.0, "vbcicms_compra_para_consumo": 0.0, "valor_despesas": 56517.02000000006, "icms_vendas": 5515.260200000001, "ipi_venda": 0.0, "pis_vendas": 835.4100000000001, "cofins_vendas": 3848.1499999999996, "icms_devolucoes": 0.0, "pis_devolucoes": 0.0, "cofins_devolucoes": 0.0, "icms_transferencias": 0.0, "pis_transferencia": 0.0, "cofins_transferencia": 0.0, "icms_transporte": 2562.9099999999976, "pis_transporte": 366.75705000000005, "cofins_transporte": 1689.3052000000002, "icms_energia_eletrica": 59.7, "pis_energia_eletrica": 4.49, "cofins_energia_eletrica": 20.66, "icms_compra_para_revenda": 0.0, "icms_compra_para_consumo": 0.0, "pis_compra_para_consumo": 0.35, "cofins_compra_para_consumo": 1.6, "icms_real": 2952.350200000003, "base_piscofins_real": 58742.5698, "pis_real": 598.0, "cofins_real": 2754.47, "total_pis_cofins_real": 3352.47, "dre": -2458.01, "csll_real": 0.0, "irpj_basico_real": 0.0, "irpj_real": 0.0, "lucro_real_liquido": -2458.01, "irpj_base_calculo_8_percent": 5140.6264, "irpj_imposto_basico": 771.09396, "irpj_excesso": 0, "irpj_adicional": 0.0, "irpj_a_recolher": 771.09396, "csll_base_calculo_12_percent": 7710.939599999999, "csll_imposto_devido": 693.9845639999999, "csll_a_recolher": 693.9845639999999, "saldo_abatimento_inicial": 42139.79999999999, "abatimento_aplicado": 0.0, "base_calculo_apos_escudo": 0.0, "saldo_abatimento_final": 44597.81020000006, "csll_com_escudo": 0.0, "irpj_com_escudo": 0.0, "total_impostos_real": 7769.898724000002, "carga_tributaria_real": 12.091753991692535, "carga_tributaria_real_ML": 2.443181216854688}, "2026-10": {"saldo_icms_anterior": 0.0, "saldo_pis_anterior": 0.0, "saldo_cofins_anterior": 0.0, "total_vendas": 87.0, "valor_vendas": 83571.68000000001, "total_compra_para_revenda": 0.0, "valor_compra_para_revenda": 0.0, "total_compra_para_consumo": 4.0, "valor_compra_para_consumo": 482.3, "total_transporte": 585.0, "valor_transporte": 20666.610000000044, "faturamento_bruto": 83571.68000000001, "total_devolucoes": 5.0, "valor_devolucoes": 6938.5, "vbcicms_devolucoes": 6938.5, "vprod_devolucoes": 6763.34, "voutro_devolucoes": 175.16, "total_transferencias": 363.0, "valor_transferencias": 108091.12000000023, "vbcicms_transferencias": 0.0, "vprod_transferencias": 107706.24000000018, "voutro_transferencias": 0.0, "valor_vendas_liquidas": 76633.18000000001, "faturamento_ml": 184724.30000000022, "total_servicos": 8.0, "valor_servicos": 27381.68, "total_energia_eletrica": 1, "valor_energia_eletrica": 282.09, "total_canceladas": 0.0, "valor_canceladas": 0.0, "total_ct-e_estadual": 168.0, "valor_ct-e_estadual": 5387.149999999993, "total_ct-e_interestadual": 417.0, "valor_ct-e_interestadual": 15279.46000000005, "cmv_vendas": 68134.18000000002, "cmv_transferencias": 84310.56999999993, "cmv_total": 152444.74999999994, "cmv_total_percentual": 82.52555294565997, "vprod_vendas": 83031.67999999998, "voutro_vendas": 540.0, "vbcicms_vendas": 69331.05999999998, "vprod_compra_para_revenda": 0.0, "voutro_compra_para_revenda": 0.0, "vbcicms_compra_para_revenda": 0.0, "vprod_compra_para_consumo": 472.92, "voutro_compra_para_consumo": 0.0, "vbcicms_compra_para_consumo": 383.6, "valor_despesas": 48812.680000000044, "icms_vendas": 8478.6578, "ipi_venda": 0.0, "pis_vendas": 1037.53, "cofins_vendas": 4778.780000000001, "icms_devolucoes": 745.3299999999999, "pis_devolucoes": 102.18, "cofins_devolucoes": 470.67999999999995, "icms_transferencias": 0.0, "pis_transferencia": 0.0, "cofins_transferencia": 0.0, "icms_transporte": 2088.9699999999984, "pis_transporte": 306.53105999999946, "cofins_transporte": 1411.9006400000012, "icms_energia_eletrica": 46.64, "pis_energia_eletrica": 3.5, "cofins_energia_eletrica": 16.16, "icms_compra_para_revenda": 0.0, "icms_compra_para_consumo": 62.71, "pis_compra_para_consumo": 5.1899999999999995, "cofins_compra_para_consumo": 23.919999999999998, "icms_real": 5644.3578000000025, "base_piscofins_real": 75093.0222, "pis_real": 826.81, "cofins_real": 4176.82, "total_pis_cofins_real": 5003.629999999999, "dre": 14843.73, "csll_real": 1335.94, "irpj_basico_real": 2226.56, "irpj_real": 2226.56, "lucro_real_liquido": 11281.23, "irpj_base_calculo_8_percent": 6130.6544, "irpj_imposto_basico": 919.59816, "irpj_excesso": 0, "irpj_adicional": 0.0, "irpj_a_recolher": 919.59816, "csll_base_calculo_12_percent": 9195.981600000001, "csll_imposto_devido": 827.6383440000001, "csll_a_recolher": 827.6383440000001, "saldo_abatimento_inicial": 44597.81020000006, "abatimento_aplicado": 4453.11965999999, "base_calculo_apos_escudo": 10390.61253999998, "saldo_abatimento_final": 40144.69054000007, "csll_com_escudo": 935.1551285999982, "irpj_com_escudo": 1558.5918809999969, "total_impostos_real": 12395.224304000003, "carga_tributaria_real": 14.8318477072616, "carga_tributaria_real_ML": 6.7101211394494324}, "2026-11": {"saldo_icms_anterior": 0.0, "saldo_pis_anterior": 0.0, "saldo_cofins_anterior": 0.0, "total_vendas": 0.0, "valor_vendas": 0.0, "total_compra_para_revenda": 0.0, "valor_compra_para_revenda": 0.0, "total_compra_para_consumo": 2.0, "valor_compra_para_consumo": 1330.0, "total_transporte": 0.0, "valor_transporte": 0.0, "faturamento_bruto": 0.0, "total_devolucoes": 2.0, "valor_devolucoes": 44.910000000000004, "vbcicms_devolucoes": 0.0, "vprod_devolucoes": 44.910000000000004, "voutro_devolucoes": 0.0, "total_transferencias": 0.0, "valor_transferencias": 0.0, "vbcicms_transferencias": 0.0, "vprod_transferencias": 0.0, "voutro_transferencias": 0.0, "valor_vendas_liquidas": -44.910000000000004, "faturamento_ml": -44.910000000000004, "total_servicos": 4.0, "valor_servicos": 62138.29, "total_energia_eletrica": 0, "valor_energia_eletrica": 0.0, "total_canceladas": 0.0, "valor_canceladas": 0.0, "total_ct-e_estadual": 0.0, "valor_ct-e_estadual": 0.0, "total_ct-e_interestadual": 0.0, "valor_ct-e_interestadual": 0.0, "cmv_vendas": 0.0, "cmv_transferencias": 0.0, "cmv_total": 0.0, "cmv_total_percentual": 0.0, "vprod_vendas": 0.0, "voutro_vendas": 0.0, "vbcicms_vendas": 0.0, "vprod_compra_para_revenda": 0.0, "voutro_compra_para_revenda": 0.0, "vbcicms_compra_para_revenda": 0.0, "vprod_compra_para_consumo": 1250.0, "voutro_compra_para_consumo": 0.0, "vbcicms_compra_para_consumo": 0.0, "valor_despesas": 63468.29, "icms_vendas": 0.0, "ipi_venda": 0.0, "pis_vendas": 0.0, "cofins_vendas": 0.0, "icms_devolucoes": 0.0, "pis_devolucoes": 0.0, "cofins_devolucoes": 0.0, "icms_transferencias": 0.0, "pis_transferencia": 0.0, "cofins_transferencia": 0.0, "icms_transporte": 0.0, "pis_transporte": 0.0, "cofins_transporte": 0.0, "icms_energia_eletrica": 0.0, "pis_energia_eletrica": 0.0, "cofins_energia_eletrica": 0.0, "icms_compra_para_revenda": 0.0, "icms_compra_para_consumo": 0.0, "pis_compra_para_consumo": 0.0, "cofins_compra_para_consumo": 0.0, "icms_real": 0.0, "base_piscofins_real": 0.0, "pis_real": -0.74, "cofins_real": -0.74, "total_pis_cofins_real": -1.48, "dre": -63468.29, "csll_real": 0.0, "irpj_basico_real": 0.0, "irpj_real": 0.0, "lucro_real_liquido": -63468.29, "irpj_base_calculo_8_percent": -3.5928000000000004, "irpj_imposto_basico": -0.5389200000000001, "irpj_excesso": 0, "irpj_adicional": 0.0, "irpj_a_recolher": -0.5389200000000001, "csll_base_calculo_12_percent": -5.389200000000001, "csll_imposto_devido": -0.485028, "csll_a_recolher": -0.485028, "saldo_abatimento_inicial": 40144.69054000007, "abatimento_aplicado": 0.0, "base_calculo_apos_escudo": 0.0, "saldo_abatimento_final": 103612.98054000008, "csll_com_escudo": 0.0, "irpj_com_escudo": 0.0, "total_impostos_real": -2.5039480000000003, "carga_tributaria_real": 0.0, "carga_tributaria_real_ML": 0.0}}, "card_definitions": [{"id": "faturamento_ml", "title": "Faturamento ML", "subtitle": "Vendas + Transferências", "value_key": "faturamento_ml", "format_type": "currency"}, {"id": "faturamento_bruto", "title": "Faturamento Bruto", "subtitle": "Sobre notas de vendas", "value_key": "faturamento_bruto", "format_type": "currency"}, {"id": "valor_despesas", "title": "Despesas Operacionais", "subtitle": "Serviços e Fretes", "value_key": "valor_despesas", "format_type": "currency"}, {"id": "total_impostos_real", "title": "Total de Impostos", "subtitle": "PIS + COFINS + IRPJ + CSL", "value_key": "total_impostos_real", "format_type": "currency"}, {"id": "cmv_total", "title": "CMV", "subtitle": "CMV Vendas + Transferências", "value_key": "cmv_total", "format_type": "currency"}, {"id": "cmv_total_percentual", "title": "CMV (%)", "subtitle": "Percentual sobre faturamentl ML", "value_key": "cmv_total_percentual", "format_type": "percentage"}, {"id": "carga_tributaria_real", "title": "Carga Tributária ", "subtitle": "sobre vendas", "value_key": "carga_tributaria_real", "format_type": "percentage"}], "lucro_real_card_definitions": [{"id": "icms_real", "title": "ICMS", "subtitle": "Icms a pagar", "value_key": "icms_real", "format_type": "currency"}, {"id": "pis_real", "title": "PIS", "subtitle": "Alíquota 1.65%", "value_key": "pis_real", "format_type": "currency"}, {"id": "cofins_real", "title": "COFINS Real", "subtitle": "Alíquota 7.6%", "value_key": "cofins_real", "format_type": "currency"}, {"id": "lucro_real_liquido", "title": "Resultado Contábil", "subtitle": "Lucro Apurado ", "value_key": "lucro_real_liquido", "format_type": "currency"}, {"id": "irpj_a_recolher", "title": "IRPJ estimado", "subtitle": "Estimando 8% de lucro", "value_key": "irpj_a_recolher", "format_type": "currency"}, {"id": "csll_a_recolher", "title": "CSLL estimado", "subtitle": "Estimando 12% de lucro", "value_key": "csll_a_recolher", "format_type": "currency"}, {"id": "total_impostos_real", "title": "Total Impostos Real", "subtitle": "PIS + COFINS + IRPJ + CSLL", "value_key": "total_impostos_real", "format_type": "currency"}], "financial_summary_definitions": [{"label": "Notas de Venda", "qty_key": "total_vendas", "value_key": "valor_vendas", "vprod_key": "vprod_vendas", "vBCICMS_key": "vbcicms_vendas", "icms_key": "icms_vendas", "ipi_key": "ipi_venda", "pis_key": "pis_vendas", "cofins_key": "cofins_vendas", "voutro_key": "voutro_vendas"}, {"label": "Notas de Compra (revenda)", "qty_key": "total_compra_para_revenda", "value_key": "valor_compra_para_revenda", "vprod_key": "vprod_compra_para_revenda", "vBCICMS_key": "vbcicms_compra_para_revenda", "icms_key": "icms_compra_para_revenda", "ipi_key": "ipi_compra_para_revenda", "pis_key": "pis_compra_para_revenda", "cofins_key": "cofins_compra_para_revenda", "voutro_key": "voutro_compra_para_revenda"}, {"label": "Notas de Compra (Consumo)", "qty_key": "total_compra_para_consumo", "value_key": "valor_compra_para_consumo", "vprod_key": "vprod_compra_para_consumo", "vBCICMS_key": "vbcicms_compra_para_consumo", "icms_key": "icms_compra_para_consumo", "ipi_key": "ipi_compra_para_consumo", "pis_key": "pis_compra_para_consumo", "cofins_key": "cofins_compra_para_consumo", "voutro_key": "voutro_compra_para_consumo"}, {"label": "Notas de Transferência", "qty_key": "total_transferencias", "value_key": "valor_transferencias", "vprod_key": "vprod_transferencias", "vBCICMS_key": "vbcicms_transferencias", "icms_key": "icms_transferencias", "ipi_key": "ipi_transferencia", "pis_key": "pis_transferencia", "cofins_key": "cofins_transferencia", "voutro_key": "voutro_transferencias"}, {"label": "Notas de Transporte (CTe)", "qty_key": "total_transporte", "value_key": "valor_transporte", "vprod_key": null, "vBCICMS_key": null, "icms_key": "icms_transporte", "ipi_key": null, "pis_key": "pis_transporte", "cofins_key": "cofins_transporte", "voutro_key": null}, {"label": "Serviços", "qty_key": "total_servicos", "value_key": "valor_servicos", "vprod_key": null, "vBCICMS_key": null, "icms_key": null, "ipi_key": null, "pis_key": "pis_servicos", "cofins_key": "cofins_servicos", "voutro_key": null}, {"label": "Energia Elétrica", "qty_key": "total_energia_eletrica", "value_key": "valor_energia_eletrica", "vprod_key": null, "vBCICMS_key": null, "icms_key": "icms_energia_eletrica", "ipi_key": null, "pis_key": "pis_energia_eletrica", "cofins_key": "cofins_energia_eletrica", "voutro_key": null}, {"label": "Devoluções", "qty_key": "total_devolucoes", "value_key": "valor_devolucoes", "vprod_key": "vprod_devolucoes", "vBCICMS_key": "vbcicms_devolucoes", "icms_key": "icms_devolucoes", "ipi_key": "ipi_devolucao", "pis_key": "pis_devolucoes", "cofins_key": "cofins_devolucoes", "voutro_key": "voutro_devolucoes"}, {"label": "Canceladas", "qty_key": "total_canceladas", "value_key": "valor_canceladas", "vprod_key": null, "vBCICMS_key": null, "icms_key": "icms_cancelada", "ipi_key": "ipi_cancelada", "pis_key": "pis_cancelada", "cofins_key": "cofins_cancelada", "voutro_key": null}], "financial_summary": [], "tax_summary": [], "monthly_summary_table": [{"Mês": "2026-06", "Vendas": 498322.9499999986, "Compras": 0.0, "Transferências": 38838.44, "Faturamento ML": 537161.3899999986, "ICMS": 45380.28260000009, "PIS/COFINS": 38720.62, "IRPJ/CSLL": 98205.67, "IRPJ/CSLL Estimado": 13348.346859999958, "Lucro Real Líquido": 196516.89, "CMV Vendas": 403055.5199999992, "CMV Transferências": 33180.94, "CMV Total": 436236.4599999992, "CMV Total (%)": 81.21143256405684}, {"Mês": "2026-07", "Vendas": 80441.24, "Compras": 0.0, "Transferências": 271135.56000000023, "Faturamento ML": 351329.8000000002, "ICMS": 5688.557200000001, "PIS/COFINS": 5212.09, "IRPJ/CSLL": 0.0, "IRPJ/CSLL Estimado": 1828.428672, "Lucro Real Líquido": -21452.3, "CMV Vendas": 59383.57, "CMV Transferências": 220899.54999999976, "CMV Total": 280283.11999999976, "CMV Total (%)": 79.77778144637875}, {"Mês": "2026-08", "Vendas": 17875.33, "Compras": 873.3299999999999, "Transferências": 168814.49999999988, "Faturamento ML": 186439.0299999999, "ICMS": 984.6527999999998, "PIS/COFINS": 553.71, "IRPJ/CSLL": 0.0, "IRPJ/CSLL Estimado": 401.839284, "Lucro Real Líquido": -20687.5, "CMV Vendas": 12044.759999999998, "CMV Transferências": 135470.94999999992, "CMV Total": 147515.70999999993, "CMV Total (%)": 79.12276200965002}, {"Mês": "2026-09", "Vendas": 64257.829999999994, "Compras": 532.8, "Transferências": 253766.00999999983, "Faturamento ML": 318023.83999999985, "ICMS": 2952.350200000003, "PIS/COFINS": 3352.47, "IRPJ/CSLL": 0.0, "IRPJ/CSLL Estimado": 1465.078524, "Lucro Real Líquido": -2458.01, "CMV Vendas": 53334.07, "CMV Transferências": 210113.37000000002, "CMV Total": 263447.44, "CMV Total (%)": 82.83889660599033}, {"Mês": "2026-10", "Vendas": 83571.68000000001, "Compras": 482.3, "Transferências": 108091.12000000023, "Faturamento ML": 184724.30000000022, "ICMS": 5644.3578000000025, "PIS/COFINS": 5003.629999999999, "IRPJ/CSLL": 3562.5, "IRPJ/CSLL Estimado": 1747.236504, "Lucro Real Líquido": 11281.23, "CMV Vendas": 68134.18000000002, "CMV Transferências": 84310.56999999993, "CMV Total": 152444.74999999994, "CMV Total (%)": 82.52555294565997}, {"Mês": "2026-11", "Vendas": 0.0, "Compras": 1330.0, "Transferências": 0.0, "Faturamento ML": -44.910000000000004, "ICMS": 0.0, "PIS/COFINS": -1.48, "IRPJ/CSLL": 0.0, "IRPJ/CSLL Estimado": -1.023948, "Lucro Real Líquido": -63468.29, "CMV Vendas": 0.0, "CMV Transferências": 0.0, "CMV Total": 0.0, "CMV Total (%)": 0.0}]};
+    const dashboardData = {"detalhamento_operacoes": {"2026-10": {"receitas": {"CFOP 5102": {"qtd": 32, "valor": 34716.56, "nome": "5102 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "CFOP 6152": {"qtd": 266, "valor": 78989.82000000004, "nome": "6152 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transferência", "emitente_name": "N&P IMPORTACAO E COMERCIO LTDA"}, "CFOP 5152": {"qtd": 97, "valor": 29101.29999999999, "nome": "5152 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transferência", "emitente_name": "N&P IMPORTACAO E COMERCIO LTDA"}, "CFOP 6102": {"qtd": 40, "valor": 32681.030000000002, "nome": "6102 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "CFOP 6108": {"qtd": 15, "valor": 16174.089999999998, "nome": "6108 - VENDA DE MERCADORIA", "operacao_tipo": "Venda", "emitente_name": "N&P IMPORTACAO E COMERCIO LTDA"}}, "despesas": {"NF3e_35261004172213000151660000249016451070269914": {"qtd": 1, "valor": 282.09, "nome": "Energia Elétrica - COMPANHIA PIRATININGA DE FORÇA E LUZ", "operacao_tipo": "Energia Elétrica", "emitente_name": "COMPANHIA PIRATININGA DE FORÇA E LUZ"}, "Serviço_3ebdab1b": {"qtd": 1, "valor": 987.62, "nome": "Serviço: REC - MENS-6829679-20/10/26", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_6b128d34": {"qtd": 1, "valor": 962.07, "nome": "Serviço: VEICULAÇÃO DE ANUNCIO EOU MIDIAS ONLINE;;;;; PI: -;;; Data de vencimento: -", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_564a92d8": {"qtd": 1, "valor": 467.95, "nome": "Serviço: C-PLUS 5 - ORDEM DE SERVICO|C-PLUS 5 - USUARIO SIMULTANEO ADICIONAL|C-PLUS 5 - EMPRESA ADICIONAL|C-PLUS 5 - INTEGRACAO E-COMMERCE|C-PLUS 5 - LICENCA SERVIDOR - 1 USUARIO", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_d3b73673": {"qtd": 1, "valor": 263.2, "nome": "Serviço: Dropshipping||||PI: -|Condicion de pagamento: |Data de vencimento: -", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_c94c34f1": {"qtd": 1, "valor": 14.2, "nome": "Serviço: Conjunto de pedidos de insercao de anuncios na internet durante o mes Setembro Conforme Lei 12.741/2012, os valores aproximados dos tributos sao:  Tributos Federais: R$ 1,91  Tributos Estaduais R$ 0,00  Tributos Municipais R$ 0,58 Para qualquer duvida relacionada a esta nota fiscal, entre em contato conosco atraves do link facebook.com/business/resources (http://facebook.com/business/resources) Referente a conta de anuncios: 1535429861952080", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_b2eac73d": {"qtd": 1, "valor": 27.05, "nome": "Serviço: Shipping Serviços de transportes Melienvios||||PI: -|Condicion de pagamento: |Data de vencimento: -", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_7bb3e84c": {"qtd": 1, "valor": 3560.17, "nome": "Serviço: Tarifa MercadoPago  Cobrança ON||||PI: -|Condicion de pagamento: |Data de vencimento: -", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_de020fae": {"qtd": 1, "valor": 21099.42, "nome": "Serviço: Intermediação de negócios||||PI: -|Condicion de pagamento: |Data de vencimento: -", "operacao_tipo": "Serviço", "emitente_name": ""}, "CFOP 5949": {"qtd": 42, "valor": 17536.589999999997, "nome": "5949 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transporte", "emitente_name": "N&P IMPORTACAO E COMERCIO LTDA"}, "CFOP 6949": {"qtd": 97, "valor": 47349.45, "nome": "6949 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transporte", "emitente_name": "N&P IMPORTACAO E COMERCIO LTDA"}, "CFOP 2202": {"qtd": 3, "valor": 3852.83, "nome": "2202 - Devolucao de mercadorias", "operacao_tipo": "Devolução", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "CFOP 1202": {"qtd": 2, "valor": 3085.67, "nome": "1202 - Devolucao de mercadorias", "operacao_tipo": "Devolução", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "CFOP 6106": {"qtd": 5, "valor": 124.75, "nome": "6106 - Venda de mercadorias", "operacao_tipo": "Compra Outras", "emitente_name": "PARK COMPUTADORES JPRR COMERCIO LTDA"}, "CFOP 5101": {"qtd": 1, "valor": 278.0, "nome": "5101 - Venda de mercadorias", "operacao_tipo": "Compra para Consumo", "emitente_name": "MTAG ETIQUETAS ACESSORIOS EM GERAL LTDA"}, "CFOP 5102": {"qtd": 1, "valor": 50.0, "nome": "5102 - Venda Dentro do Estado", "operacao_tipo": "Compra para Consumo", "emitente_name": "MINA DAGUA COMERCIAL LTDA"}, "CFOP 6102": {"qtd": 2, "valor": 154.3, "nome": "6102 - VENDA", "operacao_tipo": "Compra para Consumo", "emitente_name": "MA COMERCIO DE PRODUTOS ELETRONICOS LTDA"}, "CFOP 6108": {"qtd": 1, "valor": 5810.0, "nome": "6108 - (NF-e) Venda de mercadorias de terceiros para consumidor fin", "operacao_tipo": "Compra Outras", "emitente_name": "PERSONALIZZE LTDA"}, "CTe 6353": {"qtd": 417, "valor": 15279.460000000052, "nome": "6353 - Frete/Transporte", "operacao_tipo": "CT-e Interestadual", "emitente_name": "EBAZARCOMBR LTDA"}, "CTe 5353": {"qtd": 168, "valor": 5387.149999999995, "nome": "5353 - Frete/Transporte", "operacao_tipo": "CT-e Estadual", "emitente_name": "EBAZARCOMBR LTDA"}}}, "2026-06": {"receitas": {"CFOP 5152": {"qtd": 19, "valor": 8778.490000000002, "nome": "5152 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transferência", "emitente_name": "N&P IMPORTACAO E COMERCIO LTDA"}, "CFOP 6152": {"qtd": 60, "valor": 30059.949999999997, "nome": "6152 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transferência", "emitente_name": "N&P IMPORTACAO E COMERCIO LTDA"}, "CFOP 6108": {"qtd": 492, "valor": 326269.80999999924, "nome": "6108 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "CFOP 5102": {"qtd": 211, "valor": 146649.5599999999, "nome": "5102 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "CFOP 6102": {"qtd": 34, "valor": 25403.58, "nome": "6102 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}}, "despesas": {"CTe 5353": {"qtd": 229, "valor": 8107.909999999999, "nome": "5353 - Frete/Transporte", "operacao_tipo": "CT-e Estadual", "emitente_name": "EBAZARCOMBR LTDA"}, "CTe 6353": {"qtd": 586, "valor": 23082.629999999976, "nome": "6353 - Frete/Transporte", "operacao_tipo": "CT-e Interestadual", "emitente_name": "EBAZARCOMBR LTDA"}, "Serviço_15ee860e": {"qtd": 1, "valor": 119.88, "nome": "Serviço: Prestação de serviço conforme fatura 1007657627 de 09.06.2026 a 08.06.2027 Valor aproximado dos tributos (ISS, PIS e COFINS), conforme Lei 12.741 de 08/12/2012: R$14,57 (12.15%)", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_7b8a2336": {"qtd": 1, "valor": 10704.2, "nome": "Serviço: Tarifa MercadoPago  Cobrança ON|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_8cec88f6": {"qtd": 1, "valor": 247.2, "nome": "Serviço: Dropshipping|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_aec328e5": {"qtd": 1, "valor": 27.7, "nome": "Serviço: Shipping Serviços de transportes Melienvios|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_4538b4be": {"qtd": 1, "valor": 19726.49, "nome": "Serviço: VEICULAÇÃO DE ANUNCIO EOU MIDIAS ONLINE|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_adc6c7bd": {"qtd": 1, "valor": 48389.31, "nome": "Serviço: Intermediação de negócios|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_6b8dd97f": {"qtd": 1, "valor": 26.9, "nome": "Serviço: Prestação de serviço conforme fatura 1007656935 de 09.06.2026 a 08.06.2027 Valor aproximado dos tributos (ISS, PIS e COFINS), conforme Lei 12.741 de 08/12/2012: R$3,27 (12.15%)", "operacao_tipo": "Serviço", "emitente_name": ""}}}, "2026-07": {"receitas": {"CFOP 6152": {"qtd": 351, "valor": 199259.05000000005, "nome": "6152 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transferência", "emitente_name": "N&P IMPORTACAO E COMERCIO LTDA"}, "CFOP 5152": {"qtd": 115, "valor": 71876.50999999997, "nome": "5152 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transferência", "emitente_name": "N&P IMPORTACAO E COMERCIO LTDA"}, "CFOP 6102": {"qtd": 20, "valor": 31666.67, "nome": "6102 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "CFOP 6108": {"qtd": 19, "valor": 44635.27, "nome": "6108 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "CFOP 5102": {"qtd": 19, "valor": 4139.3, "nome": "5102 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}}, "despesas": {"Serviço_68e1fedc": {"qtd": 1, "valor": 112.1, "nome": "Serviço: Shipping Serviços de transportes Melienvios|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_dd5d0975": {"qtd": 1, "valor": 188.3, "nome": "Serviço: Dropshipping|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_6f9414c4": {"qtd": 1, "valor": 25201.34, "nome": "Serviço: Intermediação de negócios|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_2171bb39": {"qtd": 1, "valor": 570.9, "nome": "Serviço: C-PLUS 5 - ORDEM DE SERVICO|C-PLUS 5 - LICENCA SERVIDOR - 1 USUARIO|C-PLUS 5 - EMPRESA ADICIONAL|C-PLUS 5 - INTEGRACAO E-COMMERCE|C-PLUS 5 - USUARIO SIMULTANEO ADICIONAL", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_80825ea9": {"qtd": 1, "valor": 8793.77, "nome": "Serviço: VEICULAÇÃO DE ANUNCIO EOU MIDIAS ONLINE|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_44954871": {"qtd": 1, "valor": 5404.76, "nome": "Serviço: Tarifa MercadoPago  Cobrança ON||||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_f3405fd4": {"qtd": 1, "valor": 7100.0, "nome": "Serviço: ALTERAÇÃO CONTRATUAL - R'||chr(36)||' 1.000,00REGISTRO DE MARCA - R'||chr(36)||' 2.500,00UPSELL DE RADAR - 3600,00", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_6421e80c": {"qtd": 1, "valor": 21698.12, "nome": "Serviço: Lead:  239342 - Consultoria Pacote China - ref. março/2026", "operacao_tipo": "Serviço", "emitente_name": ""}, "CTe 6353": {"qtd": 389, "valor": 13935.819999999998, "nome": "6353 - Frete/Transporte", "operacao_tipo": "CT-e Interestadual", "emitente_name": "EBAZARCOMBR LTDA"}, "CTe 5353": {"qtd": 131, "valor": 4375.6399999999985, "nome": "5353 - Frete/Transporte", "operacao_tipo": "CT-e Estadual", "emitente_name": "EBAZARCOMBR LTDA"}, "CFOP 2411": {"qtd": 2, "valor": 888.6700000000001, "nome": "2411 - Devolucao de mercadorias", "operacao_tipo": "Outros", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "CFOP 2202": {"qtd": 1, "valor": 247.0, "nome": "2202 - Devolucao de mercadorias", "operacao_tipo": "Devolução", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}}}, "2026-09": {"receitas": {"CFOP 6152": {"qtd": 433, "valor": 194774.4299999999, "nome": "6152 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transferência", "emitente_name": "N&P IMPORTACAO E COMERCIO LTDA"}, "CFOP 6102": {"qtd": 42, "valor": 39248.22000000001, "nome": "6102 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "CFOP 5152": {"qtd": 112, "valor": 58991.580000000016, "nome": "5152 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transferência", "emitente_name": "N&P IMPORTACAO E COMERCIO LTDA"}, "CFOP 6108": {"qtd": 11, "valor": 6371.84, "nome": "6108 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "CFOP 5102": {"qtd": 16, "valor": 18637.770000000004, "nome": "5102 - VENDA DE MERCADORIA", "operacao_tipo": "Venda", "emitente_name": "N&P IMPORTACAO E COMERCIO LTDA"}}, "despesas": {"NF3e_35260904172213000151660000226550271030773585": {"qtd": 1, "valor": 350.08, "nome": "Energia Elétrica - COMPANHIA PIRATININGA DE FORÇA E LUZ", "operacao_tipo": "Energia Elétrica", "emitente_name": "COMPANHIA PIRATININGA DE FORÇA E LUZ"}, "CFOP 5106": {"qtd": 2, "valor": 170.0, "nome": "5106 - Venda de mercadorias", "operacao_tipo": "Compra para Consumo", "emitente_name": "L L FERNANDES COMERCIO DE EMBALAGENS"}, "CFOP 5105": {"qtd": 1, "valor": 54.5, "nome": "5105 - Venda de mercadorias", "operacao_tipo": "Compra Outras", "emitente_name": "IJ PLAST INDUSTRIA E COMERCIO DE PLASTICOS LTDA"}, "CFOP 5102": {"qtd": 4, "valor": 341.8, "nome": "5102 - Venda Dentro do Estado", "operacao_tipo": "Compra para Consumo", "emitente_name": "MINA DAGUA COMERCIAL LTDA"}, "CFOP 5405": {"qtd": 1, "valor": 21.0, "nome": "5405 - Venda merc adq rec terc suj ICMS-ST (substituido)", "operacao_tipo": "Compra para Consumo", "emitente_name": "TIM S.A.-São Paulo"}, "Serviço_6146b8c3": {"qtd": 1, "valor": 85.7, "nome": "Serviço: Shipping Serviços de transportes Melienvios|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_b97412d2": {"qtd": 1, "valor": 813.54, "nome": "Serviço: VEICULAÇÃO DE ANUNCIO EOU MIDIAS ONLINE|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_53d11062": {"qtd": 1, "valor": 25136.32, "nome": "Serviço: Intermediação de negócios|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_eb71a9c3": {"qtd": 1, "valor": 467.95, "nome": "Serviço: C-PLUS 5 - INTEGRACAO E-COMMERCE|C-PLUS 5 - LICENCA SERVIDOR - 1 USUARIO|C-PLUS 5 - ORDEM DE SERVICO|C-PLUS 5 - USUARIO SIMULTANEO ADICIONAL|C-PLUS 5 - EMPRESA ADICIONAL", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_8a5c1f34": {"qtd": 1, "valor": 4340.02, "nome": "Serviço: Tarifa MercadoPago  Cobrança ON|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "CTe 5353": {"qtd": 139, "valor": 4693.95, "nome": "5353 - Frete/Transporte", "operacao_tipo": "CT-e Estadual", "emitente_name": "EBAZARCOMBR LTDA"}, "CTe 6353": {"qtd": 495, "valor": 20096.66000000005, "nome": "6353 - Frete/Transporte", "operacao_tipo": "CT-e Interestadual", "emitente_name": "EBAZARCOMBR LTDA"}}}, "2026-11": {"receitas": {}, "despesas": {"Serviço_7b0438c8": {"qtd": 1, "valor": 3000.0, "nome": "Serviço: 1 SERVICO DE MARKETING. 3.000,00", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_810323af": {"qtd": 1, "valor": 1800.96, "nome": "Serviço: REC - MENS-6909901-15/11/26 - R$ 1.800,96", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_c5dbf3c2": {"qtd": 1, "valor": 337.33, "nome": "Serviço: Conjunto de pedidos de insercao de anuncios na internet durante o mes Outubro Conforme Lei 12.741/2012, os valores aproximados dos tributos sao:  Tributos Federais: R$ 45,37  Tributos Estaduais R$ 0,00  Tributos Municipais R$ 13,83 Para qualquer duvida relacionada a esta nota fiscal, entre em contato conosco atraves do link facebook.com/business/resources (http://facebook.com/business/resources) Referente a conta de anuncios: 1535429861952080", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_0793c396": {"qtd": 1, "valor": 57000.0, "nome": "Serviço: Fornecimento e instalação de fachada em ACM, composta por estrutura metálica em aço galvanizado em toda a extensão da fachada, com tratamento anticorrosivo e aplicação de zarcão. Revestimento integral da fachada em chapas de ACM de 3 mm, na cor preto fosco, incluindo execução de sanca para iluminação e canaleta para fita de LED, com iluminação na temperatura de cor 3.000 K (branco quente), instalada de forma sobreposta e disposta verticalmente. Execução de detalhe lateral em ACM na cor verde, com sistema de iluminação retroiluminada, contemplando acabamento em três faces. Fornecimento e instalação da logomarca NPGO em PVC expandido de 20 mm, com sistema de retroiluminação, ou seja, iluminação posicionada na parte posterior das letras. Fornecimento e instalação de letreiros informativos em PVC expandido de 20 mm. Fornecimento e instalação de luminoso tipo bandeira, dupla face, conforme layout e especificações aprovados pelo CONTRATANTE.     Cartão de crédito - parcelamento emissor em 12 vezes.", "operacao_tipo": "Serviço", "emitente_name": ""}, "CFOP 6102": {"qtd": 1, "valor": 1280.0, "nome": "6102 - VENDA DE MERCADORIA", "operacao_tipo": "Compra para Consumo", "emitente_name": "FABIO HENRIQUE S MARIZ"}, "CFOP 2202": {"qtd": 2, "valor": 44.910000000000004, "nome": "2202 - Retorno de mercadoria nao entregue", "operacao_tipo": "Devolução", "emitente_name": "PARK COMPUTADORES JPRR COMERCIO LTDA"}, "CFOP 5102": {"qtd": 1, "valor": 50.0, "nome": "5102 - Venda Dentro do Estado", "operacao_tipo": "Compra para Consumo", "emitente_name": "MINA DAGUA COMERCIAL LTDA"}}}, "2026-08": {"receitas": {"CFOP 5152": {"qtd": 55, "valor": 39631.06999999999, "nome": "5152 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transferência", "emitente_name": "N&P IMPORTACAO E COMERCIO LTDA"}, "CFOP 6152": {"qtd": 191, "valor": 129183.43000000002, "nome": "6152 - SAIDA DE MERCADORIAS (OUTRAS)", "operacao_tipo": "Transferência", "emitente_name": "N&P IMPORTACAO E COMERCIO LTDA"}, "CFOP 6102": {"qtd": 17, "valor": 10398.979999999998, "nome": "6102 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "CFOP 5102": {"qtd": 6, "valor": 6274.12, "nome": "5102 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "CFOP 6108": {"qtd": 3, "valor": 1202.23, "nome": "6108 - Venda de mercadoria para consumidor final", "operacao_tipo": "Venda", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}}, "despesas": {"CTe 6353": {"qtd": 220, "valor": 8342.389999999998, "nome": "6353 - Frete/Transporte", "operacao_tipo": "CT-e Interestadual", "emitente_name": "EBAZARCOMBR LTDA"}, "CTe 5353": {"qtd": 73, "valor": 2307.3100000000013, "nome": "5353 - Frete/Transporte", "operacao_tipo": "CT-e Estadual", "emitente_name": "EBAZARCOMBR LTDA"}, "Serviço_22d51450": {"qtd": 1, "valor": 375.18, "nome": "Serviço: VEICULAÇÃO DE ANUNCIO EOU MIDIAS ONLINE|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_8696b5db": {"qtd": 1, "valor": 3044.0, "nome": "Serviço: Instalação de 01 vídeo porteiro, 01 sensor IVP pet area semiaberto e revisão do alarme.\n\nDados Pagamento\nSinal R$ 1.000,00 via pix e o restante parcelado em 3x no boleto.", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_d22dbacf": {"qtd": 1, "valor": 1588.93, "nome": "Serviço: Tarifa MercadoPago  Cobrança ON|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_d8cf2ee4": {"qtd": 1, "valor": 570.9, "nome": "Serviço: C-PLUS 5 - INTEGRACAO E-COMMERCE|C-PLUS 5 - USUARIO SIMULTANEO ADICIONAL|C-PLUS 5 - ORDEM DE SERVICO|C-PLUS 5 - LICENCA SERVIDOR - 1 USUARIO|C-PLUS 5 - EMPRESA ADICIONAL", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_787f9090": {"qtd": 1, "valor": 8000.0, "nome": "Serviço: Referente a remoção da porta do local e instalação de uma porta automática com pintura eletrostática cinza e uma portinhola.Pagamento - 2.500 de entrada1.500 apos conclusão4.000 pra 30 diasDados bancários: Ag 2919CC 426320-0CNPJ 11258303000125Banco do BradescoRazão socialAntonio Erlito da costa serviços me", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_055071e0": {"qtd": 1, "valor": 0.0, "nome": "Serviço: Retirada e correção de vazamentos e duas saídas de água ,retirada das conexões em T existentes nas tubulaçãoes , colocação de junções em Y conforme necessidade de instalação,e colocação de Fitas de aço e execução de serviços necessários.", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_c8df49b9": {"qtd": 1, "valor": 71.7, "nome": "Serviço: Prestação de serviço conforme fatura 1007871379 de 31.07.2026 a 08.06.2027 Valor aproximado dos tributos (ISS, PIS e COFINS), conforme Lei 12.741 de 08/12/2012: R$8,71 (12.15%)", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_f9fa29ac": {"qtd": 1, "valor": 186.9, "nome": "Serviço: Dropshipping|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_d1ccd744": {"qtd": 1, "valor": 27.0, "nome": "Serviço: Shipping Serviços de transportes Melienvios", "operacao_tipo": "Serviço", "emitente_name": ""}, "Serviço_3aa7bb53": {"qtd": 1, "valor": 9140.95, "nome": "Serviço: Intermediação de negócios|||", "operacao_tipo": "Serviço", "emitente_name": ""}, "CFOP 2202": {"qtd": 1, "valor": 250.8, "nome": "2202 - Devolucao de mercadorias", "operacao_tipo": "Devolução", "emitente_name": "N P IMPORTACAO E COMERCIO LTDA"}, "NF3e_35260804172213000151660000211144541038566482": {"qtd": 1, "valor": 205.36, "nome": "Energia Elétrica - COMPANHIA PIRATININGA DE FORÇA E LUZ", "operacao_tipo": "Energia Elétrica", "emitente_name": "COMPANHIA PIRATININGA DE FORÇA E LUZ"}, "CFOP 5405": {"qtd": 3, "valor": 823.3299999999999, "nome": "5405 - Venda", "operacao_tipo": "Compra para Consumo", "emitente_name": "BIN MATERIAIS DE CONSTRUCAO"}, "CFOP 5102": {"qtd": 1, "valor": 50.0, "nome": "5102 - Venda Dentro do Estado", "operacao_tipo": "Compra para Consumo", "emitente_name": "MINA DAGUA COMERCIAL LTDA"}}}}, "empresa": "N&P IMPORTAÇÃO E COMÉRCIO LTDA", "global_indicators": {"total_xml": 5746.0, "total_energia_elétrica": 3.0, "valor_energia_elétrica": 837.53, "icms_energia_elétrica": 141.24, "ipi_energia_elétrica": 0.0, "pis_energia_elétrica": 10.620000000000001, "cofins_energia_elétrica": 48.9, "total_venda": 977.0, "valor_venda": 744469.029999998, "ipi_venda": 0.0, "pis_venda": 10750.270000000033, "cofins_venda": 49517.210000000065, "total_servico": 42.0, "valor_servico": 291680.03, "icms_servico": 0.0, "ipi_servico": 0.0, "pis_servico": 0.0, "cofins_servico": 0.0, "total_transferencia": 1699.0, "valor_transferencia": 840645.6300000008, "icms_transferencia": 0.0, "ipi_transferencia": 0.0, "pis_transferencia": 0.0, "cofins_transferencia": 0.0, "total_transporte": 139.0, "valor_transporte": 64886.03999999999, "icms_transporte": 0.0, "ipi_transporte": 0.0, "pis_transporte": 0.0, "cofins_transporte": 0.0, "total_devolucao": 9.0, "valor_devolucao": 7481.21, "icms_devolucao": 765.2399999999999, "ipi_devolucao": 0.0, "pis_devolucao": 110.06, "cofins_devolucao": 507.0, "total_compra_outras": 7.0, "valor_compra_outras": 5989.25, "icms_compra_outras": 9.81, "ipi_compra_outras": 4.84, "pis_compra_outras": 0.26, "cofins_compra_outras": 1.2, "total_compra_para_consumo": 17.0, "valor_compra_para_consumo": 3218.43, "icms_compra_para_consumo": 62.71, "ipi_compra_para_consumo": 9.38, "pis_compra_para_consumo": 5.539999999999999, "cofins_compra_para_consumo": 25.52, "total_ct-e_interestadual": 2107.0, "valor_ct-e_interestadual": 80736.9599999997, "icms_ct-e_interestadual": 7751.860000000038, "pis_ct-e_interestadual": 1204.254149999999, "cofins_ct-e_interestadual": 5546.867600000015, "total_ct-e_estadual": 740.0, "valor_ct-e_estadual": 24871.95999999999, "icms_ct-e_estadual": 2984.2999999999997, "pis_ct-e_estadual": 361.14639000000153, "cofins_ct-e_estadual": 1663.4621600000019, "total_cancelada": 4.0, "valor_cancelada": 9627.21, "icms_cancelada": 262.68, "ipi_cancelada": 0.0, "pis_cancelada": 154.51000000000002, "cofins_cancelada": 711.7099999999999, "total_outros": 2.0, "valor_outros": 888.6700000000001, "icms_outros": 0.0, "ipi_outros": 0.0, "pis_outros": 0.0, "cofins_outros": 0.0, "total_notas": 0, "faturamento_bruto": 744469.0299999991, "impostos_a_recolher": 0.0, "creditos_tributarios": 0.0, "total_impostos": 0.0, "icms_a_recolher": 0.0, "pis_a_recolher": 0.0, "cofins_a_recolher": 0.0, "irpj_a_recolher": 0.0, "csll_a_recolher": 0.0, "irpj_base_calculo_8_percent": 0.0, "csll_base_calculo_12_percent": 0.0, "valor_vendas_liquidas": 736987.819999999, "valor_despesas": 401344.9100000001, "carga_tributaria": 0.0, "saldo_icms_anterior": 0.0}, "monthly_indicators": {"2026-06": {"saldo_icms_anterior": 3150.86, "saldo_pis_anterior": 0.0, "saldo_cofins_anterior": 0.0, "total_vendas": 737.0, "valor_vendas": 498322.949999999, "total_compra_para_revenda": 0.0, "valor_compra_para_revenda": 0.0, "total_compra_para_consumo": 0.0, "valor_compra_para_consumo": 0.0, "total_transporte": 815.0, "valor_transporte": 31190.539999999975, "faturamento_bruto": 498322.949999999, "total_devolucoes": 0.0, "valor_devolucoes": 0.0, "vbcicms_devolucoes": 0.0, "vprod_devolucoes": 0.0, "voutro_devolucoes": 0.0, "total_transferencias": 79.0, "valor_transferencias": 38838.44000000001, "vbcicms_transferencias": 0.0, "vprod_transferencias": 38753.46000000001, "voutro_transferencias": 0.0, "valor_vendas_liquidas": 498322.949999999, "faturamento_ml": 537161.3899999991, "total_servicos": 7.0, "valor_servicos": 79241.68, "total_energia_eletrica": 0, "valor_energia_eletrica": 0.0, "total_canceladas": 3.0, "valor_canceladas": 1654.42, "total_ct-e_estadual": 229.0, "valor_ct-e_estadual": 8107.909999999999, "total_ct-e_interestadual": 586.0, "valor_ct-e_interestadual": 23082.629999999976, "cmv_vendas": 403055.51999999915, "cmv_transferencias": 33180.94000000001, "cmv_total": 436236.45999999915, "cmv_total_percentual": 81.21143256405675, "vprod_vendas": 497488.24999999924, "voutro_vendas": 290.96, "vbcicms_vendas": 498031.98999999906, "vprod_compra_para_revenda": 0.0, "voutro_compra_para_revenda": 0.0, "vbcicms_compra_para_revenda": 0.0, "vprod_compra_para_consumo": 0.0, "voutro_compra_para_consumo": 0.0, "vbcicms_compra_para_consumo": 0.0, "valor_despesas": 110432.21999999997, "icms_vendas": 51674.44260000004, "ipi_venda": 0.0, "pis_vendas": 7401.490000000024, "cofins_vendas": 34092.24000000002, "icms_devolucoes": 0.0, "pis_devolucoes": 0.0, "cofins_devolucoes": 0.0, "icms_transferencias": 0.0, "pis_transferencia": 0.0, "cofins_transferencia": 0.0, "icms_transporte": 3143.300000000005, "pis_transporte": 462.7794600000001, "cofins_transporte": 2131.590240000001, "icms_energia_eletrica": 0.0, "pis_energia_eletrica": 0.0, "cofins_energia_eletrica": 0.0, "icms_compra_para_revenda": 0.0, "icms_compra_para_consumo": 0.0, "pis_compra_para_consumo": 0.0, "cofins_compra_para_consumo": 0.0, "icms_real": 45380.282600000035, "base_piscofins_real": 446648.50739999895, "pis_real": 6906.92, "cofins_real": 31813.7, "total_pis_cofins_real": 38720.62, "dre": 294722.56, "csll_real": 26525.03, "irpj_basico_real": 44208.38, "irpj_real": 71680.64, "lucro_real_liquido": 196516.89, "irpj_base_calculo_8_percent": 39865.83599999992, "irpj_imposto_basico": 5979.875399999988, "irpj_excesso": 19865.835999999923, "irpj_adicional": 1986.5835999999924, "irpj_a_recolher": 7966.458999999981, "csll_base_calculo_12_percent": 59798.75399999988, "csll_imposto_devido": 5381.887859999989, "csll_a_recolher": 5381.887859999989, "saldo_abatimento_inicial": 0.0, "abatimento_aplicado": 0.0, "base_calculo_apos_escudo": 294722.5573999989, "saldo_abatimento_final": 0.0, "csll_com_escudo": 26525.0301659999, "irpj_com_escudo": 71680.63934999972, "total_impostos_real": 97449.24945999999, "carga_tributaria_real": 19.555440795973812, "carga_tributaria_real_ML": 18.141521575108026}, "2026-07": {"saldo_icms_anterior": 0.0, "saldo_pis_anterior": 0.0, "saldo_cofins_anterior": 0.0, "total_vendas": 58.0, "valor_vendas": 80441.24, "total_compra_para_revenda": 0.0, "valor_compra_para_revenda": 0.0, "total_compra_para_consumo": 0.0, "valor_compra_para_consumo": 0.0, "total_transporte": 520.0, "valor_transporte": 18311.459999999995, "faturamento_bruto": 80441.24, "total_devolucoes": 1.0, "valor_devolucoes": 247.0, "vbcicms_devolucoes": 247.0, "vprod_devolucoes": 247.0, "voutro_devolucoes": 0.0, "total_transferencias": 466.0, "valor_transferencias": 271135.56000000006, "vbcicms_transferencias": 0.0, "vprod_transferencias": 270968.6600000001, "voutro_transferencias": 0.0, "valor_vendas_liquidas": 80194.24, "faturamento_ml": 351329.80000000005, "total_servicos": 8.0, "valor_servicos": 69069.29000000001, "total_energia_eletrica": 0, "valor_energia_eletrica": 0.0, "total_canceladas": 0.0, "valor_canceladas": 0.0, "total_ct-e_estadual": 131.0, "valor_ct-e_estadual": 4375.6399999999985, "total_ct-e_interestadual": 389.0, "valor_ct-e_interestadual": 13935.819999999998, "cmv_vendas": 59383.57000000001, "cmv_transferencias": 220899.54999999973, "cmv_total": 280283.11999999976, "cmv_total_percentual": 79.7777814463788, "vprod_vendas": 80167.83000000002, "voutro_vendas": 216.42000000000002, "vbcicms_vendas": 80224.82, "vprod_compra_para_revenda": 0.0, "voutro_compra_para_revenda": 0.0, "vbcicms_compra_para_revenda": 0.0, "vprod_compra_para_consumo": 0.0, "voutro_compra_para_consumo": 0.0, "vbcicms_compra_para_consumo": 0.0, "valor_despesas": 87380.75, "icms_vendas": 7533.257200000002, "ipi_venda": 0.0, "pis_vendas": 1206.5800000000002, "cofins_vendas": 5557.76, "icms_devolucoes": 9.88, "pis_devolucoes": 3.91, "cofins_devolucoes": 18.02, "icms_transferencias": 0.0, "pis_transferencia": 0.0, "cofins_transferencia": 0.0, "icms_transporte": 1834.8199999999995, "pis_transporte": 271.86455999999987, "cofins_transporte": 1252.224639999999, "icms_energia_eletrica": 0.0, "pis_energia_eletrica": 0.0, "cofins_energia_eletrica": 0.0, "icms_compra_para_revenda": 0.0, "icms_compra_para_consumo": 0.0, "pis_compra_para_consumo": 0.0, "cofins_compra_para_consumo": 0.0, "icms_real": 5688.557200000002, "base_piscofins_real": 72907.9828, "pis_real": 927.21, "cofins_real": 4284.88, "total_pis_cofins_real": 5212.09, "dre": -21452.3, "csll_real": 0.0, "irpj_basico_real": 0.0, "irpj_real": 0.0, "lucro_real_liquido": -21452.3, "irpj_base_calculo_8_percent": 6415.5392, "irpj_imposto_basico": 962.33088, "irpj_excesso": 0, "irpj_adicional": 0.0, "irpj_a_recolher": 962.33088, "csll_base_calculo_12_percent": 9623.3088, "csll_imposto_devido": 866.097792, "csll_a_recolher": 866.097792, "saldo_abatimento_inicial": 0.0, "abatimento_aplicado": 0.0, "base_calculo_apos_escudo": 0.0, "saldo_abatimento_final": 21452.297199999986, "csll_com_escudo": 0.0, "irpj_com_escudo": 0.0, "total_impostos_real": 12729.075872000003, "carga_tributaria_real": 15.824067197372893, "carga_tributaria_real_ML": 3.623113061288852}, "2026-08": {"saldo_icms_anterior": 0.0, "saldo_pis_anterior": 0.0, "saldo_cofins_anterior": 0.0, "total_vendas": 26.0, "valor_vendas": 17875.329999999998, "total_compra_para_revenda": 0.0, "valor_compra_para_revenda": 0.0, "total_compra_para_consumo": 4.0, "valor_compra_para_consumo": 873.3299999999999, "total_transporte": 293.0, "valor_transporte": 10649.699999999999, "faturamento_bruto": 17875.329999999998, "total_devolucoes": 1.0, "valor_devolucoes": 250.8, "vbcicms_devolucoes": 250.8, "vprod_devolucoes": 250.8, "voutro_devolucoes": 0.0, "total_transferencias": 246.0, "valor_transferencias": 168814.49999999985, "vbcicms_transferencias": 0.0, "vprod_transferencias": 168804.51999999984, "voutro_transferencias": 0.0, "valor_vendas_liquidas": 17624.53, "faturamento_ml": 186439.02999999985, "total_servicos": 10.0, "valor_servicos": 23005.559999999998, "total_energia_eletrica": 1, "valor_energia_eletrica": 205.36, "total_canceladas": 1.0, "valor_canceladas": 7972.79, "total_ct-e_estadual": 73.0, "valor_ct-e_estadual": 2307.3100000000013, "total_ct-e_interestadual": 220.0, "valor_ct-e_interestadual": 8342.389999999998, "cmv_vendas": 12044.76, "cmv_transferencias": 135470.94999999992, "cmv_total": 147515.70999999993, "cmv_total_percentual": 79.12276200965005, "vprod_vendas": 17353.29, "voutro_vendas": 522.04, "vbcicms_vendas": 17353.29, "vprod_compra_para_revenda": 0.0, "voutro_compra_para_revenda": 0.0, "vbcicms_compra_para_revenda": 0.0, "vprod_compra_para_consumo": 873.3299999999999, "voutro_compra_para_consumo": 0.0, "vbcicms_compra_para_consumo": 0.0, "valor_despesas": 34733.95, "icms_vendas": 2100.8427999999994, "ipi_venda": 0.0, "pis_vendas": 269.26, "cofins_vendas": 1240.2799999999997, "icms_devolucoes": 10.03, "pis_devolucoes": 3.97, "cofins_devolucoes": 18.3, "icms_transferencias": 0.0, "pis_transferencia": 0.0, "cofins_transferencia": 0.0, "icms_transporte": 1106.1599999999994, "pis_transporte": 157.46840999999998, "cofins_transporte": 725.3090400000003, "icms_energia_eletrica": 34.9, "pis_energia_eletrica": 2.63, "cofins_energia_eletrica": 12.08, "icms_compra_para_revenda": 0.0, "icms_compra_para_consumo": 0.0, "pis_compra_para_consumo": 0.0, "cofins_compra_para_consumo": 0.0, "icms_real": 984.6527999999998, "base_piscofins_real": 15774.4872, "pis_real": 96.21, "cofins_real": 457.5, "total_pis_cofins_real": 553.71, "dre": -20687.5, "csll_real": 0.0, "irpj_basico_real": 0.0, "irpj_real": 0.0, "lucro_real_liquido": -20687.5, "irpj_base_calculo_8_percent": 1409.9624, "irpj_imposto_basico": 211.49435999999997, "irpj_excesso": 0, "irpj_adicional": 0.0, "irpj_a_recolher": 211.49435999999997, "csll_base_calculo_12_percent": 2114.9435999999996, "csll_imposto_devido": 190.34492399999996, "csll_a_recolher": 190.34492399999996, "saldo_abatimento_inicial": 21452.297199999986, "abatimento_aplicado": 0.0, "base_calculo_apos_escudo": 0.0, "saldo_abatimento_final": 42139.79999999998, "csll_com_escudo": 0.0, "irpj_com_escudo": 0.0, "total_impostos_real": 1940.2020839999998, "carga_tributaria_real": 10.854077010046808, "carga_tributaria_real_ML": 1.0406630435697939}, "2026-09": {"saldo_icms_anterior": 0.0, "saldo_pis_anterior": 0.0, "saldo_cofins_anterior": 0.0, "total_vendas": 69.0, "valor_vendas": 64257.83000000001, "total_compra_para_revenda": 0.0, "valor_compra_para_revenda": 0.0, "total_compra_para_consumo": 7.0, "valor_compra_para_consumo": 532.8, "total_transporte": 634.0, "valor_transporte": 24790.61000000005, "faturamento_bruto": 64257.83000000001, "total_devolucoes": 0.0, "valor_devolucoes": 0.0, "vbcicms_devolucoes": 0.0, "vprod_devolucoes": 0.0, "voutro_devolucoes": 0.0, "total_transferencias": 545.0, "valor_transferencias": 253766.00999999975, "vbcicms_transferencias": 0.0, "vprod_transferencias": 253679.0599999997, "voutro_transferencias": 0.0, "valor_vendas_liquidas": 64257.83000000001, "faturamento_ml": 318023.83999999973, "total_servicos": 5.0, "valor_servicos": 30843.530000000002, "total_energia_eletrica": 1, "valor_energia_eletrica": 350.08, "total_canceladas": 0.0, "valor_canceladas": 0.0, "total_ct-e_estadual": 139.0, "valor_ct-e_estadual": 4693.95, "total_ct-e_interestadual": 495.0, "valor_ct-e_interestadual": 20096.66000000005, "cmv_vendas": 53334.07, "cmv_transferencias": 210113.3700000001, "cmv_total": 263447.4400000001, "cmv_total_percentual": 82.8388966059904, "vprod_vendas": 64002.94, "voutro_vendas": 94.92, "vbcicms_vendas": 54202.69000000001, "vprod_compra_para_revenda": 0.0, "voutro_compra_para_revenda": 0.0, "vbcicms_compra_para_revenda": 0.0, "vprod_compra_para_consumo": 532.8, "voutro_compra_para_consumo": 0.0, "vbcicms_compra_para_consumo": 0.0, "valor_despesas": 56517.02000000006, "icms_vendas": 5515.260200000001, "ipi_venda": 0.0, "pis_vendas": 835.41, "cofins_vendas": 3848.1500000000005, "icms_devolucoes": 0.0, "pis_devolucoes": 0.0, "cofins_devolucoes": 0.0, "icms_transferencias": 0.0, "pis_transferencia": 0.0, "cofins_transferencia": 0.0, "icms_transporte": 2562.909999999998, "pis_transporte": 366.75705, "cofins_transporte": 1689.3052, "icms_energia_eletrica": 59.7, "pis_energia_eletrica": 4.49, "cofins_energia_eletrica": 20.66, "icms_compra_para_revenda": 0.0, "icms_compra_para_consumo": 0.0, "pis_compra_para_consumo": 0.35, "cofins_compra_para_consumo": 1.6, "icms_real": 2952.3502000000026, "base_piscofins_real": 58742.56980000001, "pis_real": 598.0, "cofins_real": 2754.47, "total_pis_cofins_real": 3352.47, "dre": -2458.01, "csll_real": 0.0, "irpj_basico_real": 0.0, "irpj_real": 0.0, "lucro_real_liquido": -2458.01, "irpj_base_calculo_8_percent": 5140.626400000001, "irpj_imposto_basico": 771.0939600000002, "irpj_excesso": 0, "irpj_adicional": 0.0, "irpj_a_recolher": 771.0939600000002, "csll_base_calculo_12_percent": 7710.939600000001, "csll_imposto_devido": 693.984564, "csll_a_recolher": 693.984564, "saldo_abatimento_inicial": 42139.79999999998, "abatimento_aplicado": 0.0, "base_calculo_apos_escudo": 0.0, "saldo_abatimento_final": 44597.810200000036, "csll_com_escudo": 0.0, "irpj_com_escudo": 0.0, "total_impostos_real": 7769.898724000002, "carga_tributaria_real": 12.091753991692531, "carga_tributaria_real_ML": 2.443181216854689}, "2026-10": {"saldo_icms_anterior": 0.0, "saldo_pis_anterior": 0.0, "saldo_cofins_anterior": 0.0, "total_vendas": 87.0, "valor_vendas": 83571.68000000001, "total_compra_para_revenda": 0.0, "valor_compra_para_revenda": 0.0, "total_compra_para_consumo": 4.0, "valor_compra_para_consumo": 482.29999999999995, "total_transporte": 585.0, "valor_transporte": 20666.610000000048, "faturamento_bruto": 83571.68000000001, "total_devolucoes": 5.0, "valor_devolucoes": 6938.5, "vbcicms_devolucoes": 6938.5, "vprod_devolucoes": 6763.34, "voutro_devolucoes": 175.16, "total_transferencias": 363.0, "valor_transferencias": 108091.12000000021, "vbcicms_transferencias": 0.0, "vprod_transferencias": 107706.2400000002, "voutro_transferencias": 0.0, "valor_vendas_liquidas": 76633.18000000001, "faturamento_ml": 184724.30000000022, "total_servicos": 8.0, "valor_servicos": 27381.68, "total_energia_eletrica": 1, "valor_energia_eletrica": 282.09, "total_canceladas": 0.0, "valor_canceladas": 0.0, "total_ct-e_estadual": 168.0, "valor_ct-e_estadual": 5387.149999999995, "total_ct-e_interestadual": 417.0, "valor_ct-e_interestadual": 15279.460000000052, "cmv_vendas": 68134.18000000004, "cmv_transferencias": 84310.56999999996, "cmv_total": 152444.75, "cmv_total_percentual": 82.52555294566, "vprod_vendas": 83031.68, "voutro_vendas": 540.0, "vbcicms_vendas": 69331.05999999998, "vprod_compra_para_revenda": 0.0, "voutro_compra_para_revenda": 0.0, "vbcicms_compra_para_revenda": 0.0, "vprod_compra_para_consumo": 472.91999999999996, "voutro_compra_para_consumo": 0.0, "vbcicms_compra_para_consumo": 383.6, "valor_despesas": 48812.68000000005, "icms_vendas": 8478.657800000003, "ipi_venda": 0.0, "pis_vendas": 1037.5299999999997, "cofins_vendas": 4778.779999999999, "icms_devolucoes": 745.3299999999999, "pis_devolucoes": 102.18, "cofins_devolucoes": 470.68, "icms_transferencias": 0.0, "pis_transferencia": 0.0, "cofins_transferencia": 0.0, "icms_transporte": 2088.9699999999993, "pis_transporte": 306.5310599999995, "cofins_transporte": 1411.9006400000019, "icms_energia_eletrica": 46.64, "pis_energia_eletrica": 3.5, "cofins_energia_eletrica": 16.16, "icms_compra_para_revenda": 0.0, "icms_compra_para_consumo": 62.71, "pis_compra_para_consumo": 5.1899999999999995, "cofins_compra_para_consumo": 23.919999999999998, "icms_real": 5644.357800000003, "base_piscofins_real": 75093.0222, "pis_real": 826.81, "cofins_real": 4176.82, "total_pis_cofins_real": 5003.629999999999, "dre": 14843.73, "csll_real": 1335.94, "irpj_basico_real": 2226.56, "irpj_real": 2226.56, "lucro_real_liquido": 11281.23, "irpj_base_calculo_8_percent": 6130.6544, "irpj_imposto_basico": 919.59816, "irpj_excesso": 0, "irpj_adicional": 0.0, "irpj_a_recolher": 919.59816, "csll_base_calculo_12_percent": 9195.981600000001, "csll_imposto_devido": 827.6383440000001, "csll_a_recolher": 827.6383440000001, "saldo_abatimento_inicial": 44597.810200000036, "abatimento_aplicado": 4453.1196599999885, "base_calculo_apos_escudo": 10390.612539999973, "saldo_abatimento_final": 40144.69054000005, "csll_com_escudo": 935.1551285999975, "irpj_com_escudo": 1558.591880999996, "total_impostos_real": 12395.224304000003, "carga_tributaria_real": 14.8318477072616, "carga_tributaria_real_ML": 6.7101211394494324}, "2026-11": {"saldo_icms_anterior": 0.0, "saldo_pis_anterior": 0.0, "saldo_cofins_anterior": 0.0, "total_vendas": 0.0, "valor_vendas": 0.0, "total_compra_para_revenda": 0.0, "valor_compra_para_revenda": 0.0, "total_compra_para_consumo": 2.0, "valor_compra_para_consumo": 1330.0, "total_transporte": 0.0, "valor_transporte": 0.0, "faturamento_bruto": 0.0, "total_devolucoes": 2.0, "valor_devolucoes": 44.910000000000004, "vbcicms_devolucoes": 0.0, "vprod_devolucoes": 44.910000000000004, "voutro_devolucoes": 0.0, "total_transferencias": 0.0, "valor_transferencias": 0.0, "vbcicms_transferencias": 0.0, "vprod_transferencias": 0.0, "voutro_transferencias": 0.0, "valor_vendas_liquidas": -44.910000000000004, "faturamento_ml": -44.910000000000004, "total_servicos": 4.0, "valor_servicos": 62138.29, "total_energia_eletrica": 0, "valor_energia_eletrica": 0.0, "total_canceladas": 0.0, "valor_canceladas": 0.0, "total_ct-e_estadual": 0.0, "valor_ct-e_estadual": 0.0, "total_ct-e_interestadual": 0.0, "valor_ct-e_interestadual": 0.0, "cmv_vendas": 0.0, "cmv_transferencias": 0.0, "cmv_total": 0.0, "cmv_total_percentual": 0.0, "vprod_vendas": 0.0, "voutro_vendas": 0.0, "vbcicms_vendas": 0.0, "vprod_compra_para_revenda": 0.0, "voutro_compra_para_revenda": 0.0, "vbcicms_compra_para_revenda": 0.0, "vprod_compra_para_consumo": 1250.0, "voutro_compra_para_consumo": 0.0, "vbcicms_compra_para_consumo": 0.0, "valor_despesas": 63468.29, "icms_vendas": 0.0, "ipi_venda": 0.0, "pis_vendas": 0.0, "cofins_vendas": 0.0, "icms_devolucoes": 0.0, "pis_devolucoes": 0.0, "cofins_devolucoes": 0.0, "icms_transferencias": 0.0, "pis_transferencia": 0.0, "cofins_transferencia": 0.0, "icms_transporte": 0.0, "pis_transporte": 0.0, "cofins_transporte": 0.0, "icms_energia_eletrica": 0.0, "pis_energia_eletrica": 0.0, "cofins_energia_eletrica": 0.0, "icms_compra_para_revenda": 0.0, "icms_compra_para_consumo": 0.0, "pis_compra_para_consumo": 0.0, "cofins_compra_para_consumo": 0.0, "icms_real": 0.0, "base_piscofins_real": 0.0, "pis_real": -0.74, "cofins_real": -0.74, "total_pis_cofins_real": -1.48, "dre": -63468.29, "csll_real": 0.0, "irpj_basico_real": 0.0, "irpj_real": 0.0, "lucro_real_liquido": -63468.29, "irpj_base_calculo_8_percent": -3.5928000000000004, "irpj_imposto_basico": -0.5389200000000001, "irpj_excesso": 0, "irpj_adicional": 0.0, "irpj_a_recolher": -0.5389200000000001, "csll_base_calculo_12_percent": -5.389200000000001, "csll_imposto_devido": -0.485028, "csll_a_recolher": -0.485028, "saldo_abatimento_inicial": 40144.69054000005, "abatimento_aplicado": 0.0, "base_calculo_apos_escudo": 0.0, "saldo_abatimento_final": 103612.98054000005, "csll_com_escudo": 0.0, "irpj_com_escudo": 0.0, "total_impostos_real": -2.5039480000000003, "carga_tributaria_real": 0.0, "carga_tributaria_real_ML": 0.0}}, "card_definitions": [{"id": "faturamento_ml", "title": "Faturamento ML", "subtitle": "Vendas + Transferências", "value_key": "faturamento_ml", "format_type": "currency"}, {"id": "faturamento_bruto", "title": "Faturamento Bruto", "subtitle": "Sobre notas de vendas", "value_key": "faturamento_bruto", "format_type": "currency"}, {"id": "valor_despesas", "title": "Despesas Operacionais", "subtitle": "Serviços e Fretes", "value_key": "valor_despesas", "format_type": "currency"}, {"id": "total_impostos_real", "title": "Total de Impostos", "subtitle": "PIS + COFINS + IRPJ + CSL", "value_key": "total_impostos_real", "format_type": "currency"}, {"id": "cmv_total", "title": "CMV", "subtitle": "CMV Vendas + Transferências", "value_key": "cmv_total", "format_type": "currency"}, {"id": "cmv_total_percentual", "title": "CMV (%)", "subtitle": "Percentual sobre faturamentl ML", "value_key": "cmv_total_percentual", "format_type": "percentage"}, {"id": "carga_tributaria_real", "title": "Carga Tributária ", "subtitle": "sobre vendas", "value_key": "carga_tributaria_real", "format_type": "percentage"}], "lucro_real_card_definitions": [{"id": "icms_real", "title": "ICMS", "subtitle": "Icms a pagar", "value_key": "icms_real", "format_type": "currency"}, {"id": "pis_real", "title": "PIS", "subtitle": "Alíquota 1.65%", "value_key": "pis_real", "format_type": "currency"}, {"id": "cofins_real", "title": "COFINS Real", "subtitle": "Alíquota 7.6%", "value_key": "cofins_real", "format_type": "currency"}, {"id": "lucro_real_liquido", "title": "Resultado Contábil", "subtitle": "Lucro Apurado ", "value_key": "lucro_real_liquido", "format_type": "currency"}, {"id": "irpj_a_recolher", "title": "IRPJ estimado", "subtitle": "Estimando 8% de lucro", "value_key": "irpj_a_recolher", "format_type": "currency"}, {"id": "csll_a_recolher", "title": "CSLL estimado", "subtitle": "Estimando 12% de lucro", "value_key": "csll_a_recolher", "format_type": "currency"}, {"id": "total_impostos_real", "title": "Total Impostos Real", "subtitle": "PIS + COFINS + IRPJ + CSLL", "value_key": "total_impostos_real", "format_type": "currency"}], "financial_summary_definitions": [{"label": "Notas de Venda", "qty_key": "total_vendas", "value_key": "valor_vendas", "vprod_key": "vprod_vendas", "vBCICMS_key": "vbcicms_vendas", "icms_key": "icms_vendas", "ipi_key": "ipi_venda", "pis_key": "pis_vendas", "cofins_key": "cofins_vendas", "voutro_key": "voutro_vendas"}, {"label": "Notas de Compra (revenda)", "qty_key": "total_compra_para_revenda", "value_key": "valor_compra_para_revenda", "vprod_key": "vprod_compra_para_revenda", "vBCICMS_key": "vbcicms_compra_para_revenda", "icms_key": "icms_compra_para_revenda", "ipi_key": "ipi_compra_para_revenda", "pis_key": "pis_compra_para_revenda", "cofins_key": "cofins_compra_para_revenda", "voutro_key": "voutro_compra_para_revenda"}, {"label": "Notas de Compra (Consumo)", "qty_key": "total_compra_para_consumo", "value_key": "valor_compra_para_consumo", "vprod_key": "vprod_compra_para_consumo", "vBCICMS_key": "vbcicms_compra_para_consumo", "icms_key": "icms_compra_para_consumo", "ipi_key": "ipi_compra_para_consumo", "pis_key": "pis_compra_para_consumo", "cofins_key": "cofins_compra_para_consumo", "voutro_key": "voutro_compra_para_consumo"}, {"label": "Notas de Transferência", "qty_key": "total_transferencias", "value_key": "valor_transferencias", "vprod_key": "vprod_transferencias", "vBCICMS_key": "vbcicms_transferencias", "icms_key": "icms_transferencias", "ipi_key": "ipi_transferencia", "pis_key": "pis_transferencia", "cofins_key": "cofins_transferencia", "voutro_key": "voutro_transferencias"}, {"label": "Notas de Transporte (CTe)", "qty_key": "total_transporte", "value_key": "valor_transporte", "vprod_key": null, "vBCICMS_key": null, "icms_key": "icms_transporte", "ipi_key": null, "pis_key": "pis_transporte", "cofins_key": "cofins_transporte", "voutro_key": null}, {"label": "Serviços", "qty_key": "total_servicos", "value_key": "valor_servicos", "vprod_key": null, "vBCICMS_key": null, "icms_key": null, "ipi_key": null, "pis_key": "pis_servicos", "cofins_key": "cofins_servicos", "voutro_key": null}, {"label": "Energia Elétrica", "qty_key": "total_energia_eletrica", "value_key": "valor_energia_eletrica", "vprod_key": null, "vBCICMS_key": null, "icms_key": "icms_energia_eletrica", "ipi_key": null, "pis_key": "pis_energia_eletrica", "cofins_key": "cofins_energia_eletrica", "voutro_key": null}, {"label": "Devoluções", "qty_key": "total_devolucoes", "value_key": "valor_devolucoes", "vprod_key": "vprod_devolucoes", "vBCICMS_key": "vbcicms_devolucoes", "icms_key": "icms_devolucoes", "ipi_key": "ipi_devolucao", "pis_key": "pis_devolucoes", "cofins_key": "cofins_devolucoes", "voutro_key": "voutro_devolucoes"}, {"label": "Canceladas", "qty_key": "total_canceladas", "value_key": "valor_canceladas", "vprod_key": null, "vBCICMS_key": null, "icms_key": "icms_cancelada", "ipi_key": "ipi_cancelada", "pis_key": "pis_cancelada", "cofins_key": "cofins_cancelada", "voutro_key": null}], "financial_summary": [], "tax_summary": [], "monthly_summary_table": [{"Mês": "2026-06", "Vendas": 498322.949999999, "Compras": 0.0, "Transferências": 38838.44000000001, "Faturamento ML": 537161.3899999991, "ICMS": 45380.282600000035, "PIS/COFINS": 38720.62, "IRPJ/CSLL": 98205.67, "IRPJ/CSLL Estimado": 13348.346859999969, "Lucro Real Líquido": 196516.89, "CMV Vendas": 403055.51999999915, "CMV Transferências": 33180.94000000001, "CMV Total": 436236.45999999915, "CMV Total (%)": 81.21143256405675}, {"Mês": "2026-07", "Vendas": 80441.24, "Compras": 0.0, "Transferências": 271135.56000000006, "Faturamento ML": 351329.80000000005, "ICMS": 5688.557200000002, "PIS/COFINS": 5212.09, "IRPJ/CSLL": 0.0, "IRPJ/CSLL Estimado": 1828.428672, "Lucro Real Líquido": -21452.3, "CMV Vendas": 59383.57000000001, "CMV Transferências": 220899.54999999973, "CMV Total": 280283.11999999976, "CMV Total (%)": 79.7777814463788}, {"Mês": "2026-08", "Vendas": 17875.329999999998, "Compras": 873.3299999999999, "Transferências": 168814.49999999985, "Faturamento ML": 186439.02999999985, "ICMS": 984.6527999999998, "PIS/COFINS": 553.71, "IRPJ/CSLL": 0.0, "IRPJ/CSLL Estimado": 401.8392839999999, "Lucro Real Líquido": -20687.5, "CMV Vendas": 12044.76, "CMV Transferências": 135470.94999999992, "CMV Total": 147515.70999999993, "CMV Total (%)": 79.12276200965005}, {"Mês": "2026-09", "Vendas": 64257.83000000001, "Compras": 532.8, "Transferências": 253766.00999999975, "Faturamento ML": 318023.83999999973, "ICMS": 2952.3502000000026, "PIS/COFINS": 3352.47, "IRPJ/CSLL": 0.0, "IRPJ/CSLL Estimado": 1465.078524, "Lucro Real Líquido": -2458.01, "CMV Vendas": 53334.07, "CMV Transferências": 210113.3700000001, "CMV Total": 263447.4400000001, "CMV Total (%)": 82.8388966059904}, {"Mês": "2026-10", "Vendas": 83571.68000000001, "Compras": 482.29999999999995, "Transferências": 108091.12000000021, "Faturamento ML": 184724.30000000022, "ICMS": 5644.357800000003, "PIS/COFINS": 5003.629999999999, "IRPJ/CSLL": 3562.5, "IRPJ/CSLL Estimado": 1747.236504, "Lucro Real Líquido": 11281.23, "CMV Vendas": 68134.18000000004, "CMV Transferências": 84310.56999999996, "CMV Total": 152444.75, "CMV Total (%)": 82.52555294566}, {"Mês": "2026-11", "Vendas": 0.0, "Compras": 1330.0, "Transferências": 0.0, "Faturamento ML": -44.910000000000004, "ICMS": 0.0, "PIS/COFINS": -1.48, "IRPJ/CSLL": 0.0, "IRPJ/CSLL Estimado": -1.023948, "Lucro Real Líquido": -63468.29, "CMV Vendas": 0.0, "CMV Transferências": 0.0, "CMV Total": 0.0, "CMV Total (%)": 0.0}]};
 
     function formatValue(value, type) {
         if (typeof value !== 'number') value = parseFloat(value) || 0;
@@ -861,78 +531,10 @@ tr:hover {
         safeSetText('icmsRecolherValue', formatValue(ind.icms_real, 'currency'));
         safeSetText('pisRecolherValue', formatValue(ind.pis_real, 'currency'));
         safeSetText('cofinsRecolherValue', formatValue(ind.cofins_real, 'currency'));
-        safeSetText('irpjRecolherValue', formatValue(ind.irpj_a_recolher, 'currency'));
-        safeSetText('csllRecolherValue', formatValue(ind.csll_a_recolher, 'currency'));
+        safeSetText('irpjRecolherValue', formatValue(ind.irpj_real, 'currency'));
+        safeSetText('csllRecolherValue', formatValue(ind.csll_real, 'currency'));
         safeSetText('impostosARecolherValue', formatValue(ind.total_impostos_real, 'currency'));
         safeSetText('cargaTributariaValue', formatValue(ind.carga_tributaria_real, 'percentage'));
-    }
-
-
-    function renderApuracaoDetalhadaLista(id, itens) {
-        const el = document.getElementById(id);
-        if (!el) return;
-        el.innerHTML = itens.map(item => {
-            const valor = Number(item[1] || 0);
-            return `<li>• ${item[0]}: <strong>${formatValue(valor, 'currency')}</strong></li>`;
-        }).join('');
-    }
-
-    function renderApuracaoDetalhada(ind) {
-        renderApuracaoDetalhadaLista('novoIcmsDebitos', [
-            ['ICMS sobre vendas', ind.icms_vendas]
-        ]);
-        renderApuracaoDetalhadaLista('novoIcmsCreditos', [
-            ['ICMS transporte', ind.icms_transporte],
-            ['ICMS devoluções', ind.icms_devolucoes],
-            ['ICMS energia elétrica', ind.icms_energia_eletrica],
-            ['ICMS compra para revenda', ind.icms_compra_para_revenda],
-            ['ICMS compra para consumo', ind.icms_compra_para_consumo],
-            ['Saldo anterior', ind.saldo_icms_anterior]
-        ]);
-        safeSetText('novoIcmsResultado', formatValue(ind.icms_real, 'currency'));
-
-        renderApuracaoDetalhadaLista('novoPisDebitos', [
-            ['PIS sobre vendas', ind.pis_vendas]
-        ]);
-        renderApuracaoDetalhadaLista('novoPisCreditos', [
-            ['PIS devoluções', ind.pis_devolucoes],
-            ['PIS transporte', ind.pis_transporte],
-            ['PIS energia elétrica', ind.pis_energia_eletrica],
-            ['PIS compra para consumo', ind.pis_compra_para_consumo],
-            ['Saldo anterior', ind.saldo_pis_anterior]
-        ]);
-        safeSetText('novoPisResultado', formatValue(ind.pis_real, 'currency'));
-
-        renderApuracaoDetalhadaLista('novoCofinsDebitos', [
-            ['COFINS sobre vendas', ind.cofins_vendas]
-        ]);
-        renderApuracaoDetalhadaLista('novoCofinsCreditos', [
-            ['COFINS devoluções', ind.cofins_devolucoes],
-            ['COFINS transporte', ind.cofins_transporte],
-            ['COFINS energia elétrica', ind.cofins_energia_eletrica],
-            ['COFINS compra para consumo', ind.cofins_compra_para_consumo],
-            ['Saldo anterior', ind.saldo_cofins_anterior]
-        ]);
-        safeSetText('novoCofinsResultado', formatValue(ind.cofins_real, 'currency'));
-
-        renderApuracaoDetalhadaLista('novoIrpjDebitos', [
-            ['Base de cálculo (8%)', ind.irpj_base_calculo_8_percent],
-            ['IRPJ básico (15%)', ind.irpj_imposto_basico]
-        ]);
-        renderApuracaoDetalhadaLista('novoIrpjCreditos', [
-            ['Excesso para adicional', ind.irpj_excesso],
-            ['Adicional IRPJ', ind.irpj_adicional]
-        ]);
-        safeSetText('novoIrpjResultado', formatValue(ind.irpj_a_recolher, 'currency'));
-
-        renderApuracaoDetalhadaLista('novoCsllDebitos', [
-            ['Base de cálculo (12%)', ind.csll_base_calculo_12_percent],
-            ['CSLL devida (9%)', ind.csll_imposto_devido]
-        ]);
-        renderApuracaoDetalhadaLista('novoCsllCreditos', [
-            ['Abatimento aplicado', ind.abatimento_aplicado]
-        ]);
-        safeSetText('novoCsllResultado', formatValue(ind.csll_a_recolher, 'currency'));
     }
 
     function renderCards(ind) {
@@ -1039,7 +641,7 @@ tr:hover {
         corpoEvolucaoMensal.innerHTML = '';
 
         (dashboardData.monthly_summary_table || []).forEach(row => {
-            corpoEvolucaoMensal.innerHTML += `<tr><td>${row['Mês']}</td><td>${formatValue(row['Vendas'], 'currency')}</td><td>${formatValue(row['Compras'], 'currency')}</td><td>${formatValue(row['Faturamento ML'], 'currency')}</td><td>${formatValue(row['ICMS'] || 0, 'currency')}</td><td>${formatValue(row['PIS/COFINS'], 'currency')}</td><td>${formatValue(row['Lucro Real Líquido'], 'currency')}</td></tr>`;
+            corpoEvolucaoMensal.innerHTML += `<tr><td>${row['Mês']}</td><td>${formatValue(row['Vendas'], 'currency')}</td><td>${formatValue(row['Compras'], 'currency')}</td><td>${formatValue(row['Faturamento ML'], 'currency')}</td><td>${formatValue(row['ICMS'] || 0, 'currency')}</td><td>${formatValue(row['PIS/COFINS'], 'currency')}</td><td>${formatValue(row['IRPJ/CSLL'], 'currency')}</td><td>${formatValue(row['IRPJ/CSLL Estimado'], 'currency')}</td><td>${formatValue(row['Lucro Real Líquido'], 'currency')}</td></tr>`;
         });
     }
 
@@ -1064,8 +666,6 @@ tr:hover {
                 renderCards(ind);
                 renderLucroRealCards(ind);
                 updateTaxDetails(ind);
-            renderApuracaoDetalhada(ind);
-                renderApuracaoDetalhada(ind);
                 renderRevenueExpenseTables(selectedMonth);
                 renderFinancialSummary(ind);
             }
