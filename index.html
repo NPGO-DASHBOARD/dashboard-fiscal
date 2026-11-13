@@ -533,7 +533,6 @@ tr:hover {
 
 </style>
 
-<link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/NPGO-DASHBOARD/dashboard-fiscal/refs/heads/main/FAVICON1.jpg">
 </head>
 <body>
     
@@ -884,9 +883,7 @@ tr:hover {
         renderApuracaoDetalhadaLista('novoIcmsCreditos', [
             ['ICMS transporte', ind.icms_transporte],
             ['ICMS devoluções', ind.icms_devolucoes],
-            ['ICMS energia elétrica', ind.icms_energia_eletrica],
             ['ICMS compra para revenda', ind.icms_compra_para_revenda],
-            ['ICMS compra para consumo', ind.icms_compra_para_consumo],
             ['Saldo anterior', ind.saldo_icms_anterior]
         ]);
         safeSetText('novoIcmsResultado', formatValue(ind.icms_real, 'currency'));
