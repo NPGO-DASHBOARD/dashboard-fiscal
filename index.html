@@ -241,10 +241,10 @@ tr:hover {
 }
 
 #apuracaoDetalhadaImpostos .tax-card {
-    --tax-color: #55c58a;
+    --tax-color: var(--cor-principal);
     --tax-glow: rgba(85,197,138,0.12);
 
-    background: linear-gradient(145deg, #202820, #151b18);
+    background: #141812;
     border: 1px solid rgba(255,255,255,0.08);
     border-top: 3px solid var(--tax-color);
     border-radius: 11px;
@@ -260,30 +260,7 @@ tr:hover {
     overflow: hidden;
 }
 
-#apuracaoDetalhadaImpostos .tax-icms {
-    --tax-color: #55c58a;
-    --tax-glow: rgba(85,197,138,0.12);
-}
 
-#apuracaoDetalhadaImpostos .tax-pis {
-    --tax-color: #68a8ff;
-    --tax-glow: rgba(104,168,255,0.12);
-}
-
-#apuracaoDetalhadaImpostos .tax-cofins {
-    --tax-color: #68a8ff;
-    --tax-glow: rgba(104,168,255,0.12);
-}
-
-#apuracaoDetalhadaImpostos .tax-irpj {
-    --tax-color: #e58dbd;
-    --tax-glow: rgba(229,141,189,0.12);
-}
-
-#apuracaoDetalhadaImpostos .tax-csll {
-    --tax-color: #e58dbd;
-    --tax-glow: rgba(229,141,189,0.12);
-}
 
 /* CABEÇALHO */
 
@@ -317,9 +294,31 @@ tr:hover {
     width: 32px;
     height: 32px;
     border-radius: 8px;
-    color: var(--tax-color);
-    background: var(--tax-glow);
+    color: var(--icon-color);
+    background: color-mix(in srgb, var(--icon-color) 15%, transparent);
     font-size: 17px;
+}
+
+/* Cores individuais somente dos ícones */
+
+#apuracaoDetalhadaImpostos .tax-icms {
+    --icon-color: #9a91ff;
+}
+
+#apuracaoDetalhadaImpostos .tax-pis {
+    --icon-color: #FFDE21;
+}
+
+#apuracaoDetalhadaImpostos .tax-cofins {
+    --icon-color: #FFDE21;
+}
+
+#apuracaoDetalhadaImpostos .tax-irpj {
+    --icon-color: #e58dbd;
+}
+
+#apuracaoDetalhadaImpostos .tax-csll {
+    --icon-color: #e58dbd;
 }
 
 /* VALOR PRINCIPAL */
@@ -534,7 +533,6 @@ tr:hover {
 
 </style>
 
-<link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/NPGO-DASHBOARD/dashboard-fiscal/refs/heads/main/FAVICON1.jpg">
 </head>
 <body>
     
