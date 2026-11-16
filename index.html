@@ -533,7 +533,6 @@ tr:hover {
 
 </style>
 
-<link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/NPGO-DASHBOARD/dashboard-fiscal/refs/heads/main/FAVICON1.jpg">
 </head>
 <body>
     
@@ -732,25 +731,6 @@ tr:hover {
 
 
     
-<!-- Nova Seção de Créditos da Planilha -->
-<div class="section">
-    <div class="section-title">
-        🔍 Análise de Créditos Fiscais (Planilha)
-    </div>
-    <div class="explanation-text">
-        Dados importados diretamente da planilha consolidada de créditos fiscais.
-    </div>
-    <div class="table-container">
-        <table id="tabelaCreditosPlanilha">
-            <thead>
-                <tr id="cabecalhoCreditosPlanilha"></tr>
-            </thead>
-            <tbody id="corpoCreditosPlanilha"></tbody>
-        </table>
-    </div>
-</div>
-
-    
 <div class="section flex-tables-container">
     <div>
         <div class="section-title">📈 Receitas (Entradas de Caixa)</div>
@@ -886,6 +866,7 @@ tr:hover {
         safeSetText('cargaTributariaValue', formatValue(ind.carga_tributaria_real, 'percentage'));
     }
 
+
     function renderApuracaoDetalhadaLista(id, itens) {
         const el = document.getElementById(id);
         if (!el) return;
@@ -1017,7 +998,8 @@ tr:hover {
                 operacao_display = item.emitente_name;
             } else if (item.emitente_name) {
                 operacao_display = item.emitente_name;
-            } else {                operacao_display = item.nome;
+            } else {
+                operacao_display = item.nome;
             }
             corpoDespesas.innerHTML += `<tr><td>${item.operacao_tipo}</td><td>${formatValue(item.qtd, 'integer')}</td><td>${formatValue(item.valor, 'currency')}</td><td>${operacao_display}</td></tr>`;
         }
@@ -1056,28 +1038,6 @@ tr:hover {
         });
     }
 
-    function renderCreditosPlanilha() {
-        const cabecalho = document.getElementById('cabecalhoCreditosPlanilha');
-        const corpo = document.getElementById('corpoCreditosPlanilha');
-        if (!cabecalho || !corpo || !dashboardData.creditos_fiscais_planilha || dashboardData.creditos_fiscais_planilha.length === 0) return;
-
-        const colunas = Object.keys(dashboardData.creditos_fiscais_planilha[0]);
-        cabecalho.innerHTML = colunas.map(col => `<th>${col}</th>`).join('');
-
-        corpo.innerHTML = dashboardData.creditos_fiscais_planilha.map(linha => {
-            return '<tr>' + colunas.map(col => {
-                let val = linha[col];
-                if (typeof val === 'number') {
-                    if (col.toLowerCase().includes('valor') || col.toLowerCase().includes('cred') || col.toLowerCase().includes('total')) {
-                        return `<td>${formatValue(val, 'currency')}</td>`;
-                    }
-                    return `<td>${val.toLocaleString('pt-BR')}</td>`;
-                }
-                return `<td>${val}</td>`;
-            }).join('') + '</tr>';
-        }).join('');
-    }
-
     function init() {
         const selectMes = document.getElementById('selectMes');
         if (!selectMes) return;
@@ -1099,6 +1059,7 @@ tr:hover {
                 renderCards(ind);
                 renderLucroRealCards(ind);
                 updateTaxDetails(ind);
+            renderApuracaoDetalhada(ind);
                 renderApuracaoDetalhada(ind);
                 renderRevenueExpenseTables(selectedMonth);
                 renderFinancialSummary(ind);
@@ -1106,7 +1067,6 @@ tr:hover {
         });
 
         renderMonthlyEvolutionTable();
-        renderCreditosPlanilha();
 
         if (meses.length > 0) {
             selectMes.value = meses[meses.length - 1];
