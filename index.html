@@ -533,7 +533,6 @@ tr:hover {
 
 </style>
 
-<link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/NPGO-DASHBOARD/dashboard-fiscal/refs/heads/main/FAVICON1.jpg">
 </head>
 <body>
     
@@ -891,7 +890,7 @@ tr:hover {
         safeSetText('novoIcmsResultado', formatValue(ind.icms_real, 'currency'));
 
         renderApuracaoDetalhadaLista('novoPisDebitos', [
-            ['PIS sobre vendas (Base após ICMS)', ind.pis_debito_mes || ind.pis_vendas]
+            ['PIS sobre vendas', ind.pis_debito_mes || ind.pis_vendas]
         ]);
         renderApuracaoDetalhadaLista('novoPisCreditos', [
             ['PIS devoluções', ind.pis_devolucoes],
@@ -902,7 +901,7 @@ tr:hover {
         safeSetText('novoPisResultado', formatValue(ind.pis_real, 'currency'));
 
         renderApuracaoDetalhadaLista('novoCofinsDebitos', [
-            ['COFINS sobre vendas (Base após ICMS)', ind.cofins_debito_mes || ind.cofins_vendas]
+            ['COFINS sobre vendas', ind.cofins_debito_mes || ind.cofins_vendas]
         ]);
         renderApuracaoDetalhadaLista('novoCofinsCreditos', [
             ['COFINS devoluções', ind.cofins_devolucoes],
@@ -913,17 +912,17 @@ tr:hover {
         safeSetText('novoCofinsResultado', formatValue(ind.cofins_real, 'currency'));
 
         renderApuracaoDetalhadaLista('novoIrpjDebitos', [
-            ['Base de cálculo (8%)', ind.irpj_base_calculo_8_percent],
+            ['Lucro estimado (8%)', ind.irpj_base_calculo_8_percent],
             ['IRPJ básico (15%)', ind.irpj_imposto_basico]
         ]);
         renderApuracaoDetalhadaLista('novoIrpjCreditos', [
-            ['Excesso para adicional', ind.irpj_excesso],
-            ['Adicional IRPJ', ind.irpj_adicional]
+            ['Excesso (Lucro acima R$ 20.000)', ind.irpj_excesso],
+            ['Adicional IRPJ sobre excesso (10%)', ind.irpj_adicional]
         ]);
         safeSetText('novoIrpjResultado', formatValue(ind.irpj_a_recolher, 'currency'));
 
         renderApuracaoDetalhadaLista('novoCsllDebitos', [
-            ['Base de cálculo (12%)', ind.csll_base_calculo_12_percent],
+            ['Lucro estimado (12%)', ind.csll_base_calculo_12_percent],
             ['CSLL devida (9%)', ind.csll_imposto_devido]
         ]);
         renderApuracaoDetalhadaLista('novoCsllCreditos', [
