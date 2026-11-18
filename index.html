@@ -533,7 +533,6 @@ tr:hover {
 
 </style>
 
-<link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/NPGO-DASHBOARD/dashboard-fiscal/refs/heads/main/FAVICON1.jpg">
 </head>
 <body>
     
@@ -926,7 +925,9 @@ tr:hover {
             ['Base de cálculo (12%)', ind.csll_base_calculo_12_percent],
             ['CSLL devida (9%)', ind.csll_imposto_devido]
         ]);
-       
+        renderApuracaoDetalhadaLista('novoCsllCreditos', [
+            ['Abatimento aplicado', ind.abatimento_aplicado || ind. || 0]
+        ]);
         safeSetText('novoCsllResultado', formatValue(ind.csll_a_recolher, 'currency'));
     }
 
