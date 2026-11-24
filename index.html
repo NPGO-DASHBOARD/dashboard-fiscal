@@ -533,7 +533,6 @@ tr:hover {
 
 </style>
 
-<link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/NPGO-DASHBOARD/dashboard-fiscal/refs/heads/main/FAVICON1.jpg">
 </head>
 <body>
     
@@ -968,55 +967,62 @@ tr:hover {
         renderApuracaoDetalhadaLista('novoIcmsDebitos', [
             ['ICMS sobre vendas', ind.icms_vendas],
             ['DIFAL sobre compras', ind.difal_compras]
-
         ]);
+
         renderApuracaoDetalhadaLista('novoIcmsCreditos', [
             ['ICMS transporte', ind.icms_transporte],
             ['ICMS devoluções', ind.icms_devolucoes],
             ['ICMS compras para revenda', ind.icms_compra_revenda],
             ['Saldo anterior', ind.saldo_icms_anterior]
         ]);
+
         safeSetText('novoIcmsResultado', formatValue(ind.icms_real, 'currency'));
 
         renderApuracaoDetalhadaLista('novoPisDebitos', [
             ['PIS sobre vendas', ind.pis_debito_mes || ind.pis_vendas]
         ]);
+
         renderApuracaoDetalhadaLista('novoPisCreditos', [
             ['PIS devoluções', ind.pis_devolucoes],
             ['PIS transporte', ind.pis_transporte],
             ['PIS energia elétrica', ind.pis_energia_eletrica],
             ['Saldo anterior', ind.saldo_pis_anterior]
         ]);
+
         safeSetText('novoPisResultado', formatValue(ind.pis_real, 'currency'));
 
         renderApuracaoDetalhadaLista('novoCofinsDebitos', [
             ['COFINS sobre vendas', ind.cofins_debito_mes || ind.cofins_vendas]
         ]);
+
         renderApuracaoDetalhadaLista('novoCofinsCreditos', [
             ['COFINS devoluções', ind.cofins_devolucoes],
             ['COFINS transporte', ind.cofins_transporte],
             ['COFINS energia elétrica', ind.cofins_energia_eletrica],
             ['Saldo anterior', ind.saldo_cofins_anterior]
         ]);
+
         safeSetText('novoCofinsResultado', formatValue(ind.cofins_real, 'currency'));
 
         renderApuracaoDetalhadaLista('novoIrpjDebitos', [
             ['Lucro estimado (8%)', ind.irpj_base_calculo_8_percent],
             ['IRPJ básico (15%)', ind.irpj_imposto_basico]
         ]);
+
         renderApuracaoDetalhadaLista('novoIrpjCreditos', [
             ['Excesso (Lucro acima R$ 20.000)', ind.irpj_excesso],
             ['Adicional IRPJ sobre excesso (10%)', ind.irpj_adicional]
         ]);
+
         safeSetText('novoIrpjResultado', formatValue(ind.irpj_a_recolher, 'currency'));
 
         renderApuracaoDetalhadaLista('novoCsllDebitos', [
             ['Lucro estimado (12%)', ind.csll_base_calculo_12_percent],
             ['CSLL devida (9%)', ind.csll_imposto_devido]
         ]);
-        renderApuracaoDetalhadaLista('novoCsllCreditos', [
 
-        ]);
+        renderApuracaoDetalhadaLista('novoCsllCreditos', []);
+
         safeSetText('novoCsllResultado', formatValue(ind.csll_a_recolher, 'currency'));
     }
 
@@ -1024,8 +1030,10 @@ tr:hover {
         const container = document.getElementById('dashboardCards');
         if (!container) return;
         container.innerHTML = '';
+
         (dashboardData.card_definitions || []).forEach(d => {
             const subtitleHtml = d.subtitle ? `<div class="card-subtitle">${d.subtitle}</div>` : '';
+
             container.innerHTML += `
                 <div class="card">
                     <div class="card-title">${d.title}</div>
@@ -1040,8 +1048,10 @@ tr:hover {
         const container = document.getElementById('lucroRealCards');
         if (!container) return;
         container.innerHTML = '';
+
         (dashboardData.lucro_real_card_definitions || []).forEach(d => {
             const subtitleHtml = d.subtitle ? `<div class="card-subtitle">${d.subtitle}</div>` : '';
+
             container.innerHTML += `
                 <div class="card">
                     <div class="card-title">${d.title}</div>
@@ -1066,11 +1076,13 @@ tr:hover {
         for (const chave_op in detalhesMes.receitas) {
             const item = detalhesMes.receitas[chave_op];
             let operacao_display = item.nome;
+
             if (item.operacao_tipo === 'Venda' || item.operacao_tipo === 'Transferência') {
                 if (item.emitente_name && item.operacao_tipo !== 'Serviço') {
                     operacao_display = item.emitente_name + (item.nome ? ' (' + item.nome + ')' : '');
                 }
             }
+
             corpoReceitas.innerHTML += `<tr><td>${item.operacao_tipo}</td><td>${formatValue(item.qtd, 'integer')}</td><td>${formatValue(item.valor, 'currency')}</td><td>${operacao_display}</td></tr>`;
         }
 
@@ -1091,6 +1103,7 @@ tr:hover {
             } else {
                 operacao_display = item.nome;
             }
+
             corpoDespesas.innerHTML += `<tr><td>${item.operacao_tipo}</td><td>${formatValue(item.qtd, 'integer')}</td><td>${formatValue(item.valor, 'currency')}</td><td>${operacao_display}</td></tr>`;
         }
     }
@@ -1128,96 +1141,108 @@ tr:hover {
         });
     }
 
+    // ============================================================
+    // ANÁLISE DE CRÉDITOS FISCAIS
+    // ============================================================
 
-function renderCreditAnalysis(mes) {
+    function renderCreditAnalysis(mes) {
 
-    const dados = dashboardData.analise_creditos || [];
-    const itens = dados.filter(item => item.mes_ref === mes);
+        const dados = dashboardData.analise_creditos || [];
+        const itens = dados.filter(item => item.mes_ref === mes);
 
-    const somar = campo => itens.reduce(
-        (total, item) => total + Number(item[campo] || 0), 0
-    );
+        const somar = campo => itens.reduce(
+            (total, item) => total + Number(item[campo] || 0), 0
+        );
 
-    safeSetText('totalCreditoICMS',
-        formatValue(somar('icms'), 'currency'));
+        safeSetText('totalCreditoICMS',
+            formatValue(somar('icms'), 'currency'));
 
-    safeSetText('totalCreditoPISCOFINS',
-        formatValue(somar('pis') + somar('cofins'), 'currency'));
+        safeSetText('totalCreditoPISCOFINS',
+            formatValue(somar('pis') + somar('cofins'), 'currency'));
 
-    safeSetText('totalEconomiaIRPJCSLL',
-        formatValue(somar('irpj') + somar('csll'), 'currency'));
+        safeSetText('totalEconomiaIRPJCSLL',
+            formatValue(somar('irpj') + somar('csll'), 'currency'));
 
-    function escapeHTML(valor) {
-        return String(valor ?? '').replace(/[&<>"']/g, char => ({
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            '"': '&quot;',
-            "'": '&#39;'
-        }[char]));
-    }
+        function escapeHTML(valor) {
+            return String(valor ?? '').replace(/[&<>"']/g, char => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#39;'
+            }[char]));
+        }
 
-    const corpo = document.getElementById('corpoTabelaCreditos');
-    if (!corpo) return;
+        const corpo = document.getElementById('corpoTabelaCreditos');
+        if (!corpo) return;
 
-    if (!itens.length) {
-        corpo.innerHTML = `
+        if (!itens.length) {
+            corpo.innerHTML = `
+                <tr>
+                    <td colspan="12" style="text-align:center;">
+                        Nenhuma nota analisada neste mês.
+                    </td>
+                </tr>`;
+            return;
+        }
+
+        corpo.innerHTML = itens.map(item => `
             <tr>
-                <td colspan="12" style="text-align:center;">
-                    Nenhuma nota analisada neste mês.
-                </td>
-            </tr>`;
-        return;
+                <td>${escapeHTML(item.tipo)}</td>
+                <td>${escapeHTML(item.fornecedor)}</td>
+                <td>${escapeHTML(item.regime)}</td>
+                <td style="min-width:300px;">${escapeHTML(item.descricao)}</td>
+                <td>${formatValue(item.valor_nota, 'currency')}</td>
+                <td>${formatValue(item.icms, 'currency')}</td>
+                <td>${formatValue(item.pis, 'currency')}</td>
+                <td>${formatValue(item.cofins, 'currency')}</td>
+                <td>${escapeHTML(item.tipo_despesa)}</td>
+                <td>${formatValue(item.irpj, 'currency')}</td>
+                <td>${formatValue(item.csll, 'currency')}</td>
+                <td style="min-width:300px;">${escapeHTML(item.observacao)}</td>
+            </tr>
+        `).join('');
     }
 
-    corpo.innerHTML = itens.map(item => `
-        <tr>
-            <td>${escapeHTML(item.tipo)}</td>
-            <td>${escapeHTML(item.fornecedor)}</td>
-            <td>${escapeHTML(item.regime)}</td>
-            <td style="min-width:300px;">${escapeHTML(item.descricao)}</td>
-            <td>${formatValue(item.valor_nota, 'currency')}</td>
-            <td>${formatValue(item.icms, 'currency')}</td>
-            <td>${formatValue(item.pis, 'currency')}</td>
-            <td>${formatValue(item.cofins, 'currency')}</td>
-            <td>${escapeHTML(item.tipo_despesa)}</td>
-            <td>${formatValue(item.irpj, 'currency')}</td>
-            <td>${formatValue(item.csll, 'currency')}</td>
-            <td style="min-width:300px;">${escapeHTML(item.observacao)}</td>
-        </tr>
-    `).join('');
-}
-
+    // ============================================================
+    // INICIALIZAÇÃO DO DASHBOARD
+    // ============================================================
 
     function init() {
         const selectMes = document.getElementById('selectMes');
         if (!selectMes) return;
 
         const meses = [...new Set([
-    ...Object.keys(dashboardData.monthly_indicators || {}),
-    ...(dashboardData.analise_creditos || []).map(item => item.mes_ref)
-])].sort();
+            ...Object.keys(dashboardData.monthly_indicators || {}),
+            ...(dashboardData.analise_creditos || []).map(item => item.mes_ref)
+        ])].filter(Boolean).sort();
+
         selectMes.innerHTML = '';
 
         meses.forEach(m => {
             const opt = document.createElement('option');
-            opt.value = m; opt.textContent = formatMonthName(m);
+            opt.value = m;
+            opt.textContent = formatMonthName(m);
             selectMes.appendChild(opt);
         });
 
         selectMes.addEventListener('change', function() {
             const selectedMonth = this.value;
             const ind = dashboardData.monthly_indicators[selectedMonth];
+
             if (ind) {
                 ind.mes_ref = selectedMonth;
+
                 renderCards(ind);
                 renderLucroRealCards(ind);
                 updateTaxDetails(ind);
                 renderApuracaoDetalhada(ind);
                 renderRevenueExpenseTables(selectedMonth);
                 renderFinancialSummary(ind);
-                renderCreditAnalysis(selectedMonth);
             }
+
+            // Atualiza a análise de créditos independentemente da apuração mensal.
+            renderCreditAnalysis(selectedMonth);
         });
 
         renderMonthlyEvolutionTable();
@@ -1225,14 +1250,18 @@ function renderCreditAnalysis(mes) {
         if (meses.length > 0) {
             selectMes.value = meses[meses.length - 1];
             selectMes.dispatchEvent(new Event('change'));
+        } else {
+            renderCreditAnalysis('');
         }
     }
 
     document.addEventListener('DOMContentLoaded', init);
-    if (document.readyState !== 'loading') init();
+
+    if (document.readyState !== 'loading') {
+        init();
+    }
+
 })();
-
-
 </script>
 </body>
 </html>
