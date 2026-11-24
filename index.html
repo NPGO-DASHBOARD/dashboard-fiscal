@@ -533,7 +533,6 @@ tr:hover {
 
 </style>
 
-<link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/NPGO-DASHBOARD/dashboard-fiscal/refs/heads/main/FAVICON1.jpg">
 </head>
 <body>
     
@@ -1193,7 +1192,10 @@ function renderCreditAnalysis(mes) {
         const selectMes = document.getElementById('selectMes');
         if (!selectMes) return;
 
-        const meses = Object.keys(dashboardData.monthly_indicators || {}).sort();
+        const meses = [...new Set([
+    ...Object.keys(dashboardData.monthly_indicators || {}),
+    ...(dashboardData.analise_creditos || []).map(item => item.mes_ref)
+])].sort();
         selectMes.innerHTML = '';
 
         meses.forEach(m => {
