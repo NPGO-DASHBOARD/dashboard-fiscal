@@ -576,7 +576,6 @@ tr:hover {
 
 </style>
 
-<link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/NPGO-DASHBOARD/dashboard-fiscal/refs/heads/main/FAVICON1.jpg">
 </head>
 <body>
     
@@ -621,42 +620,6 @@ tr:hover {
     </div>
     <div class="cards" id="dashboardCards">
         <!-- Cards serão populados dinamicamente via JavaScript -->
-    </div>
-</div>
-
-    
-<div class="section" id="secaoAnaliseCreditos">
-    <div class="section-title">
-        💳 Análise de Créditos Fiscais <span id="creditoAnaliseMes"></span>
-    </div>
-    <div class="credit-analysis-grid">
-        <div class="credit-analysis-card">
-            <h3>CRÉDITO ICMS</h3>
-            <div class="credit-subtitle">Crédito potencial (valor da planilha)</div>
-            <div class="credit-potential" id="creditoIcmsPotencial">R$ 0,00</div>
-            <div class="credit-result-label">Crédito elegível</div>
-            <div class="credit-result" id="creditoIcmsElegivel">R$ 0,00</div>
-        </div>
-        <div class="credit-analysis-card">
-            <h3>CRÉDITO PIS/COFINS</h3>
-            <div class="credit-subtitle">Crédito potencial (valor da planilha)</div>
-            <div class="credit-potential" id="creditoPisCofinsPotencial">R$ 0,00</div>
-            <div class="credit-result-label">Crédito elegível</div>
-            <div class="credit-result" id="creditoPisCofinsElegivel">R$ 0,00</div>
-        </div>
-        <div class="credit-analysis-card">
-            <h3>ECONOMIA IRPJ / CSLL</h3>
-            <div class="credit-subtitle">Valor total das notas</div>
-            <div class="credit-potential" id="economiaTotalNotas">R$ 0,00</div>
-            <div class="credit-result-label">Valor da economia IRPJ/CSLL</div>
-            <div class="credit-result" id="economiaIrpjCsll">R$ 0,00</div>
-        </div>
-    </div>
-    <div class="credit-analysis-details" style="margin-top:22px;">
-        <div class="section-title">📋 Detalhamento das Notas Analisadas</div>
-        <div id="grupoNotasPis"></div>
-        <div id="grupoNotasIcms"></div>
-        <div id="grupoNotasSemCredito"></div>
     </div>
 </div>
 
@@ -809,6 +772,42 @@ tr:hover {
     </div>
 </div>
 
+
+    
+<div class="section" id="secaoAnaliseCreditos">
+    <div class="section-title">
+        💳 Análise de Créditos Fiscais <span id="creditoAnaliseMes"></span>
+    </div>
+    <div class="credit-analysis-grid">
+        <div class="credit-analysis-card">
+            <h3>CRÉDITO ICMS</h3>
+            <div class="credit-subtitle">Crédito potencial (valor da planilha)</div>
+            <div class="credit-potential" id="creditoIcmsPotencial">R$ 0,00</div>
+            <div class="credit-result-label">Crédito elegível</div>
+            <div class="credit-result" id="creditoIcmsElegivel">R$ 0,00</div>
+        </div>
+        <div class="credit-analysis-card">
+            <h3>CRÉDITO PIS/COFINS</h3>
+            <div class="credit-subtitle">Crédito potencial (valor da planilha)</div>
+            <div class="credit-potential" id="creditoPisCofinsPotencial">R$ 0,00</div>
+            <div class="credit-result-label">Crédito elegível</div>
+            <div class="credit-result" id="creditoPisCofinsElegivel">R$ 0,00</div>
+        </div>
+        <div class="credit-analysis-card">
+            <h3>ECONOMIA IRPJ / CSLL</h3>
+            <div class="credit-subtitle">Valor total das notas</div>
+            <div class="credit-potential" id="economiaTotalNotas">R$ 0,00</div>
+            <div class="credit-result-label">Valor da economia IRPJ/CSLL</div>
+            <div class="credit-result" id="economiaIrpjCsll">R$ 0,00</div>
+        </div>
+    </div>
+    <div class="credit-analysis-details" style="margin-top:22px;">
+        <div class="section-title">📋 Detalhamento das Notas Analisadas</div>
+        <div id="grupoNotasPis"></div>
+        <div id="grupoNotasIcms"></div>
+        <div id="grupoNotasSemCredito"></div>
+    </div>
+</div>
 
     
 <div class="section flex-tables-container">
