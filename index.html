@@ -533,7 +533,6 @@ tr:hover {
 
 </style>
 
-<link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/NPGO-DASHBOARD/dashboard-fiscal/refs/heads/main/FAVICON1.jpg">
 </head>
 <body>
     
@@ -815,6 +814,94 @@ tr:hover {
     </div>
 </div>
 
+    
+<div class="section" id="secaoAnaliseCreditos">
+
+    <div class="section-title">
+        💰 Análise de Créditos e Oportunidades Fiscais
+    </div>
+
+    <div class="explanation-text">
+        Créditos tributários e economias potenciais identificados
+        nas notas fiscais de compras e serviços.
+    </div>
+
+    <!-- CARDS -->
+    <div class="cards creditos-cards">
+
+        <div class="card">
+            <div class="card-title">Crédito ICMS</div>
+            <div class="card-subtitle">
+                Notas elegíveis para crédito
+            </div>
+            <div class="card-value" id="totalCreditoICMS">
+                R$ 0,00
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Crédito PIS / COFINS</div>
+            <div class="card-subtitle">
+                Créditos potenciais elegíveis
+            </div>
+            <div class="card-value" id="totalCreditoPISCOFINS">
+                R$ 0,00
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Economia IRPJ / CSLL</div>
+            <div class="card-subtitle">
+                Economia tributária potencial
+            </div>
+            <div class="card-value" id="totalEconomiaIRPJCSLL">
+                R$ 0,00
+            </div>
+        </div>
+
+    </div>
+
+    <!-- TABELA -->
+    <div class="section-title" style="margin-top:30px;">
+        📋 Detalhamento das Notas Analisadas
+    </div>
+
+    <div class="table-container"
+         style="overflow-x:auto;">
+
+        <table style="min-width:1600px;">
+
+            <thead>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Fornecedor</th>
+                    <th>Regime do Emitente</th>
+                    <th>Descrição da Operação</th>
+                    <th>Valor da Nota</th>
+                    <th>Crédito ICMS</th>
+                    <th>Crédito PIS</th>
+                    <th>Crédito COFINS</th>
+                    <th>Tipo de Despesa</th>
+                    <th>Economia IRPJ</th>
+                    <th>Economia CSLL</th>
+                    <th>Observação IA / Manual</th>
+                </tr>
+            </thead>
+
+            <tbody id="corpoTabelaCreditos">
+                <tr>
+                    <td colspan="12">
+                        Aguardando carregamento dos dados...
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
 
     <!-- Botão Flutuante Voltar ao Topo -->
     <button class="btn-topo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao topo">
@@ -1040,6 +1127,67 @@ tr:hover {
         });
     }
 
+
+function renderCreditAnalysis(mes) {
+
+    const dados = dashboardData.analise_creditos || [];
+    const itens = dados.filter(item => item.mes_ref === mes);
+
+    const somar = campo => itens.reduce(
+        (total, item) => total + Number(item[campo] || 0), 0
+    );
+
+    safeSetText('totalCreditoICMS',
+        formatValue(somar('icms'), 'currency'));
+
+    safeSetText('totalCreditoPISCOFINS',
+        formatValue(somar('pis') + somar('cofins'), 'currency'));
+
+    safeSetText('totalEconomiaIRPJCSLL',
+        formatValue(somar('irpj') + somar('csll'), 'currency'));
+
+    function escapeHTML(valor) {
+        return String(valor ?? '').replace(/[&<>"']/g, char => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;'
+        }[char]));
+    }
+
+    const corpo = document.getElementById('corpoTabelaCreditos');
+    if (!corpo) return;
+
+    if (!itens.length) {
+        corpo.innerHTML = `
+            <tr>
+                <td colspan="12" style="text-align:center;">
+                    Nenhuma nota analisada neste mês.
+                </td>
+            </tr>`;
+        return;
+    }
+
+    corpo.innerHTML = itens.map(item => `
+        <tr>
+            <td>${escapeHTML(item.tipo)}</td>
+            <td>${escapeHTML(item.fornecedor)}</td>
+            <td>${escapeHTML(item.regime)}</td>
+            <td style="min-width:300px;">${escapeHTML(item.descricao)}</td>
+            <td>${formatValue(item.valor_nota, 'currency')}</td>
+            <td>${formatValue(item.icms, 'currency')}</td>
+            <td>${formatValue(item.pis, 'currency')}</td>
+            <td>${formatValue(item.cofins, 'currency')}</td>
+            <td>${escapeHTML(item.tipo_despesa)}</td>
+            <td>${formatValue(item.irpj, 'currency')}</td>
+            <td>${formatValue(item.csll, 'currency')}</td>
+            <td style="min-width:300px;">${escapeHTML(item.observacao)}</td>
+        </tr>
+    `).join('');
+}
+
+
     function init() {
         const selectMes = document.getElementById('selectMes');
         if (!selectMes) return;
@@ -1078,6 +1226,8 @@ tr:hover {
     document.addEventListener('DOMContentLoaded', init);
     if (document.readyState !== 'loading') init();
 })();
+
+
 </script>
 </body>
 </html>
