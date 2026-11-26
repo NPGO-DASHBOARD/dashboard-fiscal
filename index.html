@@ -576,7 +576,6 @@ tr:hover {
 
 </style>
 
-<link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/NPGO-DASHBOARD/dashboard-fiscal/refs/heads/main/FAVICON1.jpg">
 </head>
 <body>
     
@@ -994,7 +993,7 @@ tr:hover {
 
         renderApuracaoDetalhadaLista('novoIrpjDebitos', [
             ['Lucro estimado (8%)', ind.irpj_base_calculo_8_percent],
-            ['IRPJ básico (15%)', ind.irpj_imposto_basico]
+            ['IRPJ básico (15%)', ind.irpj_imposto_basico] 
         ]);
         renderApuracaoDetalhadaLista('novoIrpjCreditos', [
             ['Excesso (Lucro acima R$ 20.000)', ind.irpj_excesso],
@@ -1118,6 +1117,19 @@ tr:hover {
         });
     }
 
+    function formatObservation(text) {
+        if (!text) return '';
+        const parts = text.split('•');
+        const formattedParts = [];
+        parts.forEach(part => {
+            const trimmed = part.trim();
+            if (trimmed) {
+                formattedParts.push('• ' + trimmed);
+            }
+        });
+        return formattedParts.join('<br><br>');
+    }
+
     function renderCreditAnalysis(mes) {
         const todos = dashboardData.analise_creditos || [];
         const itens = todos.filter(item => item.mes_ref === mes);
@@ -1144,9 +1156,9 @@ tr:hover {
         const grupoSemCredito = itens.filter(item => !elegivelSim(item.elegivel_pis_cofins) && !elegivelSim(item.elegivel_icms));
 
         function escapeCreditHTML(valor) {
-            return String(valor ?? '').replace(/[&<>/"']/g, caractere => {
+            return String(valor ?? '').replace(/[&<>"]/g, caractere => {
                 return {
-                    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '/': '&#x2F;'
+                    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
                 }[caractere];
             });
         }
@@ -1161,7 +1173,7 @@ tr:hover {
                 <td>${formatValue(item.icms_potencial, 'currency')}</td>
                 <td>${formatValue((Number(item.pis_potencial)||0) + (Number(item.cofins_potencial)||0), 'currency')}</td>
                 <td>${formatValue((Number(item.irpj)||0) + (Number(item.csll)||0), 'currency')}</td>
-                <td>${escapeCreditHTML(item.observacao)}</td>
+                <td style="white-space: normal; line-height: 1.5; font-size:12px;">${formatObservation(escapeCreditHTML(item.observacao))}</td>
             </tr>`).join('');
             return `<div class="table-container"><table><thead><tr>
                 <th>Emissão</th><th>Documento</th><th>Fornecedor</th><th>Valor da nota</th>
