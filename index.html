@@ -576,7 +576,6 @@ tr:hover {
 
 </style>
 
-<link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/NPGO-DASHBOARD/dashboard-fiscal/refs/heads/main/FAVICON1.jpg">
 </head>
 <body>
     
@@ -938,10 +937,7 @@ tr:hover {
 
     function formatObservation(obs) {
         if (!obs) return '';
-        if (obs.includes('-')) {
-            const itens = obs.split('-').map(x => x.trim()).filter(x => x.length > 0);
-            return '<ul style="margin:0; padding-left:16px;">' + itens.map(x => `<li>${x}</li>`).join('') + '</ul>';
-        }
+        // Retorna o texto original sem transformar hífens em tópicos de lista
         return obs;
     }
 
@@ -1056,7 +1052,7 @@ tr:hover {
                             <th>Fornecedor</th>
                             <th>Valor Nota</th>
                             <th>ICMS Potencial</th>
-                            <th>PIS/COF Potencial</th>
+                            <th>PIS/COFINS Potencial</th>
                             <th>Econ IRPJ/CSLL</th>
                             <th>Observação IA / Manual</th>
                         </tr>
