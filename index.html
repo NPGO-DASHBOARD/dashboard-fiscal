@@ -576,7 +576,6 @@ tr:hover {
 
 </style>
 
-<link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/NPGO-DASHBOARD/dashboard-fiscal/refs/heads/main/FAVICON1.jpg">
 </head>
 <body>
     
@@ -938,9 +937,9 @@ tr:hover {
 
     function formatObservation(obs) {
         if (!obs) return '';
-        // Substitui os tópicos (• ou hífens) por quebras de linha com espaçamento. 
-        // Posicionar o hífen no final do colchete evita a necessidade de escape.
-        let formatted = obs.replace(/[•-]/g, '<br>• ');
+        // Substitui apenas o bullet (•) por quebras de linha com espaçamento.
+        // O hífen (-) foi removido da substituição para não quebrar a linha incorretamente.
+        let formatted = obs.replace(/[•]/g, '<br>• ');
         // Remove quebra de linha inicial se houver
         if (formatted.startsWith('<br>')) {
             formatted = formatted.substring(4);
@@ -948,7 +947,7 @@ tr:hover {
         return formatted;
     }
 
-    function updateTaxDetails(ind) { 
+    function updateTaxDetails(ind) {
         safeSetText('icmsRecolherValue', formatValue(ind.icms_real, 'currency'));
         safeSetText('pisRecolherValue', formatValue(ind.pis_real, 'currency'));
         safeSetText('cofinsRecolherValue', formatValue(ind.cofins_real, 'currency'));
@@ -1031,9 +1030,18 @@ tr:hover {
             const card = document.createElement('div');
             card.className = 'card';
             card.innerHTML = `
-                <div class="card-title">${d.title}</div>
-                <div class="card-subtitle">${d.subtitle}</div>
-                <div class="card-value">${formatValue(val, d.format_type)}</div>
+                <div class="card-title">
+                    
+                </div>
+                <div class="card-title">
+                    ${d.title}
+                </div>
+                <div class="card-subtitle">
+                    ${d.subtitle}
+                </div>
+                <div class="card-value">
+                    ${formatValue(val, d.format_type)}
+                </div>
             `;
             container.appendChild(card);
         });
@@ -1104,7 +1112,6 @@ tr:hover {
         });
     }
 
-    // Atualização da Tabela de Evolução Mensal com os novos dados
     function renderTabelaEvolucao() {
         const tbody = document.getElementById('corpoEvolucaoMensal');
         if (!tbody) return;
