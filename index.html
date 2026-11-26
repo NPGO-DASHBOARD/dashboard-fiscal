@@ -576,7 +576,6 @@ tr:hover {
 
 </style>
 
-<link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/NPGO-DASHBOARD/dashboard-fiscal/refs/heads/main/FAVICON1.jpg">
 </head>
 <body>
     
@@ -940,7 +939,7 @@ tr:hover {
         if (!obs) return '';
         // Substitui apenas o bullet (•) por quebras de linha com espaçamento.
         // O hífen (-) foi removido da substituição para não quebrar a linha incorretamente.
-        let formatted = obs.replace(/[•]/g, '<br>• ');
+        let formatted = obs.replace(/[•]/g, '<br><br>• ');
         // Remove quebra de linha inicial se houver
         if (formatted.startsWith('<br>')) {
             formatted = formatted.substring(4);
