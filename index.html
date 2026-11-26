@@ -576,7 +576,6 @@ tr:hover {
 
 </style>
 
-<link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/NPGO-DASHBOARD/dashboard-fiscal/refs/heads/main/FAVICON1.jpg">
 </head>
 <body>
     
@@ -959,7 +958,6 @@ tr:hover {
         renderApuracaoDetalhadaLista('novoIcmsDebitos', [
             ['ICMS sobre vendas', ind.icms_vendas],
             ['DIFAL sobre compras', ind.difal_compras]
-
         ]);
         renderApuracaoDetalhadaLista('novoIcmsCreditos', [
             ['ICMS transporte', ind.icms_transporte],
@@ -1007,9 +1005,7 @@ tr:hover {
             ['Lucro estimado (12%)', ind.csll_base_calculo_12_percent],
             ['CSLL devida (9%)', ind.csll_imposto_devido]
         ]);
-        renderApuracaoDetalhadaLista('novoCsllCreditos', [
-
-        ]);
+        renderApuracaoDetalhadaLista('novoCsllCreditos', []);
         safeSetText('novoCsllResultado', formatValue(ind.csll_a_recolher, 'currency'));
     }
 
@@ -1018,218 +1014,234 @@ tr:hover {
         if (!container) return;
         container.innerHTML = '';
         (dashboardData.card_definitions || []).forEach(d => {
-            const subtitleHtml = d.subtitle ? `<div class="card-subtitle">${d.subtitle}</div>` : '';
-            container.innerHTML += `
-                <div class="card">
-                    <div class="card-title">${d.title}</div>
-                    ${subtitleHtml}
-                    <div class="card-value">${formatValue(ind[d.value_key], d.format_type)}</div>
-                </div>
+            const val = ind[d.value_key] || 0;
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <div class="card-title">${d.title}</div>
+                <div class="card-subtitle">${d.subtitle || ''}</div>
+                <div class="card-value">${formatValue(val, d.format_type)}</div>
             `;
+            container.appendChild(card);
         });
     }
 
-    function renderLucroRealCards(ind) {
-        const container = document.getElementById('lucroRealCards');
-        if (!container) return;
-        container.innerHTML = '';
-        (dashboardData.lucro_real_card_definitions || []).forEach(d => {
-            const subtitleHtml = d.subtitle ? `<div class="card-subtitle">${d.subtitle}</div>` : '';
-            container.innerHTML += `
-                <div class="card">
-                    <div class="card-title">${d.title}</div>
-                    ${subtitleHtml}
-                    <div class="card-value">${formatValue(ind[d.value_key], d.format_type)}</div>
-                </div>
-            `;
-        });
+    function renderReceitasDespesas(mesRef) {
+        const corpoRec = document.getElementById('corpoReceitas');
+        const corpoDes = document.getElementById('corpoDespesas');
+        if (!corpoRec || !corpoDes) return;
+
+        corpoRec.innerHTML = '';
+        corpoDes.innerHTML = '';
+
+        const det = dashboardData.detalhamento_operacoes[mesRef] || { 'receitas': {}, 'despesas': {} };
+
+        const formatTable = (dataObj, targetBody) => {
+            Object.entries(dataObj).forEach(([chave, item]) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${item.operacao_tipo || ''}</strong></td>
+                    <td>${formatValue(item.qtd, 'integer')}</td>
+                    <td>${formatValue(item.valor, 'currency')}</td>
+                    <td>${item.nome || ''}</td>
+                `;
+                targetBody.appendChild(tr);
+            });
+        };
+
+        formatTable(det.receitas || {}, corpoRec);
+        formatTable(det.despesas || {}, corpoDes);
     }
 
-    function renderRevenueExpenseTables(mes_ref) {
-        const corpoReceitas = document.getElementById('corpoReceitas');
-        const corpoDespesas = document.getElementById('corpoDespesas');
-        if (!corpoReceitas || !corpoDespesas) return;
-
-        corpoReceitas.innerHTML = '';
-        corpoDespesas.innerHTML = '';
-
-        const detalhesMes = dashboardData.detalhamento_operacoes[mes_ref];
-        if (!detalhesMes) return;
-
-        for (const chave_op in detalhesMes.receitas) {
-            const item = detalhesMes.receitas[chave_op];
-            let operacao_display = item.nome;
-            if (item.operacao_tipo === 'Venda' || item.operacao_tipo === 'Transferência') {
-                if (item.emitente_name && item.operacao_tipo !== 'Serviço') {
-                    operacao_display = item.emitente_name + (item.nome ? ' (' + item.nome + ')' : '');
-                }
-            }
-            corpoReceitas.innerHTML += `<tr><td>${item.operacao_tipo}</td><td>${formatValue(item.qtd, 'integer')}</td><td>${formatValue(item.valor, 'currency')}</td><td>${operacao_display}</td></tr>`;
-        }
-
-        for (const chave_op in detalhesMes.despesas) {
-            const item = detalhesMes.despesas[chave_op];
-            let operacao_display = '';
-
-            if (item.operacao_tipo === 'Serviço') {
-                operacao_display = (item.emitente_name ? item.emitente_name + '<br>' : '') + item.nome;
-            } else if (item.operacao_tipo.startsWith('CT-e')) {
-                operacao_display = item.nome;
-            } else if (item.operacao_tipo === 'Devolução') {
-                operacao_display = item.nome;
-            } else if (item.operacao_tipo === 'Energia Elétrica') {
-                operacao_display = item.emitente_name;
-            } else if (item.emitente_name) {
-                operacao_display = item.emitente_name;
-            } else {
-                operacao_display = item.nome;
-            }
-            corpoDespesas.innerHTML += `<tr><td>${item.operacao_tipo}</td><td>${formatValue(item.qtd, 'integer')}</td><td>${formatValue(item.valor, 'currency')}</td><td>${operacao_display}</td></tr>`;
-        }
-    }
-
-    function renderFinancialSummary(ind) {
-        const corpoResumoFinanceiro = document.getElementById('corpoResumoFinanceiro');
-        if (!corpoResumoFinanceiro) return;
-        corpoResumoFinanceiro.innerHTML = '';
-
-        const mesResumoFinanceiro = document.getElementById('mesResumoFinanceiro');
-        if (mesResumoFinanceiro) mesResumoFinanceiro.textContent = formatMonthName(ind.mes_ref) || 'Todos';
+    function renderResumoFinanceiro(ind, mesRef) {
+        const corpo = document.getElementById('corpoResumoFinanceiro');
+        if (!corpo) return;
+        corpo.innerHTML = '';
+        safeSetText('mesResumoFinanceiro', formatMonthName(mesRef));
 
         (dashboardData.financial_summary_definitions || []).forEach(def => {
-            const indicador = def.label;
-            const quantidade = ind[def.qty_key] || 0;
-            const valor = ind[def.value_key] || 0;
-            const vProd = def.vprod_key ? (ind[def.vprod_key] || 0) : 0;
-            const vOutro = def.voutro_key ? (ind[def.voutro_key] || 0) : 0;
-            const vBCICMS = def.vBCICMS_key ? (ind[def.vBCICMS_key] || 0) : 0;
-            const icms = def.icms_key ? (ind[def.icms_key] || 0) : 0;
-            const pis = def.pis_key ? (ind[def.pis_key] || 0) : 0;
-            const cofins = def.cofins_key ? (ind[def.cofins_key] || 0) : 0;
+            const tr = document.createElement('tr');
+            const qty = ind[def.qty_key] || 0;
+            const val = ind[def.value_key] || 0;
+            const vprod = def.vprod_key ? (ind[def.vprod_key] || 0) : null;
+            const vbc = def.vBCICMS_key ? (ind[def.vBCICMS_key] || 0) : null;
+            const icms = def.icms_key ? (ind[def.icms_key] || 0) : null;
+            const ipi = def.ipi_key ? (ind[def.ipi_key] || 0) : null;
+            const pis = def.pis_key ? (ind[def.pis_key] || 0) : null;
+            const cofins = def.cofins_key ? (ind[def.cofins_key] || 0) : null;
+            const voutro = def.voutro_key ? (ind[def.voutro_key] || 0) : null;
 
-            corpoResumoFinanceiro.innerHTML += `<tr><td>${indicador}</td><td>${formatValue(quantidade, 'integer')}</td><td>${formatValue(valor, 'currency')}</td><td>${formatValue(vProd, 'currency')}</td><td>${formatValue(vOutro, 'currency')}</td><td>${formatValue(vBCICMS, 'currency')}</td><td>${formatValue(icms, 'currency')}</td><td>${formatValue(pis, 'currency')}</td><td>${formatValue(cofins, 'currency')}</td></tr>`;
+            tr.innerHTML = `
+                <td><strong>${def.label}</strong></td>
+                <td>${formatValue(qty, 'integer')}</td>
+                <td>${formatValue(val, 'currency')}</td>
+                <td>${vprod !== null ? formatValue(vprod, 'currency') : '-'}</td>
+                <td>${voutro !== null ? formatValue(voutro, 'currency') : '-'}</td>
+                <td>${vbc !== null ? formatValue(vbc, 'currency') : '-'}</td>
+                <td>${icms !== null ? formatValue(icms, 'currency') : '-'}</td>
+                <td>${pis !== null ? formatValue(pis, 'currency') : '-'}</td>
+                <td>${cofins !== null ? formatValue(cofins, 'currency') : '-'}</td>
+            `;
+            corpo.appendChild(tr);
         });
     }
 
-    function renderMonthlyEvolutionTable() {
-        const corpoEvolucaoMensal = document.getElementById('corpoEvolucaoMensal');
-        if (!corpoEvolucaoMensal) return;
-        corpoEvolucaoMensal.innerHTML = '';
-
+    function renderEvolucaoMensal() {
+        const corpo = document.getElementById('corpoEvolucaoMensal');
+        if (!corpo) return;
+        corpo.innerHTML = '';
         (dashboardData.monthly_summary_table || []).forEach(row => {
-            corpoEvolucaoMensal.innerHTML += `<tr><td>${row['Mês']}</td><td>${formatValue(row['Vendas'], 'currency')}</td><td>${formatValue(row['Compras'], 'currency')}</td><td>${formatValue(row['Faturamento ML'], 'currency')}</td><td>${formatValue(row['ICMS'] || 0, 'currency')}</td><td>${formatValue(row['PIS/COFINS'], 'currency')}</td><td>${formatValue(row['Lucro Real Líquido'], 'currency')}</td></tr>`;
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><strong>${formatMonthName(row.Mês)}</strong></td>
+                <td>${formatValue(row.Vendas, 'currency')}</td>
+                <td>${formatValue(row.Compras, 'currency')}</td>
+                <td>${formatValue(row['Faturamento ML'], 'currency')}</td>
+                <td>${formatValue(row.ICMS, 'currency')}</td>
+                <td>${formatValue(row['PIS/COFINS'], 'currency')}</td>
+                <td>${formatValue(row['Lucro Real Líquido'], 'currency')}</td>
+            `;
+            corpo.appendChild(tr);
         });
     }
 
+    function renderCreditoTabela(containerId, titulo, notas) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        if (notas.length === 0) {
+            container.innerHTML = '';
+            return;
+        }
 
+        container.innerHTML = `
+            <details>
+                <summary>${titulo} (${notas.length} notas)</summary>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Tipo Doc</th>
+                                <th>Fornecedor</th>
+                                <th>NCM / Serviço</th>
+                                <th>Valor Nota</th>
+                                <th>Créd. ICMS Potencial</th>
+                                <th>Créd. PIS Potencial</th>
+                                <th>Créd. COFINS Potencial</th>
+                                <th>IRPJ / CSLL Economia</th>
+                                <th>Tipo Despesa</th>
+                                <th>Observação IA / Manual</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${notas.map(n => `
+                                <tr>
+                                    <td>${n.data_emissao}</td>
+                                    <td>${n.tipo_doc}</td>
+                                    <td>${n.fornecedor}</td>
+                                    <td>${n.ncm_codserv}</td>
+                                    <td>${formatValue(n.valor_nota, 'currency')}</td>
+                                    <td>${formatValue(n.icms_potencial, 'currency')}</td>
+                                    <td>${formatValue(n.pis_potencial, 'currency')}</td>
+                                    <td>${formatValue(n.cofins_potencial, 'currency')}</td>
+                                    <td>${formatValue((n.irpj + n.csll), 'currency')}</td>
+                                    <td>${n.tipo_despesa}</td>
+                                    <td>${n.observacao}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            </details>
+        `;
+    }
 
-    // ============================================================
-    // CARDS E DETALHAMENTO DA ANÁLISE DE CRÉDITOS
-    // ============================================================
-    function renderCreditAnalysis(mes) {
-        const todos = dashboardData.analise_creditos || [];
-        const itens = todos.filter(item => item.mes_ref === mes);
-        const soma = (lista, campo) => lista.reduce((total, item) => total + (Number(item[campo]) || 0), 0);
-        const elegivelSim = valor => valor === true || String(valor).trim().toUpperCase() === 'SIM';
+    function renderCreditos(mesRef) {
+        safeSetText('creditoAnaliseMes', formatMonthName(mesRef));
+        const lista = (dashboardData.analise_creditos || []).filter(n => n.mes_ref === mesRef);
 
-        const potencialICMS = soma(itens, 'icms_potencial');
-        const elegivelICMS = soma(itens.filter(item => elegivelSim(item.elegivel_icms)), 'icms_potencial');
-        const potencialPisCofins = soma(itens, 'pis_potencial') + soma(itens, 'cofins_potencial');
-        const elegivelPisCofins = soma(itens.filter(item => elegivelSim(item.elegivel_pis_cofins)), 'pis_potencial') +
-            soma(itens.filter(item => elegivelSim(item.elegivel_pis_cofins)), 'cofins_potencial');
-        const totalNotas = soma(itens, 'valor_nota');
-        const economiaIrpjCsll = soma(itens, 'irpj') + soma(itens, 'csll');
+        let icmsPotencial = 0, icmsElegivel = 0;
+        let pisCofinsPotencial = 0, pisCofinsElegivel = 0;
+        let economiaTotalNotas = 0, economiaIrpjCsll = 0;
 
-        safeSetText('creditoIcmsPotencial', formatValue(potencialICMS, 'currency'));
-        safeSetText('creditoIcmsElegivel', formatValue(elegivelICMS, 'currency'));
-        safeSetText('creditoPisCofinsPotencial', formatValue(potencialPisCofins, 'currency'));
-        safeSetText('creditoPisCofinsElegivel', formatValue(elegivelPisCofins, 'currency'));
-        safeSetText('economiaTotalNotas', formatValue(totalNotas, 'currency'));
+        const notasPis = [];
+        const notasIcms = [];
+        const notasSemCredito = [];
+
+        lista.forEach(n => {
+            icmsPotencial += n.icms_potencial;
+            if (n.elegivel_icms) icmsElegivel += n.icms_potencial;
+
+            pisCofinsPotencial += (n.pis_potencial + n.cofins_potencial);
+            if (n.elegivel_pis_cofins) pisCofinsElegivel += (n.pis_potencial + n.cofins_potencial);
+
+            economiaTotalNotas += n.valor_nota;
+            economiaIrpjCsll += (n.irpj + n.csll);
+
+            if (n.elegivel_pis_cofins) {
+                notasPis.push(n);
+            } else if (n.elegivel_icms) {
+                notasIcms.push(n);
+            } else {
+                notasSemCredito.push(n);
+            }
+        });
+
+        safeSetText('creditoIcmsPotencial', formatValue(icmsPotencial, 'currency'));
+        safeSetText('creditoIcmsElegivel', formatValue(icmsElegivel, 'currency'));
+        safeSetText('creditoPisCofinsPotencial', formatValue(pisCofinsPotencial, 'currency'));
+        safeSetText('creditoPisCofinsElegivel', formatValue(pisCofinsElegivel, 'currency'));
+        safeSetText('economiaTotalNotas', formatValue(economiaTotalNotas, 'currency'));
         safeSetText('economiaIrpjCsll', formatValue(economiaIrpjCsll, 'currency'));
 
-        // Uma nota que tenha PIS/COFINS elegível fica no primeiro grupo,
-        // mesmo que também tenha ICMS elegível, evitando duplicidade.
-        const grupoPis = itens.filter(item => elegivelSim(item.elegivel_pis_cofins));
-        const grupoIcms = itens.filter(item => !elegivelSim(item.elegivel_pis_cofins) && elegivelSim(item.elegivel_icms));
-        const grupoSemCredito = itens.filter(item => !elegivelSim(item.elegivel_pis_cofins) && !elegivelSim(item.elegivel_icms));
-
-        function escapeCreditHTML(valor) {
-            return String(valor ?? '').replace(/[&<>"']/g, caractere => ({
-                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-            }[caractere]));
-        }
-        function tabelaCreditos(lista) {
-            if (!lista.length) return '<div class="credit-empty">Nenhuma nota neste grupo para o mês selecionado.</div>';
-            const linhas = lista.map(item => `<tr>
-                <td>${escapeCreditHTML(item.data_emissao)}</td>
-                <td>${escapeCreditHTML(item.tipo_doc)}</td>
-                <td>${escapeCreditHTML(item.fornecedor)}</td>
-                <td>${escapeCreditHTML(item.cfop)}</td>
-                <td>${escapeCreditHTML(item.descricao)}</td>
-                <td>${formatValue(item.valor_nota, 'currency')}</td>
-                <td>${formatValue(item.icms_potencial, 'currency')}</td>
-                <td>${formatValue((Number(item.pis_potencial)||0) + (Number(item.cofins_potencial)||0), 'currency')}</td>
-                <td>${formatValue((Number(item.irpj)||0) + (Number(item.csll)||0), 'currency')}</td>
-                <td>${escapeCreditHTML(item.observacao)}</td>
-            </tr>`).join('');
-            return `<div class="table-container"><table><thead><tr>
-                <th>Emissão</th><th>Documento</th><th>Fornecedor</th><th>CFOP</th>
-                <th>Descrição</th><th>Valor da nota</th><th>ICMS potencial</th>
-                <th>PIS/COFINS potencial</th><th>Economia IRPJ/CSLL</th><th>Observação</th>
-            </tr></thead><tbody>${linhas}</tbody></table></div>`;
-        }
-        const grupos = [
-            ['grupoNotasPis', 'Notas com crédito de PIS/COFINS', grupoPis],
-            ['grupoNotasIcms', 'Notas com crédito de ICMS', grupoIcms],
-            ['grupoNotasSemCredito', 'Notas sem direito a créditos de ICMS/PIS/COFINS', grupoSemCredito]
-        ];
-        grupos.forEach(([id, titulo, lista]) => {
-            const alvo = document.getElementById(id);
-            if (alvo) {
-                alvo.innerHTML = `<details><summary>${titulo} (${lista.length} notas)</summary>${tabelaCreditos(lista)}</details>`;
-            }
-        });
-        safeSetText('creditoAnaliseMes', formatMonthName(mes));
+        renderCreditoTabela('grupoNotasPis', 'Elegíveis para Crédito de PIS/COFINS', notasPis);
+        renderCreditoTabela('grupoNotasIcms', 'Elegíveis Apenas para Crédito de ICMS', notasIcms);
+        renderCreditoTabela('grupoNotasSemCredito', 'Notas Sem Direito a Créditos Identificados', notasSemCredito);
     }
 
-    function init() {
-        const selectMes = document.getElementById('selectMes');
-        if (!selectMes) return;
-
-        const meses = Array.from(new Set([ ...Object.keys(dashboardData.monthly_indicators || {}), ...(dashboardData.analise_creditos || []).map(item => item.mes_ref).filter(m => m && m !== 'SEM_DATA') ])).sort();
-        selectMes.innerHTML = '';
-
-        meses.forEach(m => {
+    function setupSelect() {
+        const select = document.getElementById('selectMes');
+        if (!select) return;
+        select.innerHTML = '';
+        const meses = Object.keys(dashboardData.monthly_indicators).sort();
+        meses.forEach(mes => {
             const opt = document.createElement('option');
-            opt.value = m; opt.textContent = formatMonthName(m);
-            selectMes.appendChild(opt);
+            opt.value = mes;
+            opt.textContent = formatMonthName(mes);
+            select.appendChild(opt);
         });
 
-        selectMes.addEventListener('change', function() {
-            const selectedMonth = this.value;
-            const ind = dashboardData.monthly_indicators[selectedMonth];
-            renderCreditAnalysis(selectedMonth);
-            if (ind) {
-                ind.mes_ref = selectedMonth;
-                renderCards(ind);
-                renderLucroRealCards(ind);
-                updateTaxDetails(ind);
-                renderApuracaoDetalhada(ind);
-                renderRevenueExpenseTables(selectedMonth);
-                renderFinancialSummary(ind);
-            }
-        });
-
-        renderMonthlyEvolutionTable();
-
+        // Seleciona o último mês por padrão
         if (meses.length > 0) {
-            selectMes.value = meses[meses.length - 1];
-            selectMes.dispatchEvent(new Event('change'));
+            const ultimoMes = meses[meses.length - 1];
+            select.value = ultimoMes;
+            changeMonth(ultimoMes);
         }
+
+        select.addEventListener('change', (e) => changeMonth(e.target.value));
     }
 
-    document.addEventListener('DOMContentLoaded', init);
-    if (document.readyState !== 'loading') init();
+    function changeMonth(mesRef) {
+        const ind = dashboardData.monthly_indicators[mesRef];
+        if (!ind) return;
+        renderCards(ind);
+        updateTaxDetails(ind);
+        renderApuracaoDetalhada(ind);
+        renderCreditos(mesRef);
+        renderReceitasDespesas(mesRef);
+        renderResumoFinanceiro(ind, mesRef);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        setupSelect();
+        renderEvolucaoMensal();
+    });
+    
+    // Fallback de inicialização caso o DOMContentLoaded já tenha disparado
+    if (document.readyState === 'interactive' || document.readyState === 'complete') {
+        setupSelect();
+        renderEvolucaoMensal();
+    }
 })();
 </script>
 </body>
