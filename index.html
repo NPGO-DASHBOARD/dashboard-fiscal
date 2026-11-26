@@ -576,7 +576,6 @@ tr:hover {
 
 </style>
 
-<link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/NPGO-DASHBOARD/dashboard-fiscal/refs/heads/main/FAVICON1.jpg">
 </head>
 <body>
     
@@ -959,7 +958,6 @@ tr:hover {
         renderApuracaoDetalhadaLista('novoIcmsDebitos', [
             ['ICMS sobre vendas', ind.icms_vendas],
             ['DIFAL sobre compras', ind.difal_compras]
-
         ]);
         renderApuracaoDetalhadaLista('novoIcmsCreditos', [
             ['ICMS transporte', ind.icms_transporte],
@@ -1007,9 +1005,7 @@ tr:hover {
             ['Lucro estimado (12%)', ind.csll_base_calculo_12_percent],
             ['CSLL devida (9%)', ind.csll_imposto_devido]
         ]);
-        renderApuracaoDetalhadaLista('novoCsllCreditos', [
-
-        ]);
+        renderApuracaoDetalhadaLista('novoCsllCreditos', []);
         safeSetText('novoCsllResultado', formatValue(ind.csll_a_recolher, 'currency'));
     }
 
@@ -1121,11 +1117,6 @@ tr:hover {
         });
     }
 
-
-
-    // ============================================================
-    // CARDS E DETALHAMENTO DA ANÁLISE DE CRÉDITOS
-    // ============================================================
     function renderCreditAnalysis(mes) {
         const todos = dashboardData.analise_creditos || [];
         const itens = todos.filter(item => item.mes_ref === mes);
@@ -1147,25 +1138,24 @@ tr:hover {
         safeSetText('economiaTotalNotas', formatValue(totalNotas, 'currency'));
         safeSetText('economiaIrpjCsll', formatValue(economiaIrpjCsll, 'currency'));
 
-        // Uma nota que tenha PIS/COFINS elegível fica no primeiro grupo,
-        // mesmo que também tenha ICMS elegível, evitando duplicidade.
         const grupoPis = itens.filter(item => elegivelSim(item.elegivel_pis_cofins));
         const grupoIcms = itens.filter(item => !elegivelSim(item.elegivel_pis_cofins) && elegivelSim(item.elegivel_icms));
         const grupoSemCredito = itens.filter(item => !elegivelSim(item.elegivel_pis_cofins) && !elegivelSim(item.elegivel_icms));
 
         function escapeCreditHTML(valor) {
-            return String(valor ?? '').replace(/[&<>"']/g, caractere => ({
-                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-            }[caractere]));
+            return String(valor ?? '').replace(/[&<>/"']/g, caractere => {
+                return {
+                    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '/': '&#x2F;'
+                }[caractere];
+            });
         }
+
         function tabelaCreditos(lista) {
             if (!lista.length) return '<div class="credit-empty">Nenhuma nota neste grupo para o mês selecionado.</div>';
             const linhas = lista.map(item => `<tr>
                 <td>${escapeCreditHTML(item.data_emissao)}</td>
                 <td>${escapeCreditHTML(item.tipo_doc)}</td>
                 <td>${escapeCreditHTML(item.fornecedor)}</td>
-                <td>${escapeCreditHTML(item.cfop)}</td>
-                <td>${escapeCreditHTML(item.descricao)}</td>
                 <td>${formatValue(item.valor_nota, 'currency')}</td>
                 <td>${formatValue(item.icms_potencial, 'currency')}</td>
                 <td>${formatValue((Number(item.pis_potencial)||0) + (Number(item.cofins_potencial)||0), 'currency')}</td>
@@ -1173,11 +1163,11 @@ tr:hover {
                 <td>${escapeCreditHTML(item.observacao)}</td>
             </tr>`).join('');
             return `<div class="table-container"><table><thead><tr>
-                <th>Emissão</th><th>Documento</th><th>Fornecedor</th><th>CFOP</th>
-                <th>Descrição</th><th>Valor da nota</th><th>ICMS potencial</th>
-                <th>PIS/COFINS potencial</th><th>Economia IRPJ/CSLL</th><th>Observação</th>
+                <th>Emissão</th><th>Documento</th><th>Fornecedor</th><th>Valor da nota</th>
+                <th>ICMS potencial</th><th>PIS/COFINS potencial</th><th>Economia IRPJ/CSLL</th><th>Observação</th>
             </tr></thead><tbody>${linhas}</tbody></table></div>`;
         }
+
         const grupos = [
             ['grupoNotasPis', 'Notas com crédito de PIS/COFINS', grupoPis],
             ['grupoNotasIcms', 'Notas com crédito de ICMS', grupoIcms],
